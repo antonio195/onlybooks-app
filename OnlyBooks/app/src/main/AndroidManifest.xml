@@ -17,6 +17,12 @@
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
+            android:name=".EbookSubmissionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PerfilActivity"
+            android:exported="false" />
+        <activity
             android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>

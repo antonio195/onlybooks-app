@@ -1,48 +1,54 @@
 package com.antoniocostadossantos.onlybooks
 
 import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.antoniocostadossantos.onlybooks.databinding.ActivityLoginBinding
+import com.antoniocostadossantos.onlybooks.databinding.ActivityRegisterBinding
 
-class LoginActivity : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityLoginBinding
+    private lateinit var binding: ActivityRegisterBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(R.layout.activity_register)
+
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         supportActionBar?.hide()
 
-        binding.registerButton.setOnClickListener {
-            registerActivity()
-        }
         binding.loginButton.setOnClickListener {
+            loginActivity()
+        }
+
+        binding.registerButton.setOnClickListener {
             checkFields()
         }
-
-        binding.forgotPassword.setOnClickListener {
-            forgotPasswordActivity()
-        }
     }
 
-    private fun registerActivity() {
-        val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
-
-    private fun forgotPasswordActivity(){
-        val intent = Intent(this@LoginActivity, ForgotPasswordActivity::class.java)
+    private fun loginActivity() {
+        val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
         startActivity(intent)
         finish()
     }
 
     private fun checkFields() {
         when {
+
+            binding.userInput.text.toString().isEmpty() -> {
+                binding.userInput.error = "Digite o usuário"
+            }
+            binding.userInput.text.toString().length < 3 -> {
+                binding.userInput.error = "Nome de usuário muito pequeno"
+            }
+
+            binding.userInput.text.toString().length > 20 -> {
+                binding.userInput.error = "Nome de usuário muito grande"
+            }
+
             binding.emailInput.text.toString().isEmpty() -> {
                 binding.emailInput.error = "Digite o email"
             }
@@ -60,11 +66,16 @@ class LoginActivity : AppCompatActivity() {
             }
 
             else -> {
+                val user: String = binding.userInput.text.toString()
                 val email: String = binding.emailInput.text.toString()
                 val password: String = binding.passwordInput.text.toString()
-                login(email, password)
+                register(user, email, password)
             }
         }
+    }
+
+    private fun register(user: String, email: String, password: String) {
+        Toast.makeText(this, "Cadastrando...", Toast.LENGTH_SHORT).show()
     }
 
     private fun emailValidation(email: String): Boolean {
@@ -75,9 +86,5 @@ class LoginActivity : AppCompatActivity() {
             )
         val result = pattern.containsMatchIn(email)
         return result
-    }
-
-    private fun login(email: String, password: String) {
-        Toast.makeText(this, "Logando...", Toast.LENGTH_SHORT).show()
     }
 }

@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">OnlyBooks</string>
+
+    <!-- Login Activy -->
+    <string name="welcome">Bem-vind@s</string>
+    <string name="email_address_text">Email</string>
+    <string name="password_text">Senha</string>
+    <string name="log_in_text">Entrar</string>
+    <string name="dont_have_account_text">Não possui conta?</string>
+    <string name="register_here_text">Cadastre aqui!</string>
+    <string name="forgot_password_text">Esqueci a senha</string>
+    <string name="user_name_text">Usuário</string>
+    <string name="register_text">Cadastrar</string>
+    <string name="have_account_text">Já possui conta?</string>
+    <string name="log_in_here_text">Logue aqui!</string>
+    <string name="info_text">Para redefinir sua senha digite o email cadastrado na sua conta e lhe enviaremos o link com as intruções.</string>
+    <string name="send_text">Enviar</string>
+    <string name="info_bottom">Caso não tenha acesso ao e-mail cadastrado, entre em contato com o nosso Atendimento.</string>
 </resources>

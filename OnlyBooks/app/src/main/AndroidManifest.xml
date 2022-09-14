@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.antoniocostadossantos.onlybooks">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -14,13 +16,13 @@
         android:theme="@style/Theme.OnlyBooks"
         tools:targetApi="31">
         <activity
+            android:name=".StorageActivity"
+            android:exported="false" />
+        <activity
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
             android:name=".EbookSubmissionActivity"
-            android:exported="false" />
-        <activity
-            android:name=".PerfilActivity"
             android:exported="false" />
         <activity
             android:name=".SplashActivity"

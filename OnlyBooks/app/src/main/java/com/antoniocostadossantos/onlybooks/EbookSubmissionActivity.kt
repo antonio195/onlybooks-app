@@ -7,5 +7,10 @@ class EbookSubmissionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ebook_submission)
+
+        supportActionBar?.hide()
+    }
+
+    fun uploadImage() {
     }
 }

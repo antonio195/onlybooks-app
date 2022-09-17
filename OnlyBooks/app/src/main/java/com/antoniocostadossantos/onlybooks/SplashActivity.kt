@@ -13,7 +13,7 @@ class SplashActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         Handler().postDelayed({
-            val intent = Intent(this@SplashActivity, StorageActivity::class.java)
+            val intent = Intent(this@SplashActivity, StorageAudioActivity::class.java)
             startActivity(intent)
             finish()
         }, 2000)

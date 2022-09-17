@@ -11,9 +11,10 @@
         <entry key="app/src/main/res/drawable/edi_text_rounded5_blue_light.xml" value="0.12" />
         <entry key="app/src/main/res/drawable/edit_text_rounded5.xml" value="0.12" />
         <entry key="app/src/main/res/layout/activity_ebook_submission.xml" value="0.16289592760180996" />
-        <entry key="app/src/main/res/layout/activity_file_paths.xml" value="0.19375" />
         <entry key="app/src/main/res/layout/activity_perfil.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_storage.xml" value="0.19270833333333334" />
+        <entry key="app/src/main/res/layout/activity_storage_audio.xml" value="0.15904232578024796" />
+        <entry key="app/src/main/res/layout/activity_storage_file.xml" value="0.15904232578024796" />
       </map>
     </option>
   </component>

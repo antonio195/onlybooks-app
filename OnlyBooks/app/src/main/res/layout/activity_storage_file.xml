@@ -6,28 +6,13 @@
     android:orientation="vertical"
     android:padding="14dp"
     android:scrollbars="none"
-    tools:context=".StorageActivity">
+    tools:context=".StorageFileActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="100dp"
         android:orientation="vertical">
-
-        <ImageView
-            android:id="@+id/img1"
-            android:layout_width="120dp"
-            android:layout_height="160dp"
-            android:layout_marginStart="130dp"
-            android:layout_marginBottom="40dp"
-            android:background="@drawable/ic_launcher_background" />
-
-        <ImageView
-            android:id="@+id/img2"
-            android:layout_width="120dp"
-            android:layout_height="160dp"
-            android:layout_marginStart="130dp"
-            android:layout_marginBottom="40dp"
-            android:background="@drawable/ic_launcher_background" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -42,15 +27,15 @@
                 android:text="TESTANDO URL"/>
 
             <Button
-                android:id="@+id/btnSelectedImage"
+                android:id="@+id/btnSelectedFile"
                 android:layout_width="match_parent"
-                android:text="Selecionar imagem"
+                android:text="Selecionar PDF"
                 android:layout_height="40dp" />
 
             <Button
-                android:id="@+id/btnUploadImage"
+                android:id="@+id/btnUploadFile"
                 android:layout_width="match_parent"
-                android:text="Subir imagem"
+                android:text="Subir PDF"
                 android:layout_height="40dp"/>
         </LinearLayout>
     </LinearLayout>

@@ -1,10 +1,10 @@
-package com.antoniocostadossantos.onlybooks
+package com.antoniocostadossantos.onlybooks.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import com.antoniocostadossantos.onlybooks.databinding.ActivityLoginBinding
+import com.antoniocostadossantos.onlybooks.R
 import com.antoniocostadossantos.onlybooks.databinding.ActivityRegisterBinding
 
 class RegisterActivity : AppCompatActivity() {

@@ -1,11 +1,10 @@
-package com.antoniocostadossantos.onlybooks
+package com.antoniocostadossantos.onlybooks.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.antoniocostadossantos.onlybooks.databinding.ActivityForgotPasswordBinding
-import com.antoniocostadossantos.onlybooks.databinding.ActivityLoginBinding
 
 class ForgotPasswordActivity : AppCompatActivity() {
 

@@ -1,14 +1,20 @@
-package com.antoniocostadossantos.onlybooks
+package com.antoniocostadossantos.onlybooks.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.antoniocostadossantos.onlybooks.databinding.ActivityLoginBinding
+import com.antoniocostadossantos.onlybooks.util.StateResource
+import com.antoniocostadossantos.onlybooks.viewModel.UserViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
+
+    private val userViewModel: UserViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,18 +33,18 @@ class LoginActivity : AppCompatActivity() {
         binding.forgotPassword.setOnClickListener {
             forgotPasswordActivity()
         }
+
+        verifyLogin()
     }
 
     private fun registerActivity() {
         val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
         startActivity(intent)
-        finish()
     }
 
-    private fun forgotPasswordActivity(){
+    private fun forgotPasswordActivity() {
         val intent = Intent(this@LoginActivity, ForgotPasswordActivity::class.java)
         startActivity(intent)
-        finish()
     }
 
     private fun checkFields() {
@@ -60,9 +66,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
             else -> {
-                val email: String = binding.emailInput.text.toString()
-                val password: String = binding.passwordInput.text.toString()
-                login(email, password)
+                login()
             }
         }
     }
@@ -77,7 +81,30 @@ class LoginActivity : AppCompatActivity() {
         return result
     }
 
-    private fun login(email: String, password: String) {
-        Toast.makeText(this, "Logando...", Toast.LENGTH_SHORT).show()
+    private fun login() {
+        val email: String = binding.emailInput.text.toString()
+        val password: String = binding.passwordInput.text.toString()
+
+        userViewModel.login(email, password)
+        verifyLogin()
+    }
+
+    private fun verifyLogin() {
+        userViewModel.login.observe(this) { response ->
+            when (response) {
+                is StateResource.Success -> {
+                    startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
+                    finish()
+                }
+                is StateResource.Error ->{
+                    binding.errorLogin.visibility = View.VISIBLE
+                    Toast.makeText(this, response.message, Toast.LENGTH_LONG).show()
+                }
+                else -> {
+                    println("erro login activity")
+                }
+            }
+
+        }
     }
 }

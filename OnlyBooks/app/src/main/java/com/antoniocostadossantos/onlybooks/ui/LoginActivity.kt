@@ -93,12 +93,12 @@ class LoginActivity : AppCompatActivity() {
         userViewModel.login.observe(this) { response ->
             when (response) {
                 is StateResource.Success -> {
+                    binding.errorLogin.visibility = View.INVISIBLE
                     startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
                     finish()
                 }
                 is StateResource.Error ->{
                     binding.errorLogin.visibility = View.VISIBLE
-                    Toast.makeText(this, response.message, Toast.LENGTH_LONG).show()
                 }
                 else -> {
                     println("erro login activity")

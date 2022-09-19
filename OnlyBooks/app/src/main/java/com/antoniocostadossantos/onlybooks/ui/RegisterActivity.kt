@@ -1,15 +1,20 @@
 package com.antoniocostadossantos.onlybooks.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.antoniocostadossantos.onlybooks.R
 import com.antoniocostadossantos.onlybooks.databinding.ActivityRegisterBinding
+import com.antoniocostadossantos.onlybooks.model.UserModelDTO
+import com.antoniocostadossantos.onlybooks.util.StateResource
+import com.antoniocostadossantos.onlybooks.viewModel.UserViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
+    private val userViewModel: UserViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,14 +74,39 @@ class RegisterActivity : AppCompatActivity() {
                 val user: String = binding.userInput.text.toString()
                 val email: String = binding.emailInput.text.toString()
                 val password: String = binding.passwordInput.text.toString()
-                register(user, email, password)
+                register()
             }
         }
     }
 
-    private fun register(user: String, email: String, password: String) {
-        Toast.makeText(this, "Cadastrando...", Toast.LENGTH_SHORT).show()
+    private fun register() {
+        val name = binding.userInput.text.toString()
+        val email = binding.emailInput.text.toString()
+        val password = binding.passwordInput.text.toString()
+
+        val user = UserModelDTO(name, email, password)
+        userViewModel.register(user)
+        verifyLogin()
     }
+    private fun verifyLogin() {
+        userViewModel.register.observe(this) { response ->
+            when (response) {
+                is StateResource.Success -> {
+                    Toast.makeText(this, response.data.toString(), Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this@RegisterActivity, HomeActivity::class.java))
+                    finish()
+                }
+                is StateResource.Error ->{
+                    Toast.makeText(this, response.data.toString(), Toast.LENGTH_SHORT).show()
+                }
+                else -> {
+                    println("erro login activity")
+                }
+            }
+
+        }
+    }
+
 
     private fun emailValidation(email: String): Boolean {
         val pattern =

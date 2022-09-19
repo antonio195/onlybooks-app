@@ -1,9 +1,13 @@
 package com.antoniocostadossantos.onlybooks.remote
 
+import com.antoniocostadossantos.onlybooks.constants.Constants.Companion.URL_DEV
+import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.net.ssl.SSLContext
+
 
 class RetrofitClient {
     companion object {
@@ -16,9 +20,12 @@ class RetrofitClient {
                 .addInterceptor(logging)
                 .build()
 
+
+            val gson = GsonBuilder().setLenient().disableHtmlEscaping().create()
+
             Retrofit.Builder()
-                .baseUrl("http://192.168.15.20:8080/")
-                .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl(URL_DEV)
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(client)
                 .build()
         }

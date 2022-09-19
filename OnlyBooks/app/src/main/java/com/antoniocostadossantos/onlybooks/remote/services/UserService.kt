@@ -1,12 +1,10 @@
 package com.antoniocostadossantos.onlybooks.remote.services
 
 import com.antoniocostadossantos.onlybooks.model.ListUserModel
-import retrofit2.Call
-import com.antoniocostadossantos.onlybooks.model.UserModel
+import com.antoniocostadossantos.onlybooks.model.UserModelDTO
 import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
+
 
 interface UserService {
 
@@ -17,5 +15,11 @@ interface UserService {
         @Path("senha")
         senha: String
     ): Response<ListUserModel>
+
+    @Headers("Content-Type: application/json")
+    @POST("/users/register")
+    suspend fun createUser(
+        @Body user: UserModelDTO?
+    ): Response<String>
 
 }

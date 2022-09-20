@@ -1,11 +1,13 @@
 package com.antoniocostadossantos.onlybooks.remote
 
 import com.antoniocostadossantos.onlybooks.constants.Constants.Companion.URL_DEV
+import com.antoniocostadossantos.onlybooks.constants.Constants.Companion.URL_PROD
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.net.ssl.HttpsURLConnection
 import javax.net.ssl.SSLContext
 
 
@@ -20,11 +22,10 @@ class RetrofitClient {
                 .addInterceptor(logging)
                 .build()
 
-
             val gson = GsonBuilder().setLenient().create()
 
             Retrofit.Builder()
-                .baseUrl(URL_DEV)
+                .baseUrl(URL_PROD)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(client)
                 .build()

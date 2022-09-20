@@ -23,6 +23,7 @@
         <activity
             android:name=".ui.HomeActivity"
             android:exported="false" />
+
         <activity
             android:name=".ui.ForgotPasswordActivity"
             android:exported="false" />

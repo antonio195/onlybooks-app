@@ -5,10 +5,18 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.antoniocostadossantos.onlybooks.databinding.ActivityForgotPasswordBinding
+import com.antoniocostadossantos.onlybooks.model.UserModelDTO
+import com.antoniocostadossantos.onlybooks.util.StateResource
+import com.antoniocostadossantos.onlybooks.util.hide
+import com.antoniocostadossantos.onlybooks.util.show
+import com.antoniocostadossantos.onlybooks.viewModel.UserViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ForgotPasswordActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityForgotPasswordBinding
+
+    private val userViewModel: UserViewModel by viewModel()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,6 +69,27 @@ class ForgotPasswordActivity : AppCompatActivity() {
     }
 
     private fun getNewPassword() {
-        Toast.makeText(this, "Gerando nova senha...", Toast.LENGTH_SHORT).show()
+
+        val email = binding.emailInput.text.toString().lowercase()
+        userViewModel.recoveryPassword(email)
+        verifyRecovery()
+    }
+
+    private fun verifyRecovery() {
+        userViewModel.recoveryPassword.observe(this) { response ->
+            when (response) {
+                is StateResource.Success -> {
+                    binding.errorRecovery.hide()
+                    startActivity(Intent(this@ForgotPasswordActivity, LoginActivity::class.java))
+
+                }
+                is StateResource.Error -> {
+                    binding.errorRecovery.show()
+                }
+                else -> {
+
+                }
+            }
+        }
     }
 }

@@ -2,12 +2,16 @@ package com.antoniocostadossantos.onlybooks.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.antoniocostadossantos.onlybooks.R
 import com.antoniocostadossantos.onlybooks.databinding.ActivityRegisterBinding
 import com.antoniocostadossantos.onlybooks.model.UserModelDTO
 import com.antoniocostadossantos.onlybooks.util.StateResource
+import com.antoniocostadossantos.onlybooks.util.hide
+import com.antoniocostadossantos.onlybooks.util.show
+import com.antoniocostadossantos.onlybooks.util.toast
 import com.antoniocostadossantos.onlybooks.viewModel.UserViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -80,27 +84,28 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun register() {
-        val name = binding.userInput.text.toString()
-        val email = binding.emailInput.text.toString()
+        val name = binding.userInput.text.toString().lowercase()
+        val email = binding.emailInput.text.toString().lowercase()
         val password = binding.passwordInput.text.toString()
 
         val user = UserModelDTO(name, email, password)
         userViewModel.register(user)
         verifyLogin()
     }
+
     private fun verifyLogin() {
         userViewModel.register.observe(this) { response ->
             when (response) {
                 is StateResource.Success -> {
-                    Toast.makeText(this, response.data.toString(), Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this@RegisterActivity, HomeActivity::class.java))
-                    finish()
+                    binding.errorRegister.hide()
+                    startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
+
                 }
-                is StateResource.Error ->{
-                    Toast.makeText(this, response.data.toString(), Toast.LENGTH_SHORT).show()
+                is StateResource.Error -> {
+                    binding.errorRegister.show()
                 }
                 else -> {
-                    println("erro login activity")
+                    println(response)
                 }
             }
 

@@ -73,6 +73,7 @@
         android:layout_height="wrap_content"
         android:text="Usuário ou senha incorretos"
         android:textColor="@color/red"
+        android:textStyle="bold"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@id/login_button"
         app:layout_constraintEnd_toEndOf="parent"

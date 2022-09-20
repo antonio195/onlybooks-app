@@ -22,4 +22,11 @@ interface UserService {
         @Body user: UserModelDTO?
     ): Response<String>
 
+    @Headers("Content-Type: application/json")
+    @GET("/users/recovery-password/{email}")
+    suspend fun recoveryPassword(
+        @Path("email")
+        email: String
+    ): Response<String>
+
 }

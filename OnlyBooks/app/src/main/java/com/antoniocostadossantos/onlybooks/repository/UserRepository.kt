@@ -12,4 +12,6 @@ class UserRepository : BaseRepository() {
 
     suspend fun register(userDTO: UserModelDTO) = api.createUser(userDTO)
 
+    suspend fun recoveryPassword(email: String) = api.recoveryPassword(email)
+
 }

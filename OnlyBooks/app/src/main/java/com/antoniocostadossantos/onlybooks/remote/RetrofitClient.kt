@@ -21,7 +21,7 @@ class RetrofitClient {
                 .build()
 
 
-            val gson = GsonBuilder().setLenient().disableHtmlEscaping().create()
+            val gson = GsonBuilder().setLenient().create()
 
             Retrofit.Builder()
                 .baseUrl(URL_DEV)

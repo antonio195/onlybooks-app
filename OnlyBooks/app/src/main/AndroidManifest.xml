@@ -15,8 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OnlyBooks"
-        android:usesCleartextTraffic="false"
-        android:networkSecurityConfig="@xml/network_secutiry_config"
+        android:usesCleartextTraffic="true"
+
         tools:targetApi="31">
         <activity
             android:name=".ui.HomeActivity"

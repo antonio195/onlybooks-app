@@ -7,6 +7,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.antoniocostadossantos.onlybooks.databinding.ActivityLoginBinding
 import com.antoniocostadossantos.onlybooks.util.StateResource
+import com.antoniocostadossantos.onlybooks.util.hide
+import com.antoniocostadossantos.onlybooks.util.show
 import com.antoniocostadossantos.onlybooks.viewModel.UserViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -93,12 +95,12 @@ class LoginActivity : AppCompatActivity() {
         userViewModel.login.observe(this) { response ->
             when (response) {
                 is StateResource.Success -> {
-                    binding.errorLogin.visibility = View.INVISIBLE
+                    binding.errorLogin.hide()
                     startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
                     finish()
                 }
                 is StateResource.Error ->{
-                    binding.errorLogin.visibility = View.VISIBLE
+                    binding.errorLogin.show()
                 }
                 else -> {
                     println("erro login activity")

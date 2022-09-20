@@ -1,9 +1,11 @@
 package com.antoniocostadossantos.onlybooks.ui
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
-import com.antoniocostadossantos.onlybooks.databinding.ActivityForgotPasswordBinding
+import android.webkit.WebView
+import androidx.appcompat.app.AppCompatActivity
 import com.antoniocostadossantos.onlybooks.databinding.ActivityHomeBinding
+
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
@@ -11,5 +13,10 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
+        binding.btnLer.setOnClickListener {
+            startActivity(Intent(this@HomeActivity, WebViewActivity::class.java))
+        }
     }
 }

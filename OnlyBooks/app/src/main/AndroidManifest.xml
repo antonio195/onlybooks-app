@@ -25,9 +25,9 @@
         <activity
             android:name=".ui.StorageAudioActivity"
             android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".ui.StorageFileActivity"-->
-<!--            android:exported="false" />-->
+        <activity
+            android:name=".ui.StorageFileActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.StorageActivity"
             android:exported="false" />

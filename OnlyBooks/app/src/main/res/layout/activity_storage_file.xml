@@ -1,42 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="14dp"
+    android:padding="16dp"
     android:scrollbars="none"
+    android:background="@color/backgroundWhite"
     tools:context=".ui.StorageFileActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="100dp"
         android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAlignment="center"
+            android:fontFamily="@font/source_sans_pro"
+            android:text="Nome do Ebook"
+            android:textColor="@color/azulEscuro"
+            android:textSize="28sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="40dp"
+            android:layout_marginTop="28dp"
             android:orientation="vertical">
 
+            <ImageView
+                android:id="@+id/iv_banner_ebook"
+                android:layout_width="190dp"
+                android:layout_height="266dp"
+                android:layout_marginStart="96dp"
+
+                android:scaleType="fitXY"
+                android:background="@drawable/ic_launcher_background" />
+
             <TextView
-                android:id="@+id/tv_url"
                 android:layout_width="match_parent"
+                android:layout_marginTop="96dp"
                 android:layout_height="match_parent"
-                android:text="TESTANDO URL"/>
+                android:fontFamily="@font/source_sans_pro"
+                android:text="@string/tv_name_chapter"
+                android:textColor="@color/azulEscuro"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/et_url"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:adjustViewBounds="true"
+                android:background="@drawable/edi_text_rounded5_blue_light"
+                android:fontFamily="@font/source_sans_pro"
+                android:paddingHorizontal="14dp"
+                android:textColor="@color/azulEscuro"
+                android:hint="@string/et_name_chapter"
+                android:textColorHint="@color/azulEscuro"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:orientation="vertical">
 
             <Button
                 android:id="@+id/btnSelectedFile"
                 android:layout_width="match_parent"
-                android:text="Selecionar PDF"
-                android:layout_height="40dp" />
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/azulEscuro"
+                android:fontFamily="@font/source_sans_pro"
+                android:hint="@string/btn_selected_upload_pdf"
+                android:paddingHorizontal="18dp"
+                android:paddingVertical="10dp"
+                android:textColorHint="@color/cinzaClaro"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <Button
                 android:id="@+id/btnUploadFile"
                 android:layout_width="match_parent"
-                android:text="Subir PDF"
-                android:layout_height="40dp"/>
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/azulEscuro"
+                android:fontFamily="@font/source_sans_pro"
+                android:hint="@string/btn_upload_pdf"
+                android:paddingHorizontal="18dp"
+                android:paddingVertical="10dp"
+                android:layout_marginTop="28dp"
+                android:textColorHint="@color/cinzaClaro"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

@@ -33,9 +33,9 @@ class StorageFileActivity : AppCompatActivity() {
     fun getURL(name: String) {
         FirebaseStorage.getInstance()
             .getReference("documents/$name").downloadUrl.addOnSuccessListener {
-                binding.tvUrl.text = it.toString()
+                binding.etUrl.setText(it.toString())
             }.addOnFailureListener {
-                binding.tvUrl.text = it.toString()
+                binding.etUrl.setText(it.toString())
             }
     }
 

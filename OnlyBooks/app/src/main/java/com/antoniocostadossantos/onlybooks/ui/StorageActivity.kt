@@ -27,6 +27,8 @@ class StorageActivity : AppCompatActivity() {
         binding = ActivityStorageBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.ivBannerEbook.setImageURI(null)
+
         binding.btnSelectedImage.setOnClickListener{
             selectImage()
         }
@@ -39,10 +41,10 @@ class StorageActivity : AppCompatActivity() {
     fun getURL(name: String) {
         FirebaseStorage.getInstance()
             .getReference("images/$name").downloadUrl.addOnSuccessListener {
-                binding.tvUrl.text = it.toString()
-                Glide.with(this).load(it.toString()).into(binding.img2)
+                binding.etUrl.setText(it.toString())
+                Glide.with(this).load(it.toString()).into(binding.ivBannerEbook)
             }.addOnFailureListener {
-                binding.tvUrl.text = it.toString()
+                binding.etUrl.setText(it.toString())
             }
     }
 
@@ -61,7 +63,6 @@ class StorageActivity : AppCompatActivity() {
         val storageReference = FirebaseStorage.getInstance().getReference("images/$fileName")
 
         storageReference.putFile(imageUri).addOnSuccessListener {
-            binding.img1.setImageURI(null)
             Toast.makeText(this@StorageActivity, "Sucesso ao subir", Toast.LENGTH_SHORT).show()
             getURL(fileName)
         }.addOnFailureListener {
@@ -74,7 +75,7 @@ class StorageActivity : AppCompatActivity() {
             val data: Intent? = result.data
 
             imageUri = data?.data!!
-            binding.img1.setImageURI(imageUri)
+            binding.ivBannerEbook.setImageURI(imageUri)
         }
     }
 }

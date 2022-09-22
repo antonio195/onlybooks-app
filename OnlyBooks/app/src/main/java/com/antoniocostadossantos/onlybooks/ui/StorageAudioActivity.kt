@@ -36,9 +36,9 @@ class StorageAudioActivity : AppCompatActivity() {
     fun getURL(name: String) {
         FirebaseStorage.getInstance()
             .getReference("audios/$name").downloadUrl.addOnSuccessListener {
-                binding.tvUrl.text = it.toString()
+                binding.etUrl.setText(it.toString())
             }.addOnFailureListener {
-                binding.tvUrl.text = it.toString()
+                binding.etUrl.setText(it.toString())
             }
     }
 
@@ -69,8 +69,6 @@ class StorageAudioActivity : AppCompatActivity() {
             val data: Intent? = result.data
 
             audioUri = data?.data!!
-
-            binding.tvUrl.text = audioUri.toString()
         }
     }
 }

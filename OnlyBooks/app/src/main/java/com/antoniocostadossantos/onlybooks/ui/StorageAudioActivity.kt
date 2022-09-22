@@ -1,65 +1,66 @@
-package com.antoniocostadossantos.onlybooks
+package com.antoniocostadossantos.onlybooks.ui
 
 import android.app.Activity
+import android.bluetooth.BluetoothClass.Service.AUDIO
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import com.antoniocostadossantos.onlybooks.databinding.ActivityStorageBinding
+import com.antoniocostadossantos.onlybooks.databinding.ActivityStorageAudioBinding
 import com.antoniocostadossantos.onlybooks.databinding.ActivityStorageFileBinding
-import com.bumptech.glide.Glide
 import com.google.firebase.storage.FirebaseStorage
 import java.text.SimpleDateFormat
 import java.util.*
 
-class StorageFileActivity : AppCompatActivity() {
-    lateinit var binding: ActivityStorageFileBinding
-    lateinit var fileUri: Uri
+class StorageAudioActivity : AppCompatActivity() {
+    lateinit var binding: ActivityStorageAudioBinding
+    lateinit var audioUri: Uri
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityStorageFileBinding.inflate(layoutInflater)
+        binding = ActivityStorageAudioBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnSelectedFile.setOnClickListener{
-            selectFile()
+        binding.btnSelectedAudio.setOnClickListener{
+            selectAudio()
         }
 
-        binding.btnUploadFile.setOnClickListener {
-            uploadFile()
+        binding.btnUploadAudio.setOnClickListener {
+            uploadAudio()
         }
     }
 
     fun getURL(name: String) {
         FirebaseStorage.getInstance()
-            .getReference("documents/$name").downloadUrl.addOnSuccessListener {
+            .getReference("audios/$name").downloadUrl.addOnSuccessListener {
                 binding.tvUrl.text = it.toString()
             }.addOnFailureListener {
                 binding.tvUrl.text = it.toString()
             }
     }
 
-    fun selectFile(){
+    fun selectAudio(){
         val intent = Intent()
-        intent.type = "application/pdf"
+        intent.type = "audio/*"
         intent.action = Intent.ACTION_GET_CONTENT
         resultLauncher.launch(intent)
     }
 
-    fun uploadFile() {
+    fun uploadAudio() {
         val formatter = SimpleDateFormat("yyyy_MM_dd_HH_mm_ss")
         val now = Date()
         val fileName = formatter.format(now)
 
-        val storageReference = FirebaseStorage.getInstance().getReference("documents/$fileName")
+        val storageReference = FirebaseStorage.getInstance().getReference("audios/$fileName")
 
-        storageReference.putFile(fileUri).addOnSuccessListener {
-            Toast.makeText(this@StorageFileActivity, "Sucesso ao subir", Toast.LENGTH_SHORT).show()
+        storageReference.putFile(audioUri).addOnSuccessListener {
+            Toast.makeText(this@StorageAudioActivity, "Sucesso ao subir", Toast.LENGTH_SHORT).show()
             getURL(fileName)
         }.addOnFailureListener {
-            Toast.makeText(this@StorageFileActivity, "Falha ao subir", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@StorageAudioActivity, "Falha ao subir", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -67,7 +68,9 @@ class StorageFileActivity : AppCompatActivity() {
         if (result.resultCode == Activity.RESULT_OK) {
             val data: Intent? = result.data
 
-            fileUri = data?.data!!
+            audioUri = data?.data!!
+
+            binding.tvUrl.text = audioUri.toString()
         }
     }
 }

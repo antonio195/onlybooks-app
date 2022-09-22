@@ -1,4 +1,4 @@
-package com.antoniocostadossantos.onlybooks
+package com.antoniocostadossantos.onlybooks.ui
 
 import android.app.Activity
 import android.content.Intent

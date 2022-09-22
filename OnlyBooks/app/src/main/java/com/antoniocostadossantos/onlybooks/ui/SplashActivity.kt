@@ -1,9 +1,11 @@
-package com.antoniocostadossantos.onlybooks
+package com.antoniocostadossantos.onlybooks.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
+import com.antoniocostadossantos.onlybooks.R
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -12,10 +14,9 @@ class SplashActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-        Handler().postDelayed({
-            val intent = Intent(this@SplashActivity, StorageAudioActivity::class.java)
-            startActivity(intent)
+        Handler(Looper.getMainLooper()).postDelayed({
+            startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
             finish()
-        }, 2000)
+        }, 1500)
     }
 }

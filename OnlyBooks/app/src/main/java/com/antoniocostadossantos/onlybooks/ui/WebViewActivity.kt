@@ -1,12 +1,15 @@
 package com.antoniocostadossantos.onlybooks.ui
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.res.AssetManager
 import android.os.Bundle
-import android.webkit.WebView
-import android.webkit.WebViewClient
-import com.antoniocostadossantos.onlybooks.R
-import com.antoniocostadossantos.onlybooks.databinding.ActivityHomeBinding
+import android.os.Environment
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toUri
 import com.antoniocostadossantos.onlybooks.databinding.ActivityWebViewBinding
+import com.github.barteksc.pdfviewer.util.FitPolicy
+import java.io.File
+
 
 class WebViewActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWebViewBinding
@@ -15,10 +18,50 @@ class WebViewActivity : AppCompatActivity() {
         binding = ActivityWebViewBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.webView.apply {
-            webViewClient = WebViewClient()
-            loadUrl("https://onlybooksstoragev2.blob.core.windows.net/armazenamentov2/armazenamentov2/Harry-Potter-e-a-pedra-filosofal.pdf")
-        }
 
+        val uri = intent.getStringExtra("pdf_url")?.toUri()
+
+        binding.pdfView.fromAsset("Harry-Potter-e-a-pedra-filosofal.pdf")
+            .enableSwipe(true)
+            .swipeHorizontal(true)
+            .defaultPage(0)
+            .pageSnap(true)
+            .autoSpacing(true)
+            .enableAntialiasing(true)
+            .pageFitPolicy(FitPolicy.WIDTH)
+            .pageFling(true)
+            .nightMode(false)
+            .load()
+    }
+
+
+    fun getDownloadedFile() {
+        println("------------------------------------------------------------------------------------")
+        println("------------------------------------------------------------------------------------")
+        println("------------------------------------------------------------------------------------")
+        println("------------------------------------------------------------------------------------")
+        println("------------------------------------------------------------------------------------")
+        println("------------------------------------------------------------------------------------")
+        println("------------------------------------------------------------------------------------")
+        println("------------------------------------------------------------------------------------")
+        println("------------------------------------------------------------------------------------")
+        println("------------------------------------------------------------------------------------")
+        println("------------------------------------------------------------------------------------")
+        println("------------------------------------------------------------------------------------")
+        println("------------------------------------------------------------------------------------")
+        println("------------------------------------------------------------------------------------")
+        println("------------------------------------------------------------------------------------")
+        println("------------------------------------------------------------------------------------")
+        println("------------------------------------------------------------------------------------")
+        println("------------------------------------------------------------------------------------")
+        val path = Environment.getExternalStorageDirectory().toString() + "/assets/"
+
+        println("Path $path")
+        val directory = File(path)
+        val files = directory.listFiles()
+        if (directory.canRead() && files != null) {
+            println("Files size: ${files.size}")
+            for (file in files) Log.d("FILE", file.name)
+        } else Log.d("Null?", "it is null")
     }
 }

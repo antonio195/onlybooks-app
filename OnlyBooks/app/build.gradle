@@ -34,6 +34,18 @@ android {
     viewBinding{
         enabled = true
     }
+    sourceSets {
+        release {
+            assets {
+                srcDirs 'src\\release\\assets', 'src\\release\\assets\\2'
+            }
+        }
+        main {
+            assets {
+                srcDirs 'src\\main\\assets'
+            }
+        }
+    }
 }
 
 dependencies {
@@ -72,5 +84,8 @@ dependencies {
     // Navigation Graph
     implementation "io.insert-koin:koin-androidx-navigation:$koin_version"
 
+    implementation 'com.github.barteksc:android-pdf-viewer:3.2.0-beta.1'
+
+    implementation "androidx.fragment:fragment:1.2.5"
 
 }

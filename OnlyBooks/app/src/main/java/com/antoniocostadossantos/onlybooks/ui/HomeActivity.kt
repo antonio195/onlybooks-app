@@ -16,7 +16,13 @@ class HomeActivity : AppCompatActivity() {
 
 
         binding.btnLer.setOnClickListener {
-            startActivity(Intent(this@HomeActivity, WebViewActivity::class.java))
+            val intent = Intent(this@HomeActivity, WebViewActivity::class.java)
+
+            val url = "https://firebasestorage.googleapis.com/v0/b/onlybooks-3a802.appspot.com/o/documents%2F2022_09_15_09_48_36?alt=media&token=3a89e859-3a63-4891-a819-7b65e1e24219"
+
+            intent.putExtra("pdf_url", url)
+
+            startActivity(intent)
         }
     }
 }

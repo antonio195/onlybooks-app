@@ -96,7 +96,7 @@ class LoginActivity : AppCompatActivity() {
             when (response) {
                 is StateResource.Success -> {
                     binding.errorLogin.hide()
-                    startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
+                    startActivity(Intent(this@LoginActivity, BaseFragmentActivity::class.java))
                     finish()
                 }
                 is StateResource.Error ->{

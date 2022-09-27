@@ -24,4 +24,6 @@
     <string name="btn_upload_pdf">Enviar PDF</string>
     <string name="btn_selected_upload_audio">Selecionar Audio</string>
     <string name="btn_upload_audio">Enviar Audio</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

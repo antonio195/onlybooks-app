@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_home"
+        android:icon="@drawable/home_vector"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/menu_ebooks"
+        android:icon="@drawable/books_vector"
+        android:title="Ebooks" />
+
+    <item
+        android:id="@+id/menu_new_book"
+        android:icon="@drawable/new_book_vector"
+        android:title="New Book" />
+
+    <item
+        android:id="@+id/menu_audiobook"
+        android:icon="@drawable/audio_book_vector"
+        android:title="AudioBook" />
+
+    <item
+        android:id="@+id/menu_profile"
+        android:icon="@drawable/person_vector"
+        android:title="Profile" />
+</menu>

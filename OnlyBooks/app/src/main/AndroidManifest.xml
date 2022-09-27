@@ -4,6 +4,9 @@
     package="com.antoniocostadossantos.onlybooks">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".dependencyInjection.MyApp"
@@ -18,20 +21,41 @@
         android:theme="@style/Theme.OnlyBooks"
         tools:targetApi="31">
         <activity
+            android:name=".ui.BaseFragmentActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.PaymentActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.WebViewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.StorageAudioActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.StorageFileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.StorageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.EbookSubmissionActivity"
             android:exported="false" />
         <activity
             android:name=".ui.HomeActivity"
             android:exported="false" />
-
         <activity
             android:name=".ui.ForgotPasswordActivity"
             android:exported="false" />
         <activity
             android:name=".ui.RegisterActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".ui.SplashActivity"

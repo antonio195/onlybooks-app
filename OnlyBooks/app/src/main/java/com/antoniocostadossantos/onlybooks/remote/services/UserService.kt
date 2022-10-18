@@ -16,6 +16,12 @@ interface UserService {
         senha: String
     ): Response<ListUserModel>
 
+    @GET("/users/user-login-mobile/{email}")
+    fun getUserByEmail(
+        @Path("email")
+        email: String
+    ): Response<ListUserModel>
+
     @Headers("Content-Type: application/json")
     @POST("/users/register")
     suspend fun createUser(

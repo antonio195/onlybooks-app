@@ -2,10 +2,9 @@ package com.antoniocostadossantos.onlybooks.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.antoniocostadossantos.onlybooks.databinding.ActivityLoginBinding
+import com.antoniocostadossantos.onlybooks.util.SecurityPreferences
 import com.antoniocostadossantos.onlybooks.util.StateResource
 import com.antoniocostadossantos.onlybooks.util.hide
 import com.antoniocostadossantos.onlybooks.util.show
@@ -17,6 +16,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
 
     private val userViewModel: UserViewModel by viewModel()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,11 +30,36 @@ class LoginActivity : AppCompatActivity() {
         }
         binding.loginButton.setOnClickListener {
             checkFields()
+
+            val base = userViewModel.login.value?.data?.items?.get(0)
+            if (base != null) {
+                val id = base.id.toString()
+                val nome = base.nome.toString()
+                val email = base.email.toString()
+                val password = base.senha.toString()
+                val description = base.descricao.toString()
+                val photo = base.photo.toString()
+                val header = base.header.toString()
+
+
+                val prefs = SecurityPreferences(applicationContext)
+                prefs.setId(id)
+                prefs.setName(nome)
+                prefs.setEmail(email)
+                prefs.setPassword(password)
+                prefs.setDescription(description)
+                prefs.setPhoto(photo)
+                prefs.setHeader(header)
+            }
         }
 
         binding.forgotPassword.setOnClickListener {
             forgotPasswordActivity()
         }
+
+
+
+        println(userViewModel.login.value?.data?.items)
 
         verifyLogin()
     }
@@ -87,6 +112,11 @@ class LoginActivity : AppCompatActivity() {
         val email: String = binding.emailInput.text.toString()
         val password: String = binding.passwordInput.text.toString()
 
+        val preferences = SecurityPreferences(applicationContext)
+
+        preferences.setEmail(email)
+        preferences.setPassword(password)
+
         userViewModel.login(email, password)
         verifyLogin()
     }
@@ -99,7 +129,7 @@ class LoginActivity : AppCompatActivity() {
                     startActivity(Intent(this@LoginActivity, BaseFragmentActivity::class.java))
                     finish()
                 }
-                is StateResource.Error ->{
+                is StateResource.Error -> {
                     binding.errorLogin.show()
                 }
                 else -> {

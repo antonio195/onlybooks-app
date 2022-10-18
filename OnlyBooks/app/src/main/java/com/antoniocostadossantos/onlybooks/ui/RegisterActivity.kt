@@ -8,10 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.antoniocostadossantos.onlybooks.R
 import com.antoniocostadossantos.onlybooks.databinding.ActivityRegisterBinding
 import com.antoniocostadossantos.onlybooks.model.UserModelDTO
-import com.antoniocostadossantos.onlybooks.util.StateResource
-import com.antoniocostadossantos.onlybooks.util.hide
-import com.antoniocostadossantos.onlybooks.util.show
-import com.antoniocostadossantos.onlybooks.util.toast
+import com.antoniocostadossantos.onlybooks.util.*
 import com.antoniocostadossantos.onlybooks.viewModel.UserViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -87,6 +84,12 @@ class RegisterActivity : AppCompatActivity() {
         val name = binding.userInput.text.toString().lowercase()
         val email = binding.emailInput.text.toString().lowercase()
         val password = binding.passwordInput.text.toString()
+        val photo = "https://firebasestorage.googleapis.com/v0/b/onlybooks-3a802.appspot.com/o/images%2Fusuariopadrao.png?alt=media&token=2d0733ab-36cf-40cb-ac3d-b2ab854c7ed3"
+
+
+        saveInCache("name", name)
+        saveInCache("email", email)
+        saveInCache("photo", photo)
 
         val user = UserModelDTO(name, email, password)
         userViewModel.register(user)
@@ -121,5 +124,15 @@ class RegisterActivity : AppCompatActivity() {
             )
         val result = pattern.containsMatchIn(email)
         return result
+    }
+
+    private fun saveInCache(key: String, value: String) {
+        val preferences = getSharedPreferences(
+            "UserData",
+            AppCompatActivity.MODE_PRIVATE
+        )
+        val editor = preferences?.edit()
+        editor?.putString(key, value)
+        editor?.apply()
     }
 }

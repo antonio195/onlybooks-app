@@ -18,7 +18,7 @@ class SecurityPreferences(context: Context) {
     }
 
     fun getName(): String? {
-        return preferences.getString("email", "")
+        return preferences.getString("name", "")
     }
 
     fun setName(name: String) {
@@ -38,7 +38,7 @@ class SecurityPreferences(context: Context) {
     }
 
     fun setPassword(password: String) {
-        preferences.edit().putString("id,", password)
+        preferences.edit().putString("password,", password)
     }
 
     fun getHeader(): String? {

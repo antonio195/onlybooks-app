@@ -1,6 +1,7 @@
 package com.antoniocostadossantos.onlybooks.remote.services
 
 import com.antoniocostadossantos.onlybooks.model.ListUserModel
+import com.antoniocostadossantos.onlybooks.model.UserModel
 import com.antoniocostadossantos.onlybooks.model.UserModelDTO
 import retrofit2.Response
 import retrofit2.http.*
@@ -14,7 +15,7 @@ interface UserService {
         email: String,
         @Path("senha")
         senha: String
-    ): Response<ListUserModel>
+    ): Response<UserModel>
 
     @GET("/users/user-login-mobile/{email}")
     fun getUserByEmail(

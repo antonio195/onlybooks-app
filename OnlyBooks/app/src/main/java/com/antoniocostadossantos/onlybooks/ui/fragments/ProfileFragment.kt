@@ -1,6 +1,5 @@
 package com.antoniocostadossantos.onlybooks.ui.fragments
 
-import android.content.Context.MODE_PRIVATE
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.antoniocostadossantos.onlybooks.R
 import com.antoniocostadossantos.onlybooks.databinding.FragmentProfileBinding
-import com.antoniocostadossantos.onlybooks.util.SecurityPreferences
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
@@ -22,6 +20,11 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         binding.textName.text = getDataInCache("name")
         binding.textDescription.text = getDataInCache("description")
@@ -29,20 +32,15 @@ class ProfileFragment : Fragment() {
         val photoURL = getDataInCache("photo")
         val photo = binding.profileImage
 
-        println(getDataInCache("name"))
-        println(getDataInCache("description"))
-        println(getDataInCache("photo"))
 
         val requestOptions = RequestOptions()
-            .placeholder(R.drawable.ic_baseline_error_24)
-            .error(R.drawable.ic_baseline_cloud_download_24)
+            .placeholder(R.drawable.person_vector)
+            .error(R.drawable.person_vector)
 
         Glide.with(binding.profileImage)
             .applyDefaultRequestOptions(requestOptions)
             .load(photoURL)
             .into(photo)
-
-        return binding.root
     }
 
     private fun saveInCache(key: String, value: String) {

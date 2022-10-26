@@ -3,10 +3,10 @@ package com.antoniocostadossantos.onlybooks.ui
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import com.antoniocostadossantos.onlybooks.databinding.ActivityStorageFileBinding
 import com.google.firebase.storage.FirebaseStorage
 import java.text.SimpleDateFormat
@@ -21,7 +21,7 @@ class StorageFileActivity : AppCompatActivity() {
         binding = ActivityStorageFileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnSelectedFile.setOnClickListener{
+        binding.btnSelectedFile.setOnClickListener {
             selectFile()
         }
 
@@ -39,7 +39,23 @@ class StorageFileActivity : AppCompatActivity() {
             }
     }
 
-    fun selectFile(){
+    fun downloadFromName(name: String): String {
+        var path = ""
+        var error = ""
+        FirebaseStorage.getInstance()
+            .getReference("documents/$name").downloadUrl.addOnSuccessListener {
+                path = it.path!!
+            }.addOnFailureListener {
+                error = it.toString()
+            }
+
+        if (!path.isNullOrEmpty()) {
+            return path
+        }
+        return error
+    }
+
+    fun selectFile() {
         val intent = Intent()
         intent.type = "application/pdf"
         intent.action = Intent.ACTION_GET_CONTENT
@@ -61,11 +77,12 @@ class StorageFileActivity : AppCompatActivity() {
         }
     }
 
-    var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            val data: Intent? = result.data
+    var resultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val data: Intent? = result.data
 
-            fileUri = data?.data!!
+                fileUri = data?.data!!
+            }
         }
-    }
 }

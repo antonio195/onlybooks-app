@@ -2,13 +2,13 @@ package com.antoniocostadossantos.onlybooks.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.antoniocostadossantos.onlybooks.R
 import com.antoniocostadossantos.onlybooks.databinding.ActivityRegisterBinding
 import com.antoniocostadossantos.onlybooks.model.UserModelDTO
-import com.antoniocostadossantos.onlybooks.util.*
+import com.antoniocostadossantos.onlybooks.util.StateResource
+import com.antoniocostadossantos.onlybooks.util.hide
+import com.antoniocostadossantos.onlybooks.util.show
 import com.antoniocostadossantos.onlybooks.viewModel.UserViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -85,11 +85,6 @@ class RegisterActivity : AppCompatActivity() {
         val email = binding.emailInput.text.toString().lowercase()
         val password = binding.passwordInput.text.toString()
         val photo = "https://firebasestorage.googleapis.com/v0/b/onlybooks-3a802.appspot.com/o/images%2Fusuariopadrao.png?alt=media&token=2d0733ab-36cf-40cb-ac3d-b2ab854c7ed3"
-
-
-        saveInCache("name", name)
-        saveInCache("email", email)
-        saveInCache("photo", photo)
 
         val user = UserModelDTO(name, email, password)
         userViewModel.register(user)

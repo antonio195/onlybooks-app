@@ -31,26 +31,26 @@ class LoginActivity : AppCompatActivity() {
         binding.loginButton.setOnClickListener {
             checkFields()
 
-            val base = userViewModel.login.value?.data?.items?.get(0)
-            if (base != null) {
-                val id = base.id.toString()
-                val nome = base.nome.toString()
-                val email = base.email.toString()
-                val password = base.senha.toString()
-                val description = base.descricao.toString()
-                val photo = base.photo.toString()
-                val header = base.header.toString()
-
-
-                val prefs = SecurityPreferences(applicationContext)
-                prefs.setId(id)
-                prefs.setName(nome)
-                prefs.setEmail(email)
-                prefs.setPassword(password)
-                prefs.setDescription(description)
-                prefs.setPhoto(photo)
-                prefs.setHeader(header)
-            }
+//            val base = userViewModel.login.value?.data?.items?.get(0)
+//            if (base != null) {
+//                val id = base.id.toString()
+//                val nome = base.nome.toString()
+//                val email = base.email.toString()
+//                val password = base.senha.toString()
+//                val description = base.descricao.toString()
+//                val photo = base.photo.toString()
+//                val header = base.header.toString()
+//
+//
+//                val prefs = SecurityPreferences(applicationContext)
+//                prefs.setId(id)
+//                prefs.setName(nome)
+//                prefs.setEmail(email)
+//                prefs.setPassword(password)
+//                prefs.setDescription(description)
+//                prefs.setPhoto(photo)
+//                prefs.setHeader(header)
+//            }
         }
 
         binding.forgotPassword.setOnClickListener {
@@ -58,8 +58,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
 
-
-        println(userViewModel.login.value?.data?.items)
+//        println(userViewModel.login.value?.data?.items)
 
         verifyLogin()
     }
@@ -124,7 +123,25 @@ class LoginActivity : AppCompatActivity() {
     private fun verifyLogin() {
         userViewModel.login.observe(this) { response ->
             when (response) {
+
                 is StateResource.Success -> {
+
+                    val id = response.data?.id.toString()
+                    val name = response.data?.nome.toString()
+                    val email = response.data?.email.toString()
+                    val password = response.data?.senha.toString()
+                    val description = response.data?.descricao.toString()
+                    val header = response.data?.header.toString()
+                    val photo = response.data?.photo.toString()
+
+                    saveInCache("id", id)
+                    saveInCache("name", name)
+                    saveInCache("email", email)
+                    saveInCache("password", password)
+                    saveInCache("description", description)
+                    saveInCache("header", header)
+                    saveInCache("photo", photo)
+
                     binding.errorLogin.hide()
                     startActivity(Intent(this@LoginActivity, BaseFragmentActivity::class.java))
                     finish()
@@ -139,4 +156,15 @@ class LoginActivity : AppCompatActivity() {
 
         }
     }
+
+    private fun saveInCache(key: String, value: String) {
+        val preferences = getSharedPreferences(
+            "UserData",
+            AppCompatActivity.MODE_PRIVATE
+        )
+        val editor = preferences?.edit()
+        editor?.putString(key, value)
+        editor?.apply()
+    }
+
 }

@@ -26,4 +26,6 @@
     <string name="btn_upload_audio">Enviar Audio</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="read_ebook">Ler ebook</string>
 </resources>

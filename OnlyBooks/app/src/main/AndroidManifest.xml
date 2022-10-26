@@ -6,7 +6,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".dependencyInjection.MyApp"
@@ -40,7 +39,7 @@
             android:name=".ui.StorageFileActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.StorageActivity"
+            android:name=".ui.StorageImageActivity"
             android:exported="false" />
         <activity
             android:name=".ui.LoginActivity"

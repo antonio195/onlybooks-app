@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cinzaClaro"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:scrollbars="none"
+    tools:context=".ui.fragments.CreateEbookFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/image_ebook"
+                android:layout_width="180dp"
+                android:layout_height="250dp"
+                android:layout_marginTop="16dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_launcher_background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/rounded_edges_imageView_5" />
+
+            <TextView
+                android:id="@+id/text_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/source_sans_pro"
+                android:text="Título *"
+                android:textColor="@color/azulEscuro"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/image_ebook" />
+
+            <EditText
+                android:id="@+id/input_title"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/edi_text_rounded5_blue_light"
+                android:fontFamily="@font/source_sans_pro"
+                android:paddingStart="10dp"
+                android:textColor="@color/azulEscuro"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_title" />
+
+            <TextView
+                android:id="@+id/text_genre1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/source_sans_pro"
+                android:text="Gênero 1 *"
+                android:textColor="@color/azulEscuro"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_title" />
+
+            <EditText
+                android:id="@+id/input_genre1"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/edi_text_rounded5_blue_light"
+                android:fontFamily="@font/source_sans_pro"
+                android:paddingStart="10dp"
+                android:textColor="@color/azulEscuro"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_genre1" />
+
+            <TextView
+                android:id="@+id/text_genre2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/source_sans_pro"
+                android:text="Gênero 2"
+                android:textColor="@color/azulEscuro"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_genre1" />
+
+            <EditText
+                android:id="@+id/input_genre2"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/edi_text_rounded5_blue_light"
+                android:fontFamily="@font/source_sans_pro"
+                android:paddingStart="10dp"
+                android:textColor="@color/azulEscuro"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_genre2" />
+
+            <TextView
+                android:id="@+id/text_genre3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/source_sans_pro"
+                android:text="Gênero 3"
+                android:textColor="@color/azulEscuro"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_genre2" />
+
+            <EditText
+                android:id="@+id/input_genre3"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/edi_text_rounded5_blue_light"
+                android:fontFamily="@font/source_sans_pro"
+                android:paddingStart="10dp"
+                android:textColor="@color/azulEscuro"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_genre3" />
+
+            <TextView
+                android:id="@+id/text_class"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/source_sans_pro"
+                android:text="Classificação *"
+                android:textColor="@color/azulEscuro"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_genre3" />
+
+            <EditText
+                android:id="@+id/input_class"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/edi_text_rounded5_blue_light"
+                android:fontFamily="@font/source_sans_pro"
+                android:paddingStart="10dp"
+                android:textColor="@color/azulEscuro"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_class" />
+
+            <TextView
+                android:id="@+id/text_sinopse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/source_sans_pro"
+                android:text="Sinopse *"
+                android:textColor="@color/azulEscuro"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_class" />
+
+            <EditText
+                android:id="@+id/input_sinopse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/edi_text_rounded5_blue_light"
+                android:fontFamily="@font/source_sans_pro"
+                android:paddingHorizontal="10dp"
+                android:textAlignment="inherit"
+                android:textColor="@color/azulEscuro"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_sinopse" />
+
+            <Button
+                android:id="@+id/send_book_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/azulClaro"
+                android:hint="Selecionar capa do livro"
+                android:textColor="@color/azulEscuro"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_sinopse" />
+
+            <Button
+                android:id="@+id/publish_ebook"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="30dp"
+                android:backgroundTint="@color/azulEscuro"
+                android:fontFamily="@font/source_sans_pro"
+                android:hint="Publicar"
+                android:paddingHorizontal="18dp"
+                android:paddingVertical="10dp"
+                android:textColor="@color/cinzaClaro"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/send_book_image" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

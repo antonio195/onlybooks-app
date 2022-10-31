@@ -72,9 +72,6 @@ class RegisterActivity : AppCompatActivity() {
             }
 
             else -> {
-                val user: String = binding.userInput.text.toString()
-                val email: String = binding.emailInput.text.toString()
-                val password: String = binding.passwordInput.text.toString()
                 register()
             }
         }

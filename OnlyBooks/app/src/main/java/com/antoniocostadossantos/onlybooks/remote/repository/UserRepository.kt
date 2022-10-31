@@ -1,4 +1,4 @@
-package com.antoniocostadossantos.onlybooks.repository
+package com.antoniocostadossantos.onlybooks.remote.repository
 
 import com.antoniocostadossantos.onlybooks.model.UserModelDTO
 import com.antoniocostadossantos.onlybooks.remote.RetrofitClient

@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.antoniocostadossantos.onlybooks.model.UserModel
 import com.antoniocostadossantos.onlybooks.model.UserModelDTO
-import com.antoniocostadossantos.onlybooks.repository.UserRepository
+import com.antoniocostadossantos.onlybooks.remote.repository.UserRepository
 import com.antoniocostadossantos.onlybooks.util.StateResource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

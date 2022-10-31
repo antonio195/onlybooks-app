@@ -27,16 +27,6 @@ class ItemAdapter(val context: Context) : RecyclerView.Adapter<ItemAdapter.ViewH
             is ViewHolder -> {
                 holder.bind(items[position])
 
-//                holder.itemView.setOnClickListener(object : View.OnClickListener {
-//                    override fun onClick(p0: View?) {
-//                        val transaction =
-//                            (context as FragmentActivity).supportFragmentManager.beginTransaction()
-//                        transaction.replace(R.id.nav_host_fragment, EbookDetailsFragment())
-//                        transaction.addToBackStack(null)
-//                        transaction.commit()
-//                    }
-//                })
-
                 holder.itemView.setOnClickListener {
                     val transaction =
                         (context as FragmentActivity).supportFragmentManager.beginTransaction()
@@ -45,7 +35,6 @@ class ItemAdapter(val context: Context) : RecyclerView.Adapter<ItemAdapter.ViewH
                     transaction.addToBackStack(null)
                     transaction.commit()
                 }
-
             }
         }
     }

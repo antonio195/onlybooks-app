@@ -18,7 +18,9 @@ class MyApp : Application() {
             modules(
                 userDependency,
                 ebookDependency,
+                chapterDependency,
                 sharedPreferences
+
             )
         }
     }

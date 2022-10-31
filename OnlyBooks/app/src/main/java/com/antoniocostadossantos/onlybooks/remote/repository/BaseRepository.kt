@@ -1,6 +1,6 @@
-package com.antoniocostadossantos.onlybooks.repository
+package com.antoniocostadossantos.onlybooks.remote.repository
 
-import com.antoniocostadossantos.onlybooks.repository.listener.APIListener
+import com.antoniocostadossantos.onlybooks.remote.repository.listener.APIListener
 import com.google.gson.Gson
 import retrofit2.Response
 

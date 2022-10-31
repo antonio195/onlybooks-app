@@ -36,16 +36,16 @@
             android:name=".ui.StorageAudioActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.StorageFileActivity"
+            android:name=".ui.StorageFileFragment"
             android:exported="false" />
         <activity
-            android:name=".ui.StorageImageActivity"
+            android:name=".ui.fragments.StorageImageFragment"
             android:exported="false" />
         <activity
             android:name=".ui.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.EbookSubmissionActivity"
+            android:name=".ui.fragments.CreateEbookFragment"
             android:exported="false" />
         <activity
             android:name=".ui.HomeActivity"

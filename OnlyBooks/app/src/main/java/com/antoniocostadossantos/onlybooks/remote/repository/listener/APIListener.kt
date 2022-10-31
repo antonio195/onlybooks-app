@@ -1,4 +1,4 @@
-package com.antoniocostadossantos.onlybooks.repository.listener
+package com.antoniocostadossantos.onlybooks.remote.repository.listener
 
 interface APIListener<T> {
     fun onSucess(result: T)

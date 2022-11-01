@@ -1,6 +1,6 @@
 package com.antoniocostadossantos.onlybooks.remote.services
 
-import com.antoniocostadossantos.onlybooks.model.ChapterModel
+import com.antoniocostadossantos.onlybooks.model.ChapterEbookMobile
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -10,18 +10,14 @@ import retrofit2.http.Path
 
 interface ChapterService {
 
-    @POST("/ebook/update-ebook/{isEbook}/{idEbook}")
+    @POST("/chapter-mobile/post-chapter-ebook-mobile/")
     suspend fun postChapter(
-        @Body ebook: ChapterModel?,
-        @Path("isEbook") isEbook: Boolean,
-        @Path("idEbook") idEbook: Int
+        @Body ebook: ChapterEbookMobile?
     ): Response<String>
 
-    @GET("/ebook/view-chapter/{numChapter}/{idEbook}/{isEbook}")
+    @GET("/chapter-mobile/get-chapters-ebook-mobile-by-idEbook/{idEbook}/")
     suspend fun getChapter(
-        @Path("idEbook") numChapter: Int,
-        @Path("idEbook") idEbook: Int,
-        @Path("isEbook") isEbook: Boolean,
-    ): Response<String>
+        @Path("idEbook") idEbook: Int
+    ): Response<List<ChapterEbookMobile>>
 
 }

@@ -11,14 +11,21 @@ import androidx.fragment.app.FragmentActivity
 import com.antoniocostadossantos.onlybooks.R
 import com.antoniocostadossantos.onlybooks.databinding.FragmentEbookDetailsBinding
 import com.antoniocostadossantos.onlybooks.model.EbookModel
+import com.antoniocostadossantos.onlybooks.ui.ReadPDFURLActivity
 import com.antoniocostadossantos.onlybooks.ui.StorageFileFragment
-import com.antoniocostadossantos.onlybooks.ui.WebViewActivity
+import com.antoniocostadossantos.onlybooks.util.StateResource
+import com.antoniocostadossantos.onlybooks.util.toast
+import com.antoniocostadossantos.onlybooks.viewModel.ChapterViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class EbookDetailsFragment(val ebook: EbookModel) : Fragment() {
 
     private lateinit var binding: FragmentEbookDetailsBinding
+    private val chapterViewModel: ChapterViewModel by viewModel()
+
+    private var URLEbook: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +43,7 @@ class EbookDetailsFragment(val ebook: EbookModel) : Fragment() {
             binding.newChapter.show()
         }
 
-        checkChapterExist()
+        checkUrlExists()
 
         binding.editEbook.setOnClickListener {
             editEbook(ebook)
@@ -67,21 +74,21 @@ class EbookDetailsFragment(val ebook: EbookModel) : Fragment() {
             .into(image)
 
         binding.lerEbook.setOnClickListener {
-            val intent = Intent((context as FragmentActivity), WebViewActivity::class.java)
-            intent.putExtra(
-                "URLChapter",
-                "https://firebasestorage.googleapis.com/v0/b/onlybooks-3a802.appspot.com/o/documents%2Fchapeuzinho_vermelho_versao_digital.pdf?alt=media&token=ee7b6125-2906-4531-8fda-028c3232db75\n"
-            )
-            startActivity(intent)
+
+            if (URLEbook.isNullOrEmpty()) {
+                binding.lerEbook.isEnabled = false
+                toast("Ebook não possui capitulo")
+            } else {
+                val intent = Intent((context as FragmentActivity), ReadPDFURLActivity::class.java)
+                intent.putExtra(
+                    "URLEbook",
+                    URLEbook
+                )
+                startActivity(intent)
+            }
+
+
         }
-    }
-
-    private fun getChapter() {
-
-    }
-
-    private fun checkChapterExist() {
-
     }
 
     private fun editEbook(ebook: EbookModel) {
@@ -91,6 +98,32 @@ class EbookDetailsFragment(val ebook: EbookModel) : Fragment() {
         transaction.replace(R.id.nav_host_fragment, CreateEbookFragment(ebook))
         transaction.addToBackStack(null)
         transaction.commit()
+    }
+
+    private fun checkUrlExists() {
+        getUrl()
+    }
+
+    private fun getUrl() {
+        chapterViewModel.getChapter(ebook.idEbook)
+        checkUrlResponse()
+    }
+
+    private fun checkUrlResponse() {
+        chapterViewModel.getChapter.observe(viewLifecycleOwner) { response ->
+            when (response) {
+
+                is StateResource.Success -> {
+                    URLEbook = response.data?.get(0)!!.urlPDF
+                }
+                is StateResource.Error -> {
+                }
+                else -> {
+                    println("EbookDetailsFragment linha 131")
+                }
+            }
+
+        }
     }
 
     private fun getDataInCache(key: String): String? {

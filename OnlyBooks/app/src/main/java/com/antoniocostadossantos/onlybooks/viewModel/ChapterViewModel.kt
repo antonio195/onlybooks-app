@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.antoniocostadossantos.onlybooks.model.ChapterModel
+import com.antoniocostadossantos.onlybooks.model.ChapterEbookMobile
 import com.antoniocostadossantos.onlybooks.remote.repository.ChapterRepository
 import com.antoniocostadossantos.onlybooks.util.StateResource
 import kotlinx.coroutines.Dispatchers
@@ -18,18 +18,17 @@ class ChapterViewModel(
     private val _chapterResponse = MutableLiveData<StateResource<String>>()
     val chapterResponse: LiveData<StateResource<String>> = _chapterResponse
 
-    private val _getChapter = MutableLiveData<StateResource<String>>()
-    val getChapter: LiveData<StateResource<String>> = _getChapter
+    private val _getChapter = MutableLiveData<StateResource<List<ChapterEbookMobile>>>()
+    val getChapter: LiveData<StateResource<List<ChapterEbookMobile>>> = _getChapter
 
-    fun postChapter(chapter: ChapterModel, idEbook: Int, isEbook: Boolean) =
-        viewModelScope.launch(Dispatchers.IO) {
-            val response = chapterRepository.postChapter(chapter, idEbook, isEbook)
-            _chapterResponse.postValue(handleResponse(response))
-        }
+    fun postChapter(chapter: ChapterEbookMobile) = viewModelScope.launch(Dispatchers.IO) {
+        val response = chapterRepository.postChapter(chapter)
+        _chapterResponse.postValue(handleResponse(response))
+    }
 
-    fun getChapter(numChapter: Int, idEbook: Int, isEbook: Boolean) =
+    fun getChapter(idEbook: Int) =
         viewModelScope.launch(Dispatchers.IO) {
-            val response = chapterRepository.getChapter(numChapter, idEbook, isEbook)
+            val response = chapterRepository.getChapter(idEbook)
             _getChapter.postValue(handleResponse(response))
         }
 

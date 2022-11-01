@@ -13,8 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.antoniocostadossantos.onlybooks.R
 import com.antoniocostadossantos.onlybooks.databinding.ActivityStorageFileBinding
-import com.antoniocostadossantos.onlybooks.model.AudioBookModel
-import com.antoniocostadossantos.onlybooks.model.ChapterModel
+import com.antoniocostadossantos.onlybooks.model.ChapterEbookMobile
 import com.antoniocostadossantos.onlybooks.model.EbookModel
 import com.antoniocostadossantos.onlybooks.util.StateResource
 import com.antoniocostadossantos.onlybooks.viewModel.ChapterViewModel
@@ -68,27 +67,9 @@ class StorageFileFragment(val ebookBase: EbookModel) : Fragment() {
 
     }
 
-    private fun postChapter(nameChapter: String, urlChapter: String) {
-        val audioBookEmpyt = AudioBookModel(
-            "EbookPostado",
-            "18",
-            "",
-            "EbookPostado",
-            true,
-            "",
-            "",
-            "Socorro",
-            0,
-            ebookBase.idUsuario,
-            "Socorro jesus",
-            "",
-            "Jesus Cristo",
-            0,
-            true,
-            ""
-        )
-        val chapter = ChapterModel(audioBookEmpyt, 1, ebookBase, nameChapter, 1, urlChapter)
-        chapterViewModel.postChapter(chapter, ebookBase.idEbook, true)
+    private fun postChapter(urlChapter: String) {
+        val chapter = ChapterEbookMobile(ebookBase.idEbook, ebookBase.idUsuario.id, urlChapter)
+        chapterViewModel.postChapter(chapter)
     }
 
     private fun verifyUpdate() {
@@ -130,8 +111,7 @@ class StorageFileFragment(val ebookBase: EbookModel) : Fragment() {
     fun getURL(name: String) {
         FirebaseStorage.getInstance()
             .getReference("documents/$name").downloadUrl.addOnSuccessListener { url ->
-                val nameChapter = binding.nameChapter.text.toString()
-                postChapter(nameChapter, url.toString())
+                postChapter(url.toString())
                 verifyUpdate()
             }.addOnFailureListener {
                 Toast.makeText((context as FragmentActivity), it.toString(), Toast.LENGTH_SHORT)

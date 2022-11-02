@@ -71,7 +71,7 @@
                 app:layout_constraintTop_toBottomOf="@id/title_ebook" />
 
             <ScrollView
-                android:id="@+id/scrollView_synopsis"
+                android:id="@+id/scrollview_synopsis"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
@@ -114,9 +114,9 @@
                 android:textColorHint="@color/cinzaClaro"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@id/scrollView_synopsis"
-                app:layout_constraintStart_toStartOf="@id/scrollView_synopsis"
-                app:layout_constraintTop_toBottomOf="@id/scrollView_synopsis" />
+                app:layout_constraintEnd_toEndOf="@id/scrollview_synopsis"
+                app:layout_constraintStart_toStartOf="@id/scrollview_synopsis"
+                app:layout_constraintTop_toBottomOf="@id/scrollview_synopsis" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

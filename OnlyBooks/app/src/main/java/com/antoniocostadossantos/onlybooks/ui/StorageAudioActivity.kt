@@ -1,16 +1,13 @@
 package com.antoniocostadossantos.onlybooks.ui
 
 import android.app.Activity
-import android.bluetooth.BluetoothClass.Service.AUDIO
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.MediaStore
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import com.antoniocostadossantos.onlybooks.databinding.ActivityStorageAudioBinding
-import com.antoniocostadossantos.onlybooks.databinding.ActivityStorageFileBinding
 import com.google.firebase.storage.FirebaseStorage
 import java.text.SimpleDateFormat
 import java.util.*
@@ -24,7 +21,7 @@ class StorageAudioActivity : AppCompatActivity() {
         binding = ActivityStorageAudioBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnSelectedAudio.setOnClickListener{
+        binding.selectAudio.setOnClickListener {
             selectAudio()
         }
 

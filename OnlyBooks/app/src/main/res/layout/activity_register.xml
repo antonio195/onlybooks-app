@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:background="@color/azulClaro"
     tools:context=".ui.RegisterActivity">
 
@@ -86,7 +87,7 @@
         app:layout_constraintTop_toBottomOf="@id/email_input" />
 
     <TextView
-        android:id="@+id/errorRegister"
+        android:id="@+id/error_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Usuário ou email já cadastrado."

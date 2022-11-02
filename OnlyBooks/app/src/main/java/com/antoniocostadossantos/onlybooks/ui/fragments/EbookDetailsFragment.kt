@@ -12,7 +12,6 @@ import com.antoniocostadossantos.onlybooks.R
 import com.antoniocostadossantos.onlybooks.databinding.FragmentEbookDetailsBinding
 import com.antoniocostadossantos.onlybooks.model.EbookModel
 import com.antoniocostadossantos.onlybooks.ui.ReadPDFURLActivity
-import com.antoniocostadossantos.onlybooks.ui.StorageFileFragment
 import com.antoniocostadossantos.onlybooks.util.StateResource
 import com.antoniocostadossantos.onlybooks.util.toast
 import com.antoniocostadossantos.onlybooks.viewModel.ChapterViewModel
@@ -30,7 +29,7 @@ class EbookDetailsFragment(val ebook: EbookModel) : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentEbookDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -38,27 +37,53 @@ class EbookDetailsFragment(val ebook: EbookModel) : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        displayData()
+        checkUrlExists()
+        checkProperty()
+
+        binding.editEbook.setOnClickListener {
+            editEbook(ebook)
+        }
+
+        binding.newChapter.setOnClickListener {
+            goToNewChapter()
+        }
+
+        binding.lerEbook.setOnClickListener {
+            readEbook()
+        }
+    }
+
+    private fun goToNewChapter() {
+        val transaction =
+            (context as FragmentActivity).supportFragmentManager.beginTransaction()
+
+        transaction.replace(R.id.nav_host_fragment, StorageFileFragment(ebook))
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
+
+    private fun readEbook() {
+        if (URLEbook.isEmpty()) {
+            toast("Ebook não possui capitulo")
+        } else {
+            val intent = Intent((context as FragmentActivity), ReadPDFURLActivity::class.java)
+            intent.putExtra(
+                "URLEbook",
+                URLEbook
+            )
+            startActivity(intent)
+        }
+    }
+
+    private fun checkProperty() {
         if (ebook.idUsuario.id == getDataInCache("id")?.toInt()) {
             binding.editEbook.show()
             binding.newChapter.show()
         }
+    }
 
-        checkUrlExists()
-
-        binding.editEbook.setOnClickListener {
-            editEbook(ebook)
-            println(ebook)
-        }
-
-        binding.newChapter.setOnClickListener {
-            val transaction =
-                (context as FragmentActivity).supportFragmentManager.beginTransaction()
-
-            transaction.replace(R.id.nav_host_fragment, StorageFileFragment(ebook))
-            transaction.addToBackStack(null)
-            transaction.commit()
-        }
-
+    private fun displayData() {
         binding.titleEbook.text = ebook.nameEbook
         binding.genreEbook.text = ebook.genreEbook
         binding.ebookSynopsis.text = ebook.descricao
@@ -72,23 +97,6 @@ class EbookDetailsFragment(val ebook: EbookModel) : Fragment() {
             .applyDefaultRequestOptions(requestOptions)
             .load(ebook.url)
             .into(image)
-
-        binding.lerEbook.setOnClickListener {
-
-            if (URLEbook.isNullOrEmpty()) {
-                binding.lerEbook.isEnabled = false
-                toast("Ebook não possui capitulo")
-            } else {
-                val intent = Intent((context as FragmentActivity), ReadPDFURLActivity::class.java)
-                intent.putExtra(
-                    "URLEbook",
-                    URLEbook
-                )
-                startActivity(intent)
-            }
-
-
-        }
     }
 
     private fun editEbook(ebook: EbookModel) {

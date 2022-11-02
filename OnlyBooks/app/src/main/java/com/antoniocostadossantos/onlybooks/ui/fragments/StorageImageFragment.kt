@@ -29,7 +29,7 @@ class StorageImageFragment(val ebook: EbookModel) : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = ActivityStorageImageBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -38,18 +38,20 @@ class StorageImageFragment(val ebook: EbookModel) : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupImageEbook(ebook)
+        displayData()
 
-        binding.etUrl.setText(ebook.nameEbook)
-
-        binding.ivBannerEbook.setImageURI(null)
-
-        binding.btnSelectedImage.setOnClickListener {
+        binding.selectImage.setOnClickListener {
             selectImage()
         }
 
-        binding.btnUploadImage.setOnClickListener {
+        binding.uploadImage.setOnClickListener {
             uploadImage()
         }
+    }
+
+    private fun displayData() {
+        binding.etUrl.setText(ebook.nameEbook)
+
     }
 
     fun getURL(name: String) {
@@ -61,7 +63,7 @@ class StorageImageFragment(val ebook: EbookModel) : Fragment() {
             }
     }
 
-    fun selectImage(){
+    fun selectImage() {
         val intent = Intent()
         intent.type = "image/*"
         intent.action = Intent.ACTION_GET_CONTENT

@@ -6,9 +6,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
+    android:fitsSystemWindows="true"
     android:scrollbars="none"
     android:background="@color/backgroundWhite"
-    tools:context=".ui.StorageFileFragment">
+    tools:context=".ui.fragments.StorageFileFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -40,26 +41,6 @@
                 android:scaleType="fitXY"
                 android:background="@drawable/ic_launcher_background" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_marginTop="96dp"
-                android:layout_height="match_parent"
-                android:fontFamily="@font/source_sans_pro"
-                android:text="@string/tv_name_chapter"
-                android:textColor="@color/azulEscuro"
-                android:textSize="16sp" />
-
-            <EditText
-                android:id="@+id/name_chapter"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:adjustViewBounds="true"
-                android:background="@drawable/edi_text_rounded5_blue_light"
-                android:fontFamily="@font/source_sans_pro"
-                android:paddingHorizontal="14dp"
-                android:textColor="@color/azulEscuro"
-                android:hint="@string/et_name_chapter"
-                android:textColorHint="@color/azulEscuro"/>
 
         </LinearLayout>
 
@@ -67,11 +48,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="60dp"
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/btnSelectedFile"
+                android:id="@+id/select_file"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/azulEscuro"
@@ -85,7 +66,7 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <Button
-                android:id="@+id/btnUploadFile"
+                android:id="@+id/upload_file"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/azulEscuro"

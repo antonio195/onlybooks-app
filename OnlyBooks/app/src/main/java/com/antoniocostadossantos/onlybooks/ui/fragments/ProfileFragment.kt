@@ -25,13 +25,15 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        displayData()
+    }
 
+    private fun displayData() {
         binding.textName.text = getDataInCache("name")
         binding.textDescription.text = getDataInCache("description")
 
         val photoURL = getDataInCache("photo")
         val photo = binding.profileImage
-
 
         val requestOptions = RequestOptions()
             .placeholder(R.drawable.person_vector)
@@ -41,16 +43,6 @@ class ProfileFragment : Fragment() {
             .applyDefaultRequestOptions(requestOptions)
             .load(photoURL)
             .into(photo)
-    }
-
-    private fun saveInCache(key: String, value: String) {
-        val preferences = activity?.getSharedPreferences(
-            "UserData",
-            AppCompatActivity.MODE_PRIVATE
-        )
-        val editor = preferences?.edit()
-        editor?.putString(key, value)
-        editor?.apply()
     }
 
     private fun getDataInCache(key: String): String? {

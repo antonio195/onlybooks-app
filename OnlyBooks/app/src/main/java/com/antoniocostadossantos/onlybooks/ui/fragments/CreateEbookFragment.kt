@@ -33,20 +33,24 @@ class CreateEbookFragment(var ebookBase: EbookModel) : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setData(ebookBase)
+        displayData(ebookBase)
 
         binding.sendBookImage.setOnClickListener {
-            val transaction =
-                (context as FragmentActivity).supportFragmentManager.beginTransaction()
-
-            transaction.replace(R.id.nav_host_fragment, StorageImageFragment(ebookBase))
-            transaction.addToBackStack(null)
-            transaction.commit()
+            goToNewImage()
         }
 
         binding.publishEbook.setOnClickListener {
             checkFields()
         }
+    }
+
+    private fun goToNewImage() {
+        val transaction =
+            (context as FragmentActivity).supportFragmentManager.beginTransaction()
+
+        transaction.replace(R.id.nav_host_fragment, StorageImageFragment(ebookBase))
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 
     private fun checkFields() {
@@ -119,7 +123,7 @@ class CreateEbookFragment(var ebookBase: EbookModel) : Fragment() {
         }
     }
 
-    private fun setData(ebook: EbookModel) {
+    private fun displayData(ebook: EbookModel) {
         binding.inputTitle.setText(this.ebookBase.nameEbook)
         binding.inputGenre1.setText(this.ebookBase.genreEbook)
         binding.inputGenre2.setText(this.ebookBase.genre1Ebook)

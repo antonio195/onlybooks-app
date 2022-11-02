@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.antoniocostadossantos.onlybooks.databinding.ActivityLoginBinding
-import com.antoniocostadossantos.onlybooks.util.SecurityPreferences
 import com.antoniocostadossantos.onlybooks.util.StateResource
 import com.antoniocostadossantos.onlybooks.util.hide
 import com.antoniocostadossantos.onlybooks.util.show
@@ -23,52 +22,25 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar?.hide()
-
         binding.registerButton.setOnClickListener {
-            registerActivity()
+            goToRegister()
         }
         binding.loginButton.setOnClickListener {
             checkFields()
-
-//            val base = userViewModel.login.value?.data?.items?.get(0)
-//            if (base != null) {
-//                val id = base.id.toString()
-//                val nome = base.nome.toString()
-//                val email = base.email.toString()
-//                val password = base.senha.toString()
-//                val description = base.descricao.toString()
-//                val photo = base.photo.toString()
-//                val header = base.header.toString()
-//
-//
-//                val prefs = SecurityPreferences(applicationContext)
-//                prefs.setId(id)
-//                prefs.setName(nome)
-//                prefs.setEmail(email)
-//                prefs.setPassword(password)
-//                prefs.setDescription(description)
-//                prefs.setPhoto(photo)
-//                prefs.setHeader(header)
-//            }
         }
 
         binding.forgotPassword.setOnClickListener {
-            forgotPasswordActivity()
+            goToForgotPassword()
         }
-
-
-//        println(userViewModel.login.value?.data?.items)
-
         verifyLogin()
     }
 
-    private fun registerActivity() {
+    private fun goToRegister() {
         val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
         startActivity(intent)
     }
 
-    private fun forgotPasswordActivity() {
+    private fun goToForgotPassword() {
         val intent = Intent(this@LoginActivity, ForgotPasswordActivity::class.java)
         startActivity(intent)
     }
@@ -111,11 +83,6 @@ class LoginActivity : AppCompatActivity() {
         val email: String = binding.emailInput.text.toString()
         val password: String = binding.passwordInput.text.toString()
 
-        val preferences = SecurityPreferences(applicationContext)
-
-        preferences.setEmail(email)
-        preferences.setPassword(password)
-
         userViewModel.login(email, password)
         verifyLogin()
     }
@@ -153,14 +120,13 @@ class LoginActivity : AppCompatActivity() {
                     println("erro login activity")
                 }
             }
-
         }
     }
 
     private fun saveInCache(key: String, value: String) {
         val preferences = getSharedPreferences(
             "UserData",
-            AppCompatActivity.MODE_PRIVATE
+            MODE_PRIVATE
         )
         val editor = preferences?.edit()
         editor?.putString(key, value)

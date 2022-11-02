@@ -1,4 +1,4 @@
-package com.antoniocostadossantos.onlybooks.ui
+package com.antoniocostadossantos.onlybooks.ui.fragments
 
 import android.app.Activity
 import android.content.Intent
@@ -16,6 +16,7 @@ import com.antoniocostadossantos.onlybooks.databinding.ActivityStorageFileBindin
 import com.antoniocostadossantos.onlybooks.model.ChapterEbookMobile
 import com.antoniocostadossantos.onlybooks.model.EbookModel
 import com.antoniocostadossantos.onlybooks.util.StateResource
+import com.antoniocostadossantos.onlybooks.util.toast
 import com.antoniocostadossantos.onlybooks.viewModel.ChapterViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -33,27 +34,25 @@ class StorageFileFragment(val ebookBase: EbookModel) : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = ActivityStorageFileBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        displayData()
 
-        setupData()
-
-        binding.btnSelectedFile.setOnClickListener {
+        binding.selectFile.setOnClickListener {
             selectFile()
         }
 
-        binding.btnUploadFile.setOnClickListener {
+        binding.selectFile.setOnClickListener {
             uploadFile()
         }
     }
 
-    private fun setupData() {
-
+    private fun displayData() {
         binding.titleEbook.text = ebookBase.nameEbook
 
         val requestOptions = RequestOptions()
@@ -64,7 +63,6 @@ class StorageFileFragment(val ebookBase: EbookModel) : Fragment() {
             .applyDefaultRequestOptions(requestOptions)
             .load(ebookBase.url)
             .into(binding.ivBannerEbook)
-
     }
 
     private fun postChapter(urlChapter: String) {
@@ -76,32 +74,13 @@ class StorageFileFragment(val ebookBase: EbookModel) : Fragment() {
         chapterViewModel.chapterResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is StateResource.Success -> {
-                    Toast.makeText(
-                        (context as FragmentActivity),
-                        "ENVIO CAPOTULO",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    toast("Sucesso ao enviar capítulo")
                 }
-
-                is StateResource.Loading -> {
-                    Toast.makeText(
-                        (context as FragmentActivity),
-                        "ENVIO CAPOTULO",
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
-
                 is StateResource.Error -> {
-                    Toast.makeText((context as FragmentActivity), "ERRO CAPITUO", Toast.LENGTH_LONG)
-                        .show()
+                    toast("Erro ao enviar capítulo")
                 }
-
                 else -> {
-                    Toast.makeText(
-                        (context as FragmentActivity),
-                        "ERRO CAPITULO = ELSE",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    toast("Erro inesperado ao enviar capítulo.")
                 }
             }
 

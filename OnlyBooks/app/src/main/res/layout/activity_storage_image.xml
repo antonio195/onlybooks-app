@@ -59,7 +59,7 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/btnSelectedImage"
+                android:id="@+id/select_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/azulEscuro"
@@ -73,7 +73,7 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <Button
-                android:id="@+id/btnUploadImage"
+                android:id="@+id/upload_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/azulEscuro"

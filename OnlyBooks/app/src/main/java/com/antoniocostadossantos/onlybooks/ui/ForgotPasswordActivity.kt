@@ -1,11 +1,9 @@
 package com.antoniocostadossantos.onlybooks.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.antoniocostadossantos.onlybooks.databinding.ActivityForgotPasswordBinding
-import com.antoniocostadossantos.onlybooks.model.UserModelDTO
 import com.antoniocostadossantos.onlybooks.util.StateResource
 import com.antoniocostadossantos.onlybooks.util.hide
 import com.antoniocostadossantos.onlybooks.util.show
@@ -24,20 +22,16 @@ class ForgotPasswordActivity : AppCompatActivity() {
         binding = ActivityForgotPasswordBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar?.hide()
-
         binding.sendEmail.setOnClickListener {
             checkFields()
         }
 
         binding.loginButton.setOnClickListener {
-            loginActivity()
+            goToLogin()
         }
-
-
     }
 
-    private fun loginActivity() {
+    private fun goToLogin() {
         val intent = Intent(this@ForgotPasswordActivity, LoginActivity::class.java)
         startActivity(intent)
         finish()
@@ -69,7 +63,6 @@ class ForgotPasswordActivity : AppCompatActivity() {
     }
 
     private fun getNewPassword() {
-
         val email = binding.emailInput.text.toString().lowercase()
         userViewModel.recoveryPassword(email)
         verifyRecovery()
@@ -87,7 +80,6 @@ class ForgotPasswordActivity : AppCompatActivity() {
                     binding.errorRecovery.show()
                 }
                 else -> {
-
                 }
             }
         }

@@ -7,7 +7,6 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
 import com.antoniocostadossantos.onlybooks.databinding.ActivityWebViewBinding
-import com.antoniocostadossantos.onlybooks.util.DownloadReceiver
 import com.antoniocostadossantos.onlybooks.util.hide
 import com.github.barteksc.pdfviewer.util.FitPolicy
 import java.io.File
@@ -16,7 +15,6 @@ import java.io.File
 class WebViewActivity() : AppCompatActivity() {
 
     private lateinit var binding: ActivityWebViewBinding
-    private val downloadReceiver: DownloadReceiver = DownloadReceiver()
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {

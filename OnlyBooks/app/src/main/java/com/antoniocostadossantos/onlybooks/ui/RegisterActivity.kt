@@ -3,7 +3,6 @@ package com.antoniocostadossantos.onlybooks.ui
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.antoniocostadossantos.onlybooks.R
 import com.antoniocostadossantos.onlybooks.databinding.ActivityRegisterBinding
 import com.antoniocostadossantos.onlybooks.model.UserModelDTO
 import com.antoniocostadossantos.onlybooks.util.StateResource
@@ -19,15 +18,11 @@ class RegisterActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
-
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar?.hide()
-
         binding.loginButton.setOnClickListener {
-            loginActivity()
+            goToLogin()
         }
 
         binding.registerButton.setOnClickListener {
@@ -35,7 +30,7 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    private fun loginActivity() {
+    private fun goToLogin() {
         val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
         startActivity(intent)
         finish()
@@ -43,7 +38,6 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun checkFields() {
         when {
-
             binding.userInput.text.toString().isEmpty() -> {
                 binding.userInput.error = "Digite o usuário"
             }
@@ -81,7 +75,6 @@ class RegisterActivity : AppCompatActivity() {
         val name = binding.userInput.text.toString().lowercase()
         val email = binding.emailInput.text.toString().lowercase()
         val password = binding.passwordInput.text.toString()
-        val photo = "https://firebasestorage.googleapis.com/v0/b/onlybooks-3a802.appspot.com/o/images%2Fusuariopadrao.png?alt=media&token=2d0733ab-36cf-40cb-ac3d-b2ab854c7ed3"
 
         val user = UserModelDTO(name, email, password)
         userViewModel.register(user)
@@ -93,8 +86,7 @@ class RegisterActivity : AppCompatActivity() {
             when (response) {
                 is StateResource.Success -> {
                     binding.errorRegister.hide()
-                    startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
-
+                    goToLogin()
                 }
                 is StateResource.Error -> {
                     binding.errorRegister.show()
@@ -107,7 +99,6 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-
     private fun emailValidation(email: String): Boolean {
         val pattern =
             Regex(
@@ -116,15 +107,5 @@ class RegisterActivity : AppCompatActivity() {
             )
         val result = pattern.containsMatchIn(email)
         return result
-    }
-
-    private fun saveInCache(key: String, value: String) {
-        val preferences = getSharedPreferences(
-            "UserData",
-            AppCompatActivity.MODE_PRIVATE
-        )
-        val editor = preferences?.edit()
-        editor?.putString(key, value)
-        editor?.apply()
     }
 }

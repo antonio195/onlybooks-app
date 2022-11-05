@@ -22,6 +22,10 @@ fun View.hide() {
     visibility = View.INVISIBLE
 }
 
+fun View.gone() {
+    visibility = View.GONE
+}
+
 fun Fragment.toast(message: String, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(
         (context as FragmentActivity),

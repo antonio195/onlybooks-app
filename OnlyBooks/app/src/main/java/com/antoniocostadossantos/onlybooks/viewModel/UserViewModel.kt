@@ -25,6 +25,9 @@ class UserViewModel(
     private val _recoveryPassword = MutableLiveData<StateResource<String>>()
     val recoveryPassword: LiveData<StateResource<String>> = _recoveryPassword
 
+    private val _userIdResponse = MutableLiveData<StateResource<UserModel>>()
+    val userIdResponse: LiveData<StateResource<UserModel>> = _userIdResponse
+
     fun login(email: String, password: String) = viewModelScope.launch(Dispatchers.IO) {
         val response = userRepository.login(email, password)
         _login.postValue(handleResponse(response))
@@ -39,6 +42,12 @@ class UserViewModel(
         val response = userRepository.recoveryPassword(email)
         _recoveryPassword.postValue(handleResponse(response))
     }
+
+    fun getUserById(idUser: Int) = viewModelScope.launch(Dispatchers.IO) {
+        val response = userRepository.getUserById(idUser)
+        _userIdResponse.postValue(handleResponse(response))
+    }
+
 
     private fun <T> handleResponse(response: Response<T>): StateResource<T> {
         if (response.isSuccessful) {

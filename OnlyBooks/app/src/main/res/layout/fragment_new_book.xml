@@ -1,16 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fitsSystemWindows="true"
     android:layout_height="match_parent"
+    android:background="@color/cinzaClaro"
     tools:context=".ui.fragments.NewBookFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <ImageView
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_gravity="center"
-        android:src="@drawable/new_book_vector" />
+    <TextView
+        android:id="@+id/create_ebook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/source_sans_pro"
+        android:text="Criar Ebook"
+        android:textColor="@color/azulEscuro"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/view_create_ebook"
+        app:layout_constraintEnd_toEndOf="@id/view_create_ebook"
+        app:layout_constraintStart_toStartOf="@id/view_create_ebook" />
 
-</FrameLayout>
+    <View
+        android:id="@+id/view_create_ebook"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/view_background_10"
+        app:layout_constraintBottom_toTopOf="@id/view_create_audiobook"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/create_audiobook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/source_sans_pro"
+        android:text="Criar Audiobook"
+        android:textColor="@color/azulEscuro"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/view_create_audiobook"
+        app:layout_constraintEnd_toEndOf="@id/view_create_audiobook"
+        app:layout_constraintStart_toStartOf="@id/view_create_audiobook" />
+
+    <View
+        android:id="@+id/view_create_audiobook"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/view_background_10"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view_create_ebook" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

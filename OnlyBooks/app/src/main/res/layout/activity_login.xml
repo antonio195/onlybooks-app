@@ -75,6 +75,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Usuário ou senha incorretos"
+        android:fontFamily="@font/source_sans_pro"
         android:textColor="@color/red"
         android:textStyle="bold"
         android:visibility="invisible"

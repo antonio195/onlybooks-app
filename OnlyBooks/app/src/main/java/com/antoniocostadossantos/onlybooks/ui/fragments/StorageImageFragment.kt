@@ -7,23 +7,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import com.antoniocostadossantos.onlybooks.R
 import com.antoniocostadossantos.onlybooks.databinding.ActivityStorageImageBinding
 import com.antoniocostadossantos.onlybooks.model.EbookModel
+import com.antoniocostadossantos.onlybooks.util.StateResource
+import com.antoniocostadossantos.onlybooks.util.toast
+import com.antoniocostadossantos.onlybooks.viewModel.EbookViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.storage.FirebaseStorage
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
-
 
 class StorageImageFragment(val ebook: EbookModel) : Fragment() {
     lateinit var binding: ActivityStorageImageBinding
     lateinit var imageUri: Uri
+    private val ebookViewModel: EbookViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,6 +51,17 @@ class StorageImageFragment(val ebook: EbookModel) : Fragment() {
         }
     }
 
+    private fun setupImageEbook(ebook: EbookModel) {
+        val requestOptions = RequestOptions()
+            .placeholder(R.drawable.ic_baseline_cloud_download_24)
+            .error(R.drawable.ic_baseline_error_24)
+
+        Glide.with(binding.ivBannerEbook)
+            .applyDefaultRequestOptions(requestOptions)
+            .load(ebook.url)
+            .into(binding.ivBannerEbook)
+    }
+
     private fun displayData() {
         binding.etUrl.setText(ebook.nameEbook)
 
@@ -58,9 +71,32 @@ class StorageImageFragment(val ebook: EbookModel) : Fragment() {
         FirebaseStorage.getInstance()
             .getReference("images/$name").downloadUrl.addOnSuccessListener {
                 Glide.with(this).load(it.toString()).into(binding.ivBannerEbook)
+                ebook.url = it.toString()
+                updateEbook(ebook)
             }.addOnFailureListener {
                 binding.etUrl.setText(it.toString())
             }
+    }
+
+    private fun updateEbook(ebook: EbookModel) {
+        ebookViewModel.updateEbook(ebook, ebook.idEbook)
+        verifyUpdateEbook()
+    }
+
+    private fun verifyUpdateEbook() {
+        ebookViewModel.updateEbook.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is StateResource.Success -> {
+                    toast("Sucesso ao atualizar a capa")
+                }
+                is StateResource.Error -> {
+                    toast("Erro ao atualizar a capa")
+                }
+                else -> {
+                    toast("Erro inesperado ao atualizar a capa")
+                }
+            }
+        }
     }
 
     fun selectImage() {
@@ -78,24 +114,11 @@ class StorageImageFragment(val ebook: EbookModel) : Fragment() {
         val storageReference = FirebaseStorage.getInstance().getReference("images/$fileName")
 
         storageReference.putFile(imageUri).addOnSuccessListener {
-            Toast.makeText((context as FragmentActivity), "Sucesso ao subir", Toast.LENGTH_SHORT)
-                .show()
+            toast("Sucesso ao subir")
             getURL(fileName)
         }.addOnFailureListener {
-            Toast.makeText((context as FragmentActivity), "Falha ao subir", Toast.LENGTH_SHORT)
-                .show()
+            toast("Falha ao subir")
         }
-    }
-
-    private fun setupImageEbook(ebook: EbookModel) {
-        val requestOptions = RequestOptions()
-            .placeholder(R.drawable.ic_baseline_cloud_download_24)
-            .error(R.drawable.ic_baseline_error_24)
-
-        Glide.with(binding.ivBannerEbook)
-            .applyDefaultRequestOptions(requestOptions)
-            .load(ebook.url)
-            .into(binding.ivBannerEbook)
     }
 
     var resultLauncher =

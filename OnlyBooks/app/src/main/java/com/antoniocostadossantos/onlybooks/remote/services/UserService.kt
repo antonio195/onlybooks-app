@@ -23,6 +23,12 @@ interface UserService {
         email: String
     ): Response<ListUserModel>
 
+    @GET("/users/get-user/{idUser}")
+    suspend fun getUserById(
+        @Path("idUser")
+        idUser: Int
+    ): Response<UserModel>
+
     @Headers("Content-Type: application/json")
     @POST("/users/register")
     suspend fun createUser(

@@ -2,10 +2,7 @@ package com.antoniocostadossantos.onlybooks.remote.services
 
 import com.antoniocostadossantos.onlybooks.model.EbookModel
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.PATCH
-import retrofit2.http.Path
+import retrofit2.http.*
 
 
 interface EbookService {
@@ -16,8 +13,13 @@ interface EbookService {
     @PATCH("/ebook/update-ebook/{idEbook}")
     suspend fun updateEbook(
         @Body ebook: EbookModel?,
-        @Path("idEbook")
-        idEbook: Int
+        @Path("idEbook") idEbook: Int
+    ): Response<String>
+
+    @POST("/ebook/create-ebook/{idUser}")
+    suspend fun postEbook(
+        @Body ebook: EbookModel?,
+        @Path("idUser") idUser: Int
     ): Response<String>
 
 }

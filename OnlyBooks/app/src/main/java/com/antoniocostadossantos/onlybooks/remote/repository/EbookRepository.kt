@@ -12,4 +12,6 @@ class EbookRepository : BaseRepository() {
 
     suspend fun updateEbook(ebook: EbookModel, idEbook: Int) = api.updateEbook(ebook, idEbook)
 
+    suspend fun postEbook(ebook: EbookModel, idUser: Int) = api.postEbook(ebook, idUser)
+
 }

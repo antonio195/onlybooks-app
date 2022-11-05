@@ -7,10 +7,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import com.antoniocostadossantos.onlybooks.R
 import com.antoniocostadossantos.onlybooks.databinding.ActivityStorageFileBinding
 import com.antoniocostadossantos.onlybooks.model.ChapterEbookMobile
@@ -47,27 +45,25 @@ class StorageFileFragment(val ebookBase: EbookModel) : Fragment() {
             selectFile()
         }
 
-        binding.selectFile.setOnClickListener {
-            uploadFile()
+        binding.uploadFile.setOnClickListener {
+            uploadImage()
         }
     }
 
-    private fun displayData() {
-        binding.titleEbook.text = ebookBase.nameEbook
 
-        val requestOptions = RequestOptions()
-            .placeholder(R.drawable.ic_baseline_cloud_download_24)
-            .error(R.drawable.ic_baseline_error_24)
-
-        Glide.with(binding.ivBannerEbook)
-            .applyDefaultRequestOptions(requestOptions)
-            .load(ebookBase.url)
-            .into(binding.ivBannerEbook)
+    fun getURL(name: String) {
+        FirebaseStorage.getInstance()
+            .getReference("documents/$name").downloadUrl.addOnSuccessListener {
+                postChapter(it.toString())
+            }.addOnFailureListener {
+                toast("Erro ao pegar URL")
+            }
     }
 
     private fun postChapter(urlChapter: String) {
         val chapter = ChapterEbookMobile(ebookBase.idEbook, ebookBase.idUsuario.id, urlChapter)
         chapterViewModel.postChapter(chapter)
+        verifyUpdate()
     }
 
     private fun verifyUpdate() {
@@ -87,15 +83,18 @@ class StorageFileFragment(val ebookBase: EbookModel) : Fragment() {
         }
     }
 
-    fun getURL(name: String) {
-        FirebaseStorage.getInstance()
-            .getReference("documents/$name").downloadUrl.addOnSuccessListener { url ->
-                postChapter(url.toString())
-                verifyUpdate()
-            }.addOnFailureListener {
-                Toast.makeText((context as FragmentActivity), it.toString(), Toast.LENGTH_SHORT)
-                    .show()
-            }
+
+    private fun displayData() {
+        binding.titleEbook.text = ebookBase.nameEbook
+
+        val requestOptions = RequestOptions()
+            .placeholder(R.drawable.ic_baseline_cloud_download_24)
+            .error(R.drawable.ic_baseline_error_24)
+
+        Glide.with(binding.ivBannerEbook)
+            .applyDefaultRequestOptions(requestOptions)
+            .load(ebookBase.url)
+            .into(binding.ivBannerEbook)
     }
 
     fun selectFile() {
@@ -105,7 +104,7 @@ class StorageFileFragment(val ebookBase: EbookModel) : Fragment() {
         resultLauncher.launch(intent)
     }
 
-    fun uploadFile() {
+    fun uploadImage() {
         val formatter = SimpleDateFormat("yyyy_MM_dd_HH_mm_ss")
         val now = Date()
         val fileName = formatter.format(now)
@@ -113,12 +112,10 @@ class StorageFileFragment(val ebookBase: EbookModel) : Fragment() {
         val storageReference = FirebaseStorage.getInstance().getReference("documents/$fileName")
 
         storageReference.putFile(fileUri).addOnSuccessListener {
-            Toast.makeText((context as FragmentActivity), "Sucesso ao subir", Toast.LENGTH_SHORT)
-                .show()
+            toast("Sucesso ao subir")
             getURL(fileName)
         }.addOnFailureListener {
-            Toast.makeText((context as FragmentActivity), "Falha ao subir", Toast.LENGTH_SHORT)
-                .show()
+            toast("Falha ao subir")
         }
     }
 

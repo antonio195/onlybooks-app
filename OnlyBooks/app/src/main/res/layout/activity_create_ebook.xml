@@ -57,6 +57,32 @@
                 app:layout_constraintTop_toBottomOf="@id/text_title" />
 
             <TextView
+                android:id="@+id/text_co_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/source_sans_pro"
+                android:text="Co autor"
+                android:textColor="@color/azulEscuro"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_title" />
+
+            <EditText
+                android:id="@+id/input_co_author"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/edi_text_rounded5_blue_light"
+                android:fontFamily="@font/source_sans_pro"
+                android:paddingStart="10dp"
+                android:textColor="@color/azulEscuro"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_co_author" />
+
+            <TextView
                 android:id="@+id/text_genre1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -67,7 +93,7 @@
                 android:textColor="@color/azulEscuro"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/input_title" />
+                app:layout_constraintTop_toBottomOf="@id/input_co_author" />
 
             <EditText
                 android:id="@+id/input_genre1"
@@ -179,6 +205,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="5dp"
+                android:minHeight="100dp"
                 android:background="@drawable/edi_text_rounded5_blue_light"
                 android:fontFamily="@font/source_sans_pro"
                 android:paddingHorizontal="10dp"
@@ -192,9 +219,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:backgroundTint="@color/azulClaro"
+                android:backgroundTint="@color/azulEscuro"
+                android:fontFamily="@font/source_sans_pro"
                 android:hint="Selecionar capa do livro"
-                android:textColor="@color/azulEscuro"
+                android:textColorHint="@color/azulClaro"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/input_sinopse" />
@@ -204,18 +232,34 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:layout_marginBottom="30dp"
                 android:backgroundTint="@color/azulEscuro"
                 android:fontFamily="@font/source_sans_pro"
                 android:hint="Publicar"
-                android:paddingHorizontal="18dp"
+                android:paddingHorizontal="20dp"
                 android:paddingVertical="10dp"
-                android:textColor="@color/cinzaClaro"
+                android:textColorHint="@color/cinzaClaro"
                 android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/send_book_image" />
+
+            <TextView
+                android:id="@+id/info_box_cover"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="20dp"
+                android:fontFamily="@font/source_sans_pro"
+                android:text="Atenção! \n Você poderá inserir capa e capítulo depois de postar o Ebook"
+                android:textAlignment="center"
+                android:textColor="@color/azulEscuro"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/publish_ebook"
+                app:layout_constraintStart_toStartOf="@id/publish_ebook"
+                app:layout_constraintTop_toBottomOf="@id/publish_ebook" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

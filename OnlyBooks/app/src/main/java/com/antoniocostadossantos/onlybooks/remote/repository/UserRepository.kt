@@ -14,4 +14,6 @@ class UserRepository : BaseRepository() {
 
     suspend fun recoveryPassword(email: String) = api.recoveryPassword(email)
 
+    suspend fun getUserById(idUser: Int) = api.getUserById(idUser)
+
 }

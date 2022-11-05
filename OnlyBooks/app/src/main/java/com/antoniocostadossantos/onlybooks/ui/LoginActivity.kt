@@ -110,8 +110,7 @@ class LoginActivity : AppCompatActivity() {
                     saveInCache("photo", photo)
 
                     binding.errorLogin.hide()
-                    startActivity(Intent(this@LoginActivity, BaseFragmentActivity::class.java))
-                    finish()
+                    goToBaseFragment()
                 }
                 is StateResource.Error -> {
                     binding.errorLogin.show()
@@ -121,6 +120,11 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun goToBaseFragment() {
+        startActivity(Intent(this@LoginActivity, BaseFragmentActivity::class.java))
+        finish()
     }
 
     private fun saveInCache(key: String, value: String) {

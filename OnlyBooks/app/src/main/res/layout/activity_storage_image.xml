@@ -9,7 +9,7 @@
     android:padding="16dp"
     android:scrollbars="none"
     android:background="@color/backgroundWhite"
-    tools:context=".ui.fragments.StorageImageFragment">
+    tools:context=".ui.fragments.StorageImageEbookFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -1,6 +1,5 @@
 package com.antoniocostadossantos.onlybooks.ui.fragments
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,9 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.antoniocostadossantos.onlybooks.R
-import com.antoniocostadossantos.onlybooks.databinding.FragmentEbookDetailsBinding
-import com.antoniocostadossantos.onlybooks.model.EbookModel
-import com.antoniocostadossantos.onlybooks.ui.ReadPDFURLActivity
+import com.antoniocostadossantos.onlybooks.databinding.FragmentAudiobookDetailsBinding
+import com.antoniocostadossantos.onlybooks.model.AudioBookModel
 import com.antoniocostadossantos.onlybooks.util.StateResource
 import com.antoniocostadossantos.onlybooks.util.toast
 import com.antoniocostadossantos.onlybooks.viewModel.ChapterViewModel
@@ -19,18 +17,18 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class EbookDetailsFragment(val ebook: EbookModel) : Fragment() {
+class AudioBookDetailsFragment(val audioBook: AudioBookModel) : Fragment() {
 
-    private lateinit var binding: FragmentEbookDetailsBinding
+    private lateinit var binding: FragmentAudiobookDetailsBinding
     private val chapterViewModel: ChapterViewModel by viewModel()
 
-    private var URLEbook: String = ""
+    private var URLAudioBook: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentEbookDetailsBinding.inflate(inflater, container, false)
+        binding = FragmentAudiobookDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -42,15 +40,15 @@ class EbookDetailsFragment(val ebook: EbookModel) : Fragment() {
         checkProperty()
 
         binding.editEbook.setOnClickListener {
-            editEbook(ebook)
+            editAudioBook(audioBook)
         }
 
         binding.newChapter.setOnClickListener {
             goToNewChapter()
         }
 
-        binding.lerEbook.setOnClickListener {
-            readEbook()
+        binding.ouvirAudiobook.setOnClickListener {
+            listenEbook(URLAudioBook)
         }
     }
 
@@ -58,35 +56,38 @@ class EbookDetailsFragment(val ebook: EbookModel) : Fragment() {
         val transaction =
             (context as FragmentActivity).supportFragmentManager.beginTransaction()
 
-        transaction.replace(R.id.nav_host_fragment, StorageFileEbookFragment(ebook))
+        transaction.replace(R.id.nav_host_fragment, StorageFileAudioBookFragment(audioBook))
         transaction.addToBackStack(null)
         transaction.commit()
     }
 
-    private fun readEbook() {
-        if (URLEbook.isEmpty()) {
-            toast("Ebook não possui capitulo")
+    private fun listenEbook(URLAudioBook: String) {
+        if (URLAudioBook.isEmpty()) {
+            toast("AudioBook não possui capitulo")
         } else {
-            val intent = Intent((context as FragmentActivity), ReadPDFURLActivity::class.java)
-            intent.putExtra(
-                "URLEbook",
-                URLEbook
+            val transaction =
+                (context as FragmentActivity).supportFragmentManager.beginTransaction()
+
+            transaction.replace(
+                R.id.nav_host_fragment,
+                ListenAudioBookFragment(URLAudioBook)
             )
-            startActivity(intent)
+            transaction.addToBackStack(null)
+            transaction.commit()
         }
     }
 
     private fun checkProperty() {
-        if (ebook.idUsuario.id == getDataInCache("id")?.toInt()) {
+        if (audioBook.idUsuario.id == getDataInCache("id")?.toInt()) {
             binding.editEbook.show()
             binding.newChapter.show()
         }
     }
 
     private fun displayData() {
-        binding.titleEbook.text = ebook.nameEbook
-        binding.genreEbook.text = ebook.genreEbook
-        binding.ebookSynopsis.text = ebook.descricao
+        binding.titleEbook.text = audioBook.nameAudioBook
+        binding.genreEbook.text = audioBook.genreAudioBook
+        binding.ebookSynopsis.text = audioBook.descricao
         val image = binding.imageEbook
 
         val requestOptions = RequestOptions()
@@ -95,15 +96,14 @@ class EbookDetailsFragment(val ebook: EbookModel) : Fragment() {
 
         Glide.with(binding.imageEbook)
             .applyDefaultRequestOptions(requestOptions)
-            .load(ebook.url)
+            .load(audioBook.urlAudioBook)
             .into(image)
     }
 
-    private fun editEbook(ebook: EbookModel) {
-        val transaction =
-            (context as FragmentActivity).supportFragmentManager.beginTransaction()
+    private fun editAudioBook(audioBook: AudioBookModel) {
+        val transaction = (context as FragmentActivity).supportFragmentManager.beginTransaction()
 
-        transaction.replace(R.id.nav_host_fragment, CreateEbookFragment(ebook))
+        transaction.replace(R.id.nav_host_fragment, CreateAudioBookFragment(audioBook))
         transaction.addToBackStack(null)
         transaction.commit()
     }
@@ -113,21 +113,22 @@ class EbookDetailsFragment(val ebook: EbookModel) : Fragment() {
     }
 
     private fun getUrl() {
-        chapterViewModel.getChapterEbook(ebook.idEbook)
+        chapterViewModel.getChapterAudioBook(audioBook.idAudioBook)
         checkUrlResponse()
     }
 
     private fun checkUrlResponse() {
-        chapterViewModel.getChapterEbook.observe(viewLifecycleOwner) { response ->
+        chapterViewModel.getChapterAudioBook.observe(viewLifecycleOwner) { response ->
             when (response) {
 
                 is StateResource.Success -> {
-                    URLEbook = response.data?.get(0)!!.urlPDF
+                    println(response.data?.get(0)!!.urlAudio)
+                    URLAudioBook = response.data?.get(0)!!.urlAudio
                 }
                 is StateResource.Error -> {
                 }
                 else -> {
-                    println("EbookDetailsFragment linha 131")
+                    println("AudioBookDetailsFragment linha 131")
                 }
             }
 

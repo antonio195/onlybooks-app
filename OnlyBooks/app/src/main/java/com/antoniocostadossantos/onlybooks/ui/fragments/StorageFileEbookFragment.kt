@@ -23,7 +23,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
-class StorageFileFragment(val ebookBase: EbookModel) : Fragment() {
+class StorageFileEbookFragment(val ebookBase: EbookModel) : Fragment() {
     lateinit var binding: ActivityStorageFileBinding
     lateinit var fileUri: Uri
     private val chapterViewModel: ChapterViewModel by viewModel()

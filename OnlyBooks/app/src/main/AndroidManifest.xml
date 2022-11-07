@@ -43,10 +43,10 @@
             android:name=".ui.StorageAudioActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.fragments.StorageFileFragment"
+            android:name=".ui.fragments.StorageFileEbookFragment"
             android:exported="false" />
         <activity
-            android:name=".ui.fragments.StorageImageFragment"
+            android:name=".ui.fragments.StorageImageEbookFragment"
             android:exported="false" />
         <activity
             android:name=".ui.LoginActivity"

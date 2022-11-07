@@ -12,7 +12,7 @@ import com.antoniocostadossantos.onlybooks.util.toast
 import java.io.IOException
 
 
-class ListenAudioBookFragment : Fragment() {
+class ListenAudioBookFragment(val URLAudioBook: String) : Fragment() {
 
     private lateinit var binding: FragmentListenAudioBookBinding
 
@@ -29,6 +29,8 @@ class ListenAudioBookFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        println(URLAudioBook)
 
         binding.idBtnPlay.setOnClickListener {
             playAudio()
@@ -61,8 +63,7 @@ class ListenAudioBookFragment : Fragment() {
 
 
     private fun playAudio() {
-        val audioUrl =
-            "https://firebasestorage.googleapis.com/v0/b/onlybooks-3a802.appspot.com/o/audios%2FDuzz-ASAS.mp3?alt=media&token=915dd2d5-7f91-479f-a394-c892b3dc7e7f"
+        val audioUrl = URLAudioBook
 
         mediaPlayer = MediaPlayer()
 

@@ -9,29 +9,28 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.antoniocostadossantos.onlybooks.R
-import com.antoniocostadossantos.onlybooks.databinding.ActivityCreateEbookBinding
-import com.antoniocostadossantos.onlybooks.model.EbookModel
+import com.antoniocostadossantos.onlybooks.databinding.ActivityCreateAudiobookBinding
+import com.antoniocostadossantos.onlybooks.model.AudioBookModel
 import com.antoniocostadossantos.onlybooks.util.StateResource
 import com.antoniocostadossantos.onlybooks.util.gone
 import com.antoniocostadossantos.onlybooks.util.show
-import com.antoniocostadossantos.onlybooks.util.toast
-import com.antoniocostadossantos.onlybooks.viewModel.EbookViewModel
+import com.antoniocostadossantos.onlybooks.viewModel.AudioBookViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class CreateEbookFragment(var ebookBase: EbookModel) : Fragment() {
+class CreateAudioBookFragment(var audioBookBase: AudioBookModel) : Fragment() {
 
-    private lateinit var binding: ActivityCreateEbookBinding
+    private lateinit var binding: ActivityCreateAudiobookBinding
 
-    private val ebookViewModel: EbookViewModel by viewModel()
+    private val audioBookViewModel: AudioBookViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = ActivityCreateEbookBinding.inflate(inflater, container, false)
+        binding = ActivityCreateAudiobookBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -39,7 +38,7 @@ class CreateEbookFragment(var ebookBase: EbookModel) : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         checkIsNewEbook()
 
-        displayData(ebookBase)
+        displayData(audioBookBase)
 
         binding.sendBookImage.setOnClickListener {
             goToNewImage()
@@ -50,15 +49,15 @@ class CreateEbookFragment(var ebookBase: EbookModel) : Fragment() {
         }
     }
 
-    private fun displayData(ebook: EbookModel) {
-        binding.inputTitle.setText(this.ebookBase.nameEbook)
-        binding.inputCoAuthor.setText(ebook.coAuthorEbook)
-        binding.inputGenre1.setText(this.ebookBase.genreEbook)
-        binding.inputGenre2.setText(this.ebookBase.genre1Ebook)
-        binding.inputGenre3.setText(this.ebookBase.genre2Ebook)
-        binding.inputClass.setText(this.ebookBase.classificacao)
-        binding.inputSinopse.setText(this.ebookBase.descricao)
-        val image = ebook.url
+    private fun displayData(audioBookBase: AudioBookModel) {
+        binding.inputTitle.setText(audioBookBase.nameAudioBook)
+        binding.inputCoAuthor.setText(audioBookBase.coAuthorAudioBook)
+        binding.inputGenre1.setText(audioBookBase.genreAudioBook)
+        binding.inputGenre2.setText(audioBookBase.genre1AudioBook)
+        binding.inputGenre3.setText(audioBookBase.genre2AudioBook)
+        binding.inputClass.setText(audioBookBase.classificacao)
+        binding.inputSinopse.setText(audioBookBase.descricao)
+        val image = audioBookBase.urlAudioBook
 
         val requestOptions = RequestOptions()
             .placeholder(R.drawable.ic_baseline_cloud_download_24)
@@ -74,7 +73,7 @@ class CreateEbookFragment(var ebookBase: EbookModel) : Fragment() {
         val transaction =
             (context as FragmentActivity).supportFragmentManager.beginTransaction()
 
-        transaction.replace(R.id.nav_host_fragment, StorageImageEbookFragment(ebookBase))
+        transaction.replace(R.id.nav_host_fragment, StorageImageAudioBookFragment(audioBookBase))
         transaction.addToBackStack(null)
         transaction.commit()
     }
@@ -104,25 +103,24 @@ class CreateEbookFragment(var ebookBase: EbookModel) : Fragment() {
     }
 
     private fun updateEbook() {
-        ebookBase.nameEbook = binding.inputTitle.text.toString()
-        ebookBase.genreEbook = binding.inputGenre1.text.toString()
-        ebookBase.genre1Ebook = binding.inputGenre2.text.toString()
-        ebookBase.genre2Ebook = binding.inputGenre3.text.toString()
-        ebookBase.classificacao = binding.inputClass.text.toString()
-        ebookBase.descricao = binding.inputSinopse.text.toString()
+        audioBookBase.nameAudioBook = binding.inputTitle.text.toString()
+        audioBookBase.genreAudioBook = binding.inputGenre1.text.toString()
+        audioBookBase.genre1AudioBook = binding.inputGenre2.text.toString()
+        audioBookBase.genre2AudioBook = binding.inputGenre3.text.toString()
+        audioBookBase.classificacao = binding.inputClass.text.toString()
+        audioBookBase.descricao = binding.inputSinopse.text.toString()
 
-        println(ebookBase)
-        ebookViewModel.updateEbook(ebookBase, ebookBase.idEbook)
+        audioBookViewModel.updateAudioBook(audioBookBase, audioBookBase.idAudioBook)
         verifyUpdate()
     }
 
     private fun verifyUpdate() {
-        ebookViewModel.updateEbook.observe(viewLifecycleOwner) { response ->
+        audioBookViewModel.updateAudioBook.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is StateResource.Success -> {
                     Toast.makeText(
                         (context as FragmentActivity),
-                        "Ebook atualizado",
+                        "AudioBook atualizado",
                         Toast.LENGTH_SHORT
                     ).show()
 
@@ -137,12 +135,12 @@ class CreateEbookFragment(var ebookBase: EbookModel) : Fragment() {
                 is StateResource.Error -> {
                     Toast.makeText(
                         (context as FragmentActivity),
-                        "Erro ao atualizar ebook",
+                        "Erro ao atualizar AudioBook",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
                 else -> {
-                    println("ERRO AO TENTAR ATUALIZAR EBOOK")
+                    println("ERRO AO TENTAR ATUALIZAR AudioBook")
                     println(response)
                 }
             }
@@ -153,50 +151,49 @@ class CreateEbookFragment(var ebookBase: EbookModel) : Fragment() {
         val isNewEbook = arguments?.getString("newEbook")
         if (!isNewEbook.isNullOrEmpty()) {
 
-            ebookBase.nameEbook = binding.inputTitle.text.toString()
-            ebookBase.authorEbook = getDataInCache("name")!!
-            ebookBase.coAuthorEbook = binding.inputCoAuthor.text.toString()
-            ebookBase.genreEbook = binding.inputGenre1.text.toString()
-            ebookBase.genre1Ebook = binding.inputGenre2.text.toString()
-            ebookBase.genre2Ebook = binding.inputGenre3.text.toString()
-            ebookBase.classificacao = binding.inputClass.text.toString()
-            ebookBase.descricao = binding.inputSinopse.text.toString()
+            audioBookBase.nameAudioBook = binding.inputTitle.text.toString()
+            audioBookBase.authorAudioBook = getDataInCache("name")!!
+            audioBookBase.coAuthorAudioBook = binding.inputCoAuthor.text.toString()
+            audioBookBase.genreAudioBook = binding.inputGenre1.text.toString()
+            audioBookBase.genre1AudioBook = binding.inputGenre2.text.toString()
+            audioBookBase.genre2AudioBook = binding.inputGenre3.text.toString()
+            audioBookBase.classificacao = binding.inputClass.text.toString()
+            audioBookBase.descricao = binding.inputSinopse.text.toString()
 
-            postEbook(ebookBase)
+            postAudioBook(audioBookBase)
         } else {
             updateEbook()
         }
     }
 
-    private fun postEbook(ebookBase: EbookModel) {
+    private fun postAudioBook(audioBookBase: AudioBookModel) {
         val idUser = getDataInCache("id")!!.toInt()
-        ebookViewModel.postEbook(ebookBase, idUser)
-        verifyPostEbook()
+//        ebookViewModel.postEbook(audioBookBase, idUser)
+//        verifyPostEbook()
     }
 
-    private fun verifyPostEbook() {
-        ebookViewModel.postEbook.observe(viewLifecycleOwner) { response ->
-            when (response) {
-                is StateResource.Success -> {
-                    toast("Ebook enviado")
-                    println()
-                    println()
-                    println()
-                    println()
-                    println()
-                    println()
-                    println(ebookBase)
-                    println(response.message)
-                }
-                is StateResource.Error -> {
-                    toast("Erro ao enviar Ebook")
-                }
-                else -> {
-                    toast("Erro inesperado ao enviar Ebook")
-                }
-            }
-        }
-    }
+//    private fun verifyPostEbook() {
+//        ebookViewModel.postEbook.observe(viewLifecycleOwner) { response ->
+//            when (response) {
+//                is StateResource.Success -> {
+//                    toast("Ebook enviado")
+//                    println()
+//                    println()
+//                    println()
+//                    println()
+//                    println()
+//                    println()
+//                    println(response.message)
+//                }
+//                is StateResource.Error -> {
+//                    toast("Erro ao enviar Ebook")
+//                }
+//                else -> {
+//                    toast("Erro inesperado ao enviar Ebook")
+//                }
+//            }
+//        }
+//    }
 
     private fun checkIsNewEbook() {
         val isNewEbook = arguments?.getString("newEbook")

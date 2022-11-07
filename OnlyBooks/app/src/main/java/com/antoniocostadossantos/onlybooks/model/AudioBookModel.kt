@@ -1,20 +1,20 @@
 package com.antoniocostadossantos.onlybooks.model
 
 data class AudioBookModel(
-    val authorAudioBook: String,
-    val classificacao: String,
-    val coAuthorAudioBook: String,
-    val descricao: String,
-    val isEbook: Boolean,
-    val genre1AudioBook: String,
-    val genre2AudioBook: String,
-    val genreAudioBook: String,
-    val idAudioBook: Int,
-    val idUsuario: UserModel,
-    val nameAudioBook: String,
-    val narrador2AudioBook: String,
-    val narradorAudioBook: String,
-    val precoAudioBook: Int,
-    val statusAudioBook: Boolean,
-    val urlAudioBook: String
+    var authorAudioBook: String,
+    var classificacao: String,
+    var coAuthorAudioBook: String,
+    var descricao: String,
+    var isEbook: Boolean,
+    var genre1AudioBook: String,
+    var genre2AudioBook: String,
+    var genreAudioBook: String,
+    var idAudioBook: Int,
+    var idUsuario: UserModel,
+    var nameAudioBook: String,
+    var narrador2AudioBook: String,
+    var narradorAudioBook: String,
+    var precoAudioBook: Int,
+    var statusAudioBook: Boolean,
+    var urlAudioBook: String
 )

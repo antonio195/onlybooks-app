@@ -14,7 +14,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
 
-class ItemAdapter(val context: Context) : RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
+class EbookItemAdapter(val context: Context) : RecyclerView.Adapter<EbookItemAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         var binding =
@@ -38,7 +38,6 @@ class ItemAdapter(val context: Context) : RecyclerView.Adapter<ItemAdapter.ViewH
             }
         }
     }
-
 
     override fun getItemCount(): Int {
         return items.size

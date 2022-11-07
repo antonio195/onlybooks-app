@@ -18,6 +18,7 @@ class MyApp : Application() {
             modules(
                 userDependency,
                 ebookDependency,
+                audioBookDependency,
                 chapterDependency,
                 sharedPreferences
 

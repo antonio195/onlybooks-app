@@ -14,6 +14,7 @@ import com.antoniocostadossantos.onlybooks.model.AudioBookModel
 import com.antoniocostadossantos.onlybooks.util.StateResource
 import com.antoniocostadossantos.onlybooks.util.gone
 import com.antoniocostadossantos.onlybooks.util.show
+import com.antoniocostadossantos.onlybooks.util.toast
 import com.antoniocostadossantos.onlybooks.viewModel.AudioBookViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -168,32 +169,25 @@ class CreateAudioBookFragment(var audioBookBase: AudioBookModel) : Fragment() {
 
     private fun postAudioBook(audioBookBase: AudioBookModel) {
         val idUser = getDataInCache("id")!!.toInt()
-//        ebookViewModel.postEbook(audioBookBase, idUser)
-//        verifyPostEbook()
+        audioBookViewModel.postAudioBook(audioBookBase, idUser)
+        verifyPost()
     }
 
-//    private fun verifyPostEbook() {
-//        ebookViewModel.postEbook.observe(viewLifecycleOwner) { response ->
-//            when (response) {
-//                is StateResource.Success -> {
-//                    toast("Ebook enviado")
-//                    println()
-//                    println()
-//                    println()
-//                    println()
-//                    println()
-//                    println()
-//                    println(response.message)
-//                }
-//                is StateResource.Error -> {
-//                    toast("Erro ao enviar Ebook")
-//                }
-//                else -> {
-//                    toast("Erro inesperado ao enviar Ebook")
-//                }
-//            }
-//        }
-//    }
+    private fun verifyPost() {
+        audioBookViewModel.postAudioBook.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is StateResource.Success -> {
+                    toast("AudioBook enviado")
+                }
+                is StateResource.Error -> {
+                    toast("Erro ao enviar AudioBook")
+                }
+                else -> {
+                    toast("Erro inesperado ao enviar AudioBook")
+                }
+            }
+        }
+    }
 
     private fun checkIsNewEbook() {
         val isNewEbook = arguments?.getString("newEbook")

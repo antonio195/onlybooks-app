@@ -13,4 +13,7 @@ class AudioBookRepository : BaseRepository() {
     suspend fun updateAudioBook(audioBook: AudioBookModel, idAudioBook: Int) =
         api.updateAudioBook(audioBook, idAudioBook)
 
+    suspend fun postAudioBook(audioBook: AudioBookModel, idUser: Int) =
+        api.postAudioBook(audioBook, idUser)
+
 }

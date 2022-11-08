@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.antoniocostadossantos.onlybooks.R
 import com.antoniocostadossantos.onlybooks.databinding.FragmentNewBookBinding
+import com.antoniocostadossantos.onlybooks.model.AudioBookModel
 import com.antoniocostadossantos.onlybooks.model.EbookModel
 import com.antoniocostadossantos.onlybooks.util.StateResource
 import com.antoniocostadossantos.onlybooks.viewModel.UserViewModel
@@ -32,42 +33,86 @@ class NewBookFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.createEbook.setOnClickListener {
-            getIdUser()
+            getIdUserForNewEbook()
         }
 
         binding.viewCreateEbook.setOnClickListener {
-            getIdUser()
+            getIdUserForNewEbook()
+        }
+
+        binding.createAudiobook.setOnClickListener {
+            getIdUserForNewAudioBook()
+        }
+
+        binding.viewCreateAudiobook.setOnClickListener {
+            getIdUserForNewAudioBook()
         }
     }
 
-    private fun getIdUser() {
+    private fun getIdUserForNewAudioBook() {
         val idUser = getDataInCache("id")!!.toInt()
         getUserById(idUser)
-        verifyResponse()
+        verifyResponseForNewAudioBook()
     }
 
-    private fun goToCreateEbook(newEbook: EbookModel) {
+    private fun verifyResponseForNewAudioBook() {
+        userViewModel.userIdResponse.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is StateResource.Success -> {
+                    val userModel = response.data!!
+                    val newAudioBook: AudioBookModel = AudioBookModel(
+                        getDataInCache("name")!!,
+                        "",
+                        "",
+                        "",
+                        false,
+                        "",
+                        "",
+                        "",
+                        0,
+                        userModel,
+                        "",
+                        "",
+                        "",
+                        0,
+                        true,
+                        "https://firebasestorage.googleapis.com/v0/b/onlybooks-3a802.appspot.com/o/images%2FsemCapa.png?alt=media&token=31b91efc-2cc4-4352-9740-3606f30cddde"
+                    )
 
-        val createEbookFragment = CreateEbookFragment(newEbook)
+                    goToCreateAudioBook(newAudioBook)
+                }
+                is StateResource.Error -> {
+                }
+                else -> {
+                }
+            }
+        }
+
+    }
+
+    private fun goToCreateAudioBook(audioBook: AudioBookModel) {
+
+        val createAudioBookFragment = CreateAudioBookFragment(audioBook)
 
         val bundle = Bundle()
         bundle.putString("newEbook", "newEbook")
-        createEbookFragment.arguments = bundle
+        createAudioBookFragment.arguments = bundle
 
         val transaction =
             (context as FragmentActivity).supportFragmentManager.beginTransaction()
 
-        transaction.replace(R.id.nav_host_fragment, createEbookFragment)
+        transaction.replace(R.id.nav_host_fragment, createAudioBookFragment)
         transaction.addToBackStack(null)
         transaction.commit()
     }
 
-    private fun getUserById(idUser: Int) {
-        userViewModel.getUserById(idUser)
-        verifyResponse()
+    private fun getIdUserForNewEbook() {
+        val idUser = getDataInCache("id")!!.toInt()
+        getUserById(idUser)
+        verifyResponseForNewEbook()
     }
 
-    private fun verifyResponse() {
+    private fun verifyResponseForNewEbook() {
         userViewModel.userIdResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is StateResource.Success -> {
@@ -89,7 +134,7 @@ class NewBookFragment : Fragment() {
                         true,
                         "https://firebasestorage.googleapis.com/v0/b/onlybooks-3a802.appspot.com/o/images%2FsemCapa.png?alt=media&token=31b91efc-2cc4-4352-9740-3606f30cddde"
                     )
-                    goToCreateEbook(newEbook)
+                    goToCreateNewEbook(newEbook)
                 }
                 is StateResource.Error -> {
                 }
@@ -99,6 +144,29 @@ class NewBookFragment : Fragment() {
         }
 
     }
+
+    private fun goToCreateNewEbook(newEbook: EbookModel) {
+
+        val createEbookFragment = CreateEbookFragment(newEbook)
+
+        val bundle = Bundle()
+        bundle.putString("newEbook", "newEbook")
+        createEbookFragment.arguments = bundle
+
+        val transaction =
+            (context as FragmentActivity).supportFragmentManager.beginTransaction()
+
+        transaction.replace(R.id.nav_host_fragment, createEbookFragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
+
+    private fun getUserById(idUser: Int) {
+        userViewModel.getUserById(idUser)
+        verifyResponseForNewEbook()
+    }
+
+
 
     private fun getDataInCache(key: String): String? {
         val preferences = activity?.getSharedPreferences(

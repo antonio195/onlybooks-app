@@ -25,6 +25,9 @@ class AudioBookViewModel(
     private val _updateAudioBook = MutableLiveData<StateResource<String>>()
     val updateAudioBook: LiveData<StateResource<String>> = _updateAudioBook
 
+    private val _postAudioBook = MutableLiveData<StateResource<String>>()
+    val postAudioBook: LiveData<StateResource<String>> = _postAudioBook
+
     fun getSuggestions() = viewModelScope.launch(Dispatchers.IO) {
         val response = audioBookRepository.getSuggestions()
         _suggestions.postValue(handleResponse(response))
@@ -34,6 +37,12 @@ class AudioBookViewModel(
         viewModelScope.launch(Dispatchers.IO) {
             val response = audioBookRepository.updateAudioBook(audioBook, idAudioBook)
             _updateAudioBook.postValue(handleResponse(response))
+        }
+
+    fun postAudioBook(audioBook: AudioBookModel, idUser: Int) =
+        viewModelScope.launch(Dispatchers.IO) {
+            val response = audioBookRepository.postAudioBook(audioBook, idUser)
+            _postAudioBook.postValue(handleResponse(response))
         }
 
     private fun <T> handleResponse(response: Response<T>): StateResource<T> {

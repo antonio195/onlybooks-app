@@ -7,14 +7,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.antoniocostadossantos.onlybooks.databinding.FragmentHomeBinding
-import com.antoniocostadossantos.onlybooks.ui.adapter.EbookItemAdapter
+import com.antoniocostadossantos.onlybooks.model.EbookModel
+import com.antoniocostadossantos.onlybooks.ui.adapter.EbookItemHorizontalAdapter
 import com.antoniocostadossantos.onlybooks.viewModel.EbookViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var ebookAdapter: EbookItemAdapter
+    private lateinit var ebookAdapter: EbookItemHorizontalAdapter
     private val ebookViewModel: EbookViewModel by viewModel()
 
     override fun onCreateView(
@@ -31,7 +32,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        this.ebookAdapter = EbookItemAdapter(binding.root.context)
+        this.ebookAdapter = EbookItemHorizontalAdapter(binding.root.context)
 
         val recyclerView = binding.sugestoesRecyclerview
 
@@ -44,7 +45,14 @@ class HomeFragment : Fragment() {
         recyclerView.adapter = this.ebookAdapter
 
         ebookViewModel.suggestions.observe(viewLifecycleOwner) { response ->
-            this.ebookAdapter.setList(response.data!!)
+            val list = response.data!!.toMutableList()
+            val newList = mutableListOf<EbookModel>()
+            list.shuffle()
+            newList.add(list[1])
+            newList.add(list[2])
+            newList.add(list[3])
+            newList.toList()
+            this.ebookAdapter.setList(newList)
         }
     }
 }

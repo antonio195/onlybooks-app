@@ -58,11 +58,13 @@ class CreateAudioBookFragment(var audioBookBase: AudioBookModel) : Fragment() {
         binding.inputGenre3.setText(audioBookBase.genre2AudioBook)
         binding.inputClass.setText(audioBookBase.classificacao)
         binding.inputSinopse.setText(audioBookBase.descricao)
+        binding.inputStoryteller1.setText(audioBookBase.narradorAudioBook)
+        binding.inputStoryteller2.setText(audioBookBase.narrador2AudioBook)
         val image = audioBookBase.urlAudioBook
 
         val requestOptions = RequestOptions()
-            .placeholder(R.drawable.ic_baseline_cloud_download_24)
-            .error(R.drawable.ic_baseline_error_24)
+            .placeholder(R.drawable.baixando_capa)
+            .error(R.drawable.erro_capa)
 
         Glide.with(binding.imageEbook)
             .applyDefaultRequestOptions(requestOptions)
@@ -84,19 +86,18 @@ class CreateAudioBookFragment(var audioBookBase: AudioBookModel) : Fragment() {
             binding.inputTitle.text.toString().isEmpty() -> {
                 binding.inputTitle.error = "Preencha esse campo"
             }
-
+            binding.inputStoryteller1.text.toString().isEmpty() -> {
+                binding.inputStoryteller1.error = "Preencha esse campo"
+            }
             binding.inputGenre1.text.toString().isEmpty() -> {
                 binding.inputGenre1.error = "Preencha esse campo"
             }
-
             binding.inputClass.text.toString().isEmpty() -> {
                 binding.inputClass.error = "Preencha esse campo"
             }
-
             binding.inputSinopse.text.toString().isEmpty() -> {
                 binding.inputSinopse.error = "Preencha esse campo"
             }
-
             else -> {
                 postOrUpdate()
             }
@@ -152,14 +153,19 @@ class CreateAudioBookFragment(var audioBookBase: AudioBookModel) : Fragment() {
         val isNewEbook = arguments?.getString("newEbook")
         if (!isNewEbook.isNullOrEmpty()) {
 
-            audioBookBase.nameAudioBook = binding.inputTitle.text.toString()
             audioBookBase.authorAudioBook = getDataInCache("name")!!
+            audioBookBase.classificacao = binding.inputClass.text.toString()
             audioBookBase.coAuthorAudioBook = binding.inputCoAuthor.text.toString()
-            audioBookBase.genreAudioBook = binding.inputGenre1.text.toString()
+            audioBookBase.descricao = binding.inputSinopse.text.toString()
+            audioBookBase.isEbook = true
             audioBookBase.genre1AudioBook = binding.inputGenre2.text.toString()
             audioBookBase.genre2AudioBook = binding.inputGenre3.text.toString()
-            audioBookBase.classificacao = binding.inputClass.text.toString()
-            audioBookBase.descricao = binding.inputSinopse.text.toString()
+            audioBookBase.genreAudioBook = binding.inputGenre1.text.toString()
+            audioBookBase.idAudioBook = 0
+            audioBookBase.nameAudioBook = binding.inputTitle.text.toString()
+            audioBookBase.narrador2AudioBook = binding.inputStoryteller2.text.toString()
+            audioBookBase.narradorAudioBook = binding.inputStoryteller1.text.toString()
+            audioBookBase.statusAudioBook = true
 
             postAudioBook(audioBookBase)
         } else {

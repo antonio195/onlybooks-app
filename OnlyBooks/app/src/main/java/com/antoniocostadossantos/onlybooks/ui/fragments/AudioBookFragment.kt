@@ -6,16 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import com.antoniocostadossantos.onlybooks.R
 import com.antoniocostadossantos.onlybooks.databinding.FragmentAudioBookBinding
-import com.antoniocostadossantos.onlybooks.ui.adapter.AudiobookItemAdapter
+import com.antoniocostadossantos.onlybooks.ui.adapter.AudiobookItemVerticalAdapter
 import com.antoniocostadossantos.onlybooks.viewModel.AudioBookViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class AudioBookFragment : Fragment(R.layout.fragment_audio_book) {
+class AudioBookFragment : Fragment() {
 
     private lateinit var binding: FragmentAudioBookBinding
-    private lateinit var audioBookItemAdapter: AudiobookItemAdapter
+    private lateinit var audioBookItemAdapter: AudiobookItemVerticalAdapter
     private val audioBookViewModel: AudioBookViewModel by viewModel()
 
     override fun onCreateView(
@@ -33,7 +32,7 @@ class AudioBookFragment : Fragment(R.layout.fragment_audio_book) {
     }
 
     private fun setupRecyclerView() {
-        this.audioBookItemAdapter = AudiobookItemAdapter(binding.root.context)
+        this.audioBookItemAdapter = AudiobookItemVerticalAdapter(binding.root.context)
 
         val recyclerView = binding.audiobookSugestoesRecyclerview
 

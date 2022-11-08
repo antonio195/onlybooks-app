@@ -53,8 +53,8 @@ class StorageImageAudioBookFragment(val audioBookBase: AudioBookModel) : Fragmen
 
     private fun setupImageEbook(audioBookBase: AudioBookModel) {
         val requestOptions = RequestOptions()
-            .placeholder(R.drawable.ic_baseline_cloud_download_24)
-            .error(R.drawable.ic_baseline_error_24)
+            .placeholder(R.drawable.baixando_capa)
+            .error(R.drawable.erro_capa)
 
         Glide.with(binding.ivBannerEbook)
             .applyDefaultRequestOptions(requestOptions)

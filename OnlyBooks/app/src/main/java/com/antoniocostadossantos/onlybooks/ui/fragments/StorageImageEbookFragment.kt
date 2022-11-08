@@ -53,8 +53,8 @@ class StorageImageEbookFragment(val ebook: EbookModel) : Fragment() {
 
     private fun setupImageEbook(ebook: EbookModel) {
         val requestOptions = RequestOptions()
-            .placeholder(R.drawable.ic_baseline_cloud_download_24)
-            .error(R.drawable.ic_baseline_error_24)
+            .placeholder(R.drawable.baixando_capa)
+            .error(R.drawable.erro_capa)
 
         Glide.with(binding.ivBannerEbook)
             .applyDefaultRequestOptions(requestOptions)

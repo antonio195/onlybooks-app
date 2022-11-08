@@ -34,6 +34,39 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/livro1"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/pilha_de_livros"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/view_create_ebook"
+        app:layout_constraintEnd_toEndOf="@id/view_create_ebook"
+        app:layout_constraintStart_toStartOf="@id/view_create_ebook"
+        app:layout_constraintTop_toTopOf="@id/view_create_ebook" />
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/livro2"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:src="@drawable/livro_abrindo_e_fechando"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/view_create_ebook"
+        app:layout_constraintEnd_toEndOf="@id/view_create_ebook"
+        app:layout_constraintStart_toStartOf="@id/view_create_ebook"
+        app:layout_constraintTop_toTopOf="@id/view_create_ebook" />
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/livro3"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:src="@drawable/livro_virando_pagina"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/view_create_ebook"
+        app:layout_constraintEnd_toEndOf="@id/view_create_ebook"
+        app:layout_constraintStart_toStartOf="@id/view_create_ebook"
+        app:layout_constraintTop_toTopOf="@id/view_create_ebook" />
+
     <TextView
         android:id="@+id/create_audiobook"
         android:layout_width="wrap_content"

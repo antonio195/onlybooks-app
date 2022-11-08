@@ -61,8 +61,8 @@ class CreateEbookFragment(var ebookBase: EbookModel) : Fragment() {
         val image = ebook.url
 
         val requestOptions = RequestOptions()
-            .placeholder(R.drawable.ic_baseline_cloud_download_24)
-            .error(R.drawable.ic_baseline_error_24)
+            .placeholder(R.drawable.baixando_capa)
+            .error(R.drawable.erro_capa)
 
         Glide.with(binding.imageEbook)
             .applyDefaultRequestOptions(requestOptions)

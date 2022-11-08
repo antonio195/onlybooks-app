@@ -7,14 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.antoniocostadossantos.onlybooks.databinding.FragmentEbookBinding
-import com.antoniocostadossantos.onlybooks.ui.adapter.EbookItemAdapter
+import com.antoniocostadossantos.onlybooks.ui.adapter.EbookItemVerticalAdapter
 import com.antoniocostadossantos.onlybooks.viewModel.EbookViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class EbookFragment : Fragment() {
 
     private lateinit var binding: FragmentEbookBinding
-    private lateinit var ebookAdapter: EbookItemAdapter
+    private lateinit var ebookAdapter: EbookItemVerticalAdapter
     private val ebookViewModel: EbookViewModel by viewModel()
 
     override fun onCreateView(
@@ -31,15 +31,9 @@ class EbookFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        this.ebookAdapter = EbookItemAdapter(binding.root.context)
+        this.ebookAdapter = EbookItemVerticalAdapter(binding.root.context)
 
         val recyclerView = binding.sugestoesRecyclerview
-
-//        recyclerView.layoutManager = LinearLayoutManager(
-//            activity?.applicationContext,
-//            LinearLayoutManager.HORIZONTAL,
-//            false
-//        )
 
         recyclerView.layoutManager = GridLayoutManager(activity?.applicationContext, 2)
 

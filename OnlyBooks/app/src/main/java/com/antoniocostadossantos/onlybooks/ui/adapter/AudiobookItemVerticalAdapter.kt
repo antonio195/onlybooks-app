@@ -7,19 +7,19 @@ import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.antoniocostadossantos.onlybooks.R
-import com.antoniocostadossantos.onlybooks.databinding.ItemEbookBinding
+import com.antoniocostadossantos.onlybooks.databinding.ItemEbookVerticalBinding
 import com.antoniocostadossantos.onlybooks.model.AudioBookModel
 import com.antoniocostadossantos.onlybooks.ui.fragments.AudioBookDetailsFragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
 
-class AudiobookItemAdapter(val context: Context) :
-    RecyclerView.Adapter<AudiobookItemAdapter.ViewHolder>() {
+class AudiobookItemVerticalAdapter(val context: Context) :
+    RecyclerView.Adapter<AudiobookItemVerticalAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         var binding =
-            ItemEbookBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemEbookVerticalBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
@@ -54,7 +54,8 @@ class AudiobookItemAdapter(val context: Context) :
         notifyDataSetChanged()
     }
 
-    class ViewHolder(val binding: ItemEbookBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(val binding: ItemEbookVerticalBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         private val image = binding.imageEbook
         private val genre = binding.genreEbook
 
@@ -62,8 +63,8 @@ class AudiobookItemAdapter(val context: Context) :
             genre.text = audioBookModel.genreAudioBook
 
             val requestOptions = RequestOptions()
-                .placeholder(R.drawable.ic_baseline_cloud_download_24)
-                .error(R.drawable.ic_baseline_error_24)
+                .placeholder(R.drawable.baixando_capa)
+                .error(R.drawable.erro_capa)
 
             Glide.with(binding.imageEbook)
                 .applyDefaultRequestOptions(requestOptions)

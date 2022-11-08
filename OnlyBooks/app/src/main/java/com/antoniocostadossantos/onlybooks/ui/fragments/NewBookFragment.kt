@@ -12,6 +12,7 @@ import com.antoniocostadossantos.onlybooks.databinding.FragmentNewBookBinding
 import com.antoniocostadossantos.onlybooks.model.AudioBookModel
 import com.antoniocostadossantos.onlybooks.model.EbookModel
 import com.antoniocostadossantos.onlybooks.util.StateResource
+import com.antoniocostadossantos.onlybooks.util.show
 import com.antoniocostadossantos.onlybooks.viewModel.UserViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -31,6 +32,8 @@ class NewBookFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        chooseEbookGif()
 
         binding.createEbook.setOnClickListener {
             getIdUserForNewEbook()
@@ -166,7 +169,21 @@ class NewBookFragment : Fragment() {
         verifyResponseForNewEbook()
     }
 
+    private fun drawNumber(): Int = (0..2).random()
 
+    private fun chooseEbookGif() {
+        when (drawNumber()) {
+            0 -> {
+                binding.livro1.show()
+            }
+            1 -> {
+                binding.livro2.show()
+            }
+            2 -> {
+                binding.livro3.show()
+            }
+        }
+    }
 
     private fun getDataInCache(key: String): String? {
         val preferences = activity?.getSharedPreferences(

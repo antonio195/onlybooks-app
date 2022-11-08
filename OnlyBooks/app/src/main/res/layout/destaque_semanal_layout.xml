@@ -47,7 +47,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/source_sans_pro"
-        android:text="De uma chance pro novo, quem \nsabe ele não te conquiste."
+        android:text="De uma chance pro novo, quem \nsabe ele não te conquista né?"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@id/image_destaque"

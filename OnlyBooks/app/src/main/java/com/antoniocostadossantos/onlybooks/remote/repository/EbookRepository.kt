@@ -14,4 +14,6 @@ class EbookRepository : BaseRepository() {
 
     suspend fun postEbook(ebook: EbookModel, idUser: Int) = api.postEbook(ebook, idUser)
 
+    suspend fun getSpotlightWeek() = api.getSpotlightWeek()
+
 }

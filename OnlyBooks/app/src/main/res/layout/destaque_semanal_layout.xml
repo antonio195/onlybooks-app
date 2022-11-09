@@ -8,62 +8,6 @@
     app:layout_constraintTop_toBottomOf="@id/sugestoes_recyclerview"
     android:layout_height="wrap_content">
 
-    <View
-        android:id="@+id/view_base"
-        android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:layout_marginTop="50dp"
-        android:background="@drawable/destaque_semanal_background_10"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/image_destaque"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="35dp"
-        android:src="@drawable/capa_base"
-        app:layout_constraintStart_toStartOf="@id/view_base"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/titulo_destaque"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/source_sans_pro"
-        android:text="Destaque da semana!"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@id/image_destaque"
-        app:layout_constraintTop_toTopOf="@id/view_base" />
-
-    <TextView
-        android:id="@+id/texto_destaque"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/source_sans_pro"
-        android:text="De uma chance pro novo, quem \nsabe ele não te conquista né?"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@id/image_destaque"
-        app:layout_constraintTop_toBottomOf="@id/titulo_destaque" />
-
-    <TextView
-        android:id="@+id/btn_conhecer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/source_sans_pro"
-        android:text="Conhecer"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/view_base"
-        app:layout_constraintEnd_toEndOf="@id/view_base"
-        app:layout_constraintStart_toEndOf="@id/image_destaque"
-        app:layout_constraintTop_toBottomOf="@id/texto_destaque" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

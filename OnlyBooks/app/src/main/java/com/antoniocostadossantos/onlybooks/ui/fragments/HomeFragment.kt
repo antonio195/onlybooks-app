@@ -6,10 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.antoniocostadossantos.onlybooks.R
 import com.antoniocostadossantos.onlybooks.databinding.FragmentHomeBinding
 import com.antoniocostadossantos.onlybooks.model.EbookModel
 import com.antoniocostadossantos.onlybooks.ui.adapter.EbookItemHorizontalAdapter
+import com.antoniocostadossantos.onlybooks.util.StateResource
 import com.antoniocostadossantos.onlybooks.viewModel.EbookViewModel
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
@@ -54,5 +58,40 @@ class HomeFragment : Fragment() {
             newList.toList()
             this.ebookAdapter.setList(newList)
         }
+
+        getSpotlightWeek()
+    }
+
+    private fun getSpotlightWeek() {
+        ebookViewModel.getSpotlightWeek()
+        verifySpotlightWeek()
+    }
+
+    private fun verifySpotlightWeek() {
+        ebookViewModel.spotlightWeek.observe(this) { response ->
+            when (response) {
+                is StateResource.Success -> {
+                    displayData(response.data)
+                }
+                is StateResource.Error -> {
+                }
+                else -> {
+                    println(response)
+                }
+            }
+        }
+    }
+
+    private fun displayData(ebookModel: EbookModel?) {
+        val image = binding.imageDestaque
+
+        val requestOptions = RequestOptions()
+            .placeholder(R.drawable.baixando_capa)
+            .error(R.drawable.erro_capa)
+
+        Glide.with(image)
+            .applyDefaultRequestOptions(requestOptions)
+            .load(ebookModel!!.url)
+            .into(image)
     }
 }

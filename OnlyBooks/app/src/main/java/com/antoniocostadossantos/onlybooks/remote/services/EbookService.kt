@@ -22,4 +22,7 @@ interface EbookService {
         @Path("idUser") idUser: Int
     ): Response<String>
 
+    @GET("/ebook/get-spotlight-week")
+    suspend fun getSpotlightWeek(): Response<EbookModel>
+
 }

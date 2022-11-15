@@ -20,6 +20,7 @@ class MyApp : Application() {
                 ebookDependency,
                 audioBookDependency,
                 chapterDependency,
+                libraryDependency,
                 sharedPreferences
 
             )

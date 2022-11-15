@@ -25,4 +25,14 @@ interface EbookService {
     @GET("/ebook/get-spotlight-week")
     suspend fun getSpotlightWeek(): Response<EbookModel>
 
+    @GET("/ebook/get-jobs-by-id/{idUser}")
+    suspend fun getMyEbooks(
+        @Path("idUser") idUser: Int
+    ): Response<List<EbookModel>>
+
+    @GET("/library-ebook/get-user-library/{idUser}")
+    suspend fun getMyEbooksInLibrary(
+        @Path("idUser") idUser: Int
+    ): Response<List<EbookModel>>
+
 }

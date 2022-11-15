@@ -8,113 +8,314 @@
     android:fitsSystemWindows="true"
     tools:context=".ui.fragments.ProfileFragment">
 
-    <ImageView
-        android:id="@+id/icon_logo"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/logo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/settings_button"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/ic_baseline_settings_24"
-        app:layout_constraintBottom_toBottomOf="@id/icon_logo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/icon_logo"
-        app:layout_constraintTop_toTopOf="@id/icon_logo" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/profile_image"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="60dp"
-        android:src="@drawable/ic_launcher_background"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/icon_logo" />
+            <ImageView
+                android:id="@+id/icon_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/logo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/qnts_ebooks"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/source_sans_pro"
-        android:text="0"
-        android:textColor="@color/azulEscuro"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/text_ebooks"
-        app:layout_constraintEnd_toStartOf="@id/qnts_audiobooks"
-        app:layout_constraintStart_toEndOf="@id/profile_image"
-        app:layout_constraintTop_toTopOf="@id/profile_image" />
+            <ImageView
+                android:id="@+id/settings_button"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_baseline_settings_24"
+                app:layout_constraintBottom_toBottomOf="@id/icon_logo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/icon_logo"
+                app:layout_constraintTop_toTopOf="@id/icon_logo" />
 
-    <TextView
-        android:id="@+id/text_ebooks"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Leituras"
-        android:fontFamily="@font/source_sans_pro"
-        android:textColor="@color/azulEscuro"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@id/qnts_ebooks"
-        app:layout_constraintStart_toStartOf="@id/qnts_ebooks"
-        app:layout_constraintTop_toBottomOf="@id/qnts_ebooks" />
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/profile_image"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="60dp"
+                android:src="@drawable/ic_launcher_background"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/icon_logo" />
 
-    <TextView
-        android:id="@+id/qnts_audiobooks"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/source_sans_pro"
-        android:text="0"
-        android:textColor="@color/azulEscuro"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/text_audiobooks"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/qnts_ebooks"
-        app:layout_constraintTop_toTopOf="@id/profile_image" />
+            <TextView
+                android:id="@+id/qnts_ebooks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/source_sans_pro"
+                android:text="0"
+                android:textColor="@color/azulEscuro"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/text_ebooks"
+                app:layout_constraintEnd_toStartOf="@id/qnts_audiobooks"
+                app:layout_constraintStart_toEndOf="@id/profile_image"
+                app:layout_constraintTop_toTopOf="@id/profile_image" />
 
-    <TextView
-        android:id="@+id/text_audiobooks"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Leituras"
-        android:textColor="@color/azulEscuro"
-        android:fontFamily="@font/source_sans_pro"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@id/qnts_audiobooks"
-        app:layout_constraintStart_toStartOf="@id/qnts_audiobooks"
-        app:layout_constraintTop_toBottomOf="@id/qnts_audiobooks" />
+            <TextView
+                android:id="@+id/text_ebooks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/source_sans_pro"
+                android:text="Leituras"
+                android:textColor="@color/azulEscuro"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@id/qnts_ebooks"
+                app:layout_constraintStart_toStartOf="@id/qnts_ebooks"
+                app:layout_constraintTop_toBottomOf="@id/qnts_ebooks" />
 
-    <TextView
-        android:id="@+id/text_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/source_sans_pro"
-        android:text="Lisa Simpson"
-        android:textColor="@color/azulEscuro"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/profile_image" />
+            <TextView
+                android:id="@+id/qnts_audiobooks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/source_sans_pro"
+                android:text="0"
+                android:textColor="@color/azulEscuro"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/text_audiobooks"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/qnts_ebooks"
+                app:layout_constraintTop_toTopOf="@id/profile_image" />
 
-    <TextView
-        android:id="@+id/text_description"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:fontFamily="@font/source_sans_pro"
-        android:layout_marginTop="10dp"
-        android:text="“Quem tem algo por que viver, é capaz de suportar qualquer coisa.”"
-        android:textColor="@color/azulEscuro"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_name" />
+            <TextView
+                android:id="@+id/text_audiobooks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/source_sans_pro"
+                android:text="Escutas"
+                android:textColor="@color/azulEscuro"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@id/qnts_audiobooks"
+                app:layout_constraintStart_toStartOf="@id/qnts_audiobooks"
+                app:layout_constraintTop_toBottomOf="@id/qnts_audiobooks" />
+
+            <TextView
+                android:id="@+id/text_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/source_sans_pro"
+                android:text="Lisa Simpson"
+                android:textColor="@color/azulEscuro"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/profile_image" />
+
+            <TextView
+                android:id="@+id/text_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/source_sans_pro"
+                android:text="“Quem tem algo por que viver, é capaz de suportar qualquer coisa.”"
+                android:textColor="@color/azulEscuro"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_name" />
+
+            <View
+                android:id="@+id/separetor_line0"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/azulClaro"
+                app:layout_constraintTop_toBottomOf="@id/text_description" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switch_my_works"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp"
+                android:checked="true"
+                android:fontFamily="@font/source_sans_pro"
+                android:text="Mostrar Minhas Obras?"
+                android:textColor="@color/azulEscuro"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/separetor_line0"
+                app:switchPadding="15dp"
+                app:thumbTint="@color/azulEscuro"
+                app:trackTint="@color/azulClaro" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/view_my_works"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/switch_my_works"
+                tools:visibility="gone">
+
+                <TextView
+                    android:id="@+id/my_works"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/source_sans_pro"
+                    android:text="Minhas Obras"
+                    android:textColor="@color/azulEscuro"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/view_my_works" />
+
+                <TextView
+                    android:id="@+id/show_my_ebooks"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/source_sans_pro"
+                    android:text="Ebooks"
+                    android:textColor="@color/azulEscuro"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/show_my_audiobooks"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/my_works" />
+
+                <TextView
+                    android:id="@+id/show_my_audiobooks"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/source_sans_pro"
+                    android:text="AudioBooks"
+                    android:textColor="@color/azulEscuro"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/show_my_ebooks"
+                    app:layout_constraintTop_toBottomOf="@id/my_works" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/my_work_recyclerview_ebook"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/show_my_audiobooks" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/my_work_recyclerview_audiobook"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal"
+                    android:visibility="invisible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/show_my_audiobooks" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/separetor_line1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/azulClaro"
+                app:layout_constraintTop_toBottomOf="@id/view_my_works" />
+
+            <TextView
+                android:id="@+id/my_library"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/source_sans_pro"
+                android:text="Minha biblioteca"
+                android:textColor="@color/azulEscuro"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/separetor_line1" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/view_my_library"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/my_library"
+                tools:visibility="visible">
+
+                <TextView
+                    android:id="@+id/show_my_ebooks_in_library"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/source_sans_pro"
+                    android:text="Ebooks"
+                    android:textColor="@color/azulEscuro"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/show_my_audiobooks_in_library"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/show_my_audiobooks_in_library"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/source_sans_pro"
+                    android:text="AudioBooks"
+                    android:textColor="@color/azulEscuro"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/show_my_ebooks_in_library"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/my_work_recyclerview_ebook_librabry"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/show_my_audiobooks_in_library" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/my_work_recyclerview_audiobook_librabry"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal"
+                    android:visibility="invisible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/show_my_audiobooks_in_library" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

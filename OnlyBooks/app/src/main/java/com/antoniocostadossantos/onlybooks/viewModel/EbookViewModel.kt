@@ -31,6 +31,12 @@ class EbookViewModel(
     private val _spotlightWeek = MutableLiveData<StateResource<EbookModel>>()
     val spotlightWeek: LiveData<StateResource<EbookModel>> = _spotlightWeek
 
+    private val _myEbooks = MutableLiveData<StateResource<List<EbookModel>>>()
+    val myEbooks: LiveData<StateResource<List<EbookModel>>> = _myEbooks
+
+    private val _myEbooksInLibrary = MutableLiveData<StateResource<List<EbookModel>>>()
+    val myEbooksInLibrary: LiveData<StateResource<List<EbookModel>>> = _myEbooksInLibrary
+
     fun getSuggestions() = viewModelScope.launch(Dispatchers.IO) {
         val response = ebookRepository.getSuggestions()
         _suggestions.postValue(handleResponse(response))
@@ -49,6 +55,16 @@ class EbookViewModel(
     fun getSpotlightWeek() = viewModelScope.launch(Dispatchers.IO) {
         val response = ebookRepository.getSpotlightWeek()
         _spotlightWeek.postValue(handleResponse(response))
+    }
+
+    fun getMyEbooks(idUsuario: Int) = viewModelScope.launch(Dispatchers.IO) {
+        val response = ebookRepository.getMyEbooks(idUsuario)
+        _myEbooks.postValue(handleResponse(response))
+    }
+
+    fun getMyEbooksInLibrary(idUsuario: Int) = viewModelScope.launch(Dispatchers.IO) {
+        val response = ebookRepository.getMyEbooksInLibrary(idUsuario)
+        _myEbooksInLibrary.postValue(handleResponse(response))
     }
 
     private fun <T> handleResponse(response: Response<T>): StateResource<T> {

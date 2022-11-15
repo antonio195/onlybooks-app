@@ -1,6 +1,7 @@
 package com.antoniocostadossantos.onlybooks.ui.adapter
 
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -18,7 +19,7 @@ class EbookItemVerticalAdapter(val context: Context) :
     RecyclerView.Adapter<EbookItemVerticalAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        var binding =
+        val binding =
             ItemEbookVerticalBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
@@ -49,6 +50,7 @@ class EbookItemVerticalAdapter(val context: Context) :
 
     private var items: List<EbookModel> = ArrayList()
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setList(liveList: List<EbookModel>) {
         this.items = liveList
         notifyDataSetChanged()

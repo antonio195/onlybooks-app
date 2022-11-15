@@ -22,4 +22,14 @@ interface AudioBookService {
         @Path("idUser") idUser: Int
     ): Response<String>
 
+    @GET("/audiobook/get-jobs-by-id/{idUser}")
+    suspend fun getMyAudioBooks(
+        @Path("idUser") idUser: Int
+    ): Response<List<AudioBookModel>>
+
+    @GET("/library-audiobook/get-user-library/{idUser}")
+    suspend fun getMyAudioBookssInLibrary(
+        @Path("idUser") idUser: Int
+    ): Response<List<AudioBookModel>>
+
 }

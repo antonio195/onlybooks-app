@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.antoniocostadossantos.onlybooks.R
-import com.antoniocostadossantos.onlybooks.databinding.ItemAudiobookVerticalBinding
+import com.antoniocostadossantos.onlybooks.databinding.ItemAudiobookHorizontalBinding
 import com.antoniocostadossantos.onlybooks.model.AudioBookModel
 import com.antoniocostadossantos.onlybooks.ui.fragments.AudioBookDetailsFragment
 import com.antoniocostadossantos.onlybooks.util.show
@@ -15,12 +15,16 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
 
-class AudiobookItemVerticalAdapter(val context: Context) :
-    RecyclerView.Adapter<AudiobookItemVerticalAdapter.ViewHolder>() {
+class AudioBookItemHorizontalAdapter(val context: Context) :
+    RecyclerView.Adapter<AudioBookItemHorizontalAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         var binding =
-            ItemAudiobookVerticalBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemAudiobookHorizontalBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
         return ViewHolder(binding)
     }
 
@@ -55,13 +59,13 @@ class AudiobookItemVerticalAdapter(val context: Context) :
         notifyDataSetChanged()
     }
 
-    class ViewHolder(val binding: ItemAudiobookVerticalBinding) :
+    class ViewHolder(val binding: ItemAudiobookHorizontalBinding) :
         RecyclerView.ViewHolder(binding.root) {
         private val image = binding.imageEbook
         private val genre = binding.genreEbook
 
-        fun bind(audioBookModel: AudioBookModel) {
-            genre.text = audioBookModel.genreAudioBook
+        fun bind(audioBook: AudioBookModel) {
+            genre.text = audioBook.genreAudioBook
 
             binding.audioCover.show()
             binding.imageEbook.alpha = 0.9F
@@ -72,7 +76,7 @@ class AudiobookItemVerticalAdapter(val context: Context) :
 
             Glide.with(binding.imageEbook)
                 .applyDefaultRequestOptions(requestOptions)
-                .load(audioBookModel.urlAudioBook)
+                .load(audioBook.urlAudioBook)
                 .into(image)
 
         }

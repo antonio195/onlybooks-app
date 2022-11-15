@@ -5,12 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.antoniocostadossantos.onlybooks.R
 import com.antoniocostadossantos.onlybooks.databinding.FragmentHomeBinding
+import com.antoniocostadossantos.onlybooks.model.AudioBookModel
 import com.antoniocostadossantos.onlybooks.model.EbookModel
+import com.antoniocostadossantos.onlybooks.ui.adapter.AudioBookItemHorizontalAdapter
 import com.antoniocostadossantos.onlybooks.ui.adapter.EbookItemHorizontalAdapter
 import com.antoniocostadossantos.onlybooks.util.StateResource
+import com.antoniocostadossantos.onlybooks.viewModel.AudioBookViewModel
 import com.antoniocostadossantos.onlybooks.viewModel.EbookViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -20,7 +24,11 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var ebookAdapter: EbookItemHorizontalAdapter
+    private lateinit var audiobookAdapter: AudioBookItemHorizontalAdapter
     private val ebookViewModel: EbookViewModel by viewModel()
+    private val audioBookViewModel: AudioBookViewModel by viewModel()
+
+    private lateinit var ebookSpotlight: EbookModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,13 +40,20 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupRecyclerView()
+        setupAudioBookRecyclerView()
+        setupEbookRecyclerView()
+
+        getSpotlightWeek()
+
+        binding.btnConhecer.setOnClickListener {
+            goToEbookDetails()
+        }
     }
 
-    private fun setupRecyclerView() {
+    private fun setupEbookRecyclerView() {
         this.ebookAdapter = EbookItemHorizontalAdapter(binding.root.context)
 
-        val recyclerView = binding.sugestoesRecyclerview
+        val recyclerView = binding.sugestoesRecyclerviewEbook
 
         recyclerView.layoutManager = LinearLayoutManager(
             activity?.applicationContext,
@@ -58,8 +73,31 @@ class HomeFragment : Fragment() {
             newList.toList()
             this.ebookAdapter.setList(newList)
         }
+    }
 
-        getSpotlightWeek()
+    private fun setupAudioBookRecyclerView() {
+        this.audiobookAdapter = AudioBookItemHorizontalAdapter(binding.root.context)
+
+        val recyclerView = binding.sugestoesRecyclerviewAudiobook
+
+        recyclerView.layoutManager = LinearLayoutManager(
+            activity?.applicationContext,
+            LinearLayoutManager.HORIZONTAL,
+            false
+        )
+
+        recyclerView.adapter = this.audiobookAdapter
+
+        audioBookViewModel.suggestions.observe(viewLifecycleOwner) { response ->
+            val list = response.data!!.toMutableList()
+            val newList = mutableListOf<AudioBookModel>()
+            list.shuffle()
+            newList.add(list[1])
+            newList.add(list[2])
+            newList.add(list[3])
+            newList.toList()
+            this.audiobookAdapter.setList(newList)
+        }
     }
 
     private fun getSpotlightWeek() {
@@ -68,10 +106,11 @@ class HomeFragment : Fragment() {
     }
 
     private fun verifySpotlightWeek() {
-        ebookViewModel.spotlightWeek.observe(this) { response ->
+        ebookViewModel.spotlightWeek.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is StateResource.Success -> {
                     displayData(response.data)
+                    ebookSpotlight = response.data!!
                 }
                 is StateResource.Error -> {
                 }
@@ -80,6 +119,18 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun goToEbookDetails() {
+        val transaction =
+            (context as FragmentActivity).supportFragmentManager.beginTransaction()
+
+        transaction.replace(
+            R.id.nav_host_fragment,
+            EbookDetailsFragment(ebookSpotlight)
+        )
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 
     private fun displayData(ebookModel: EbookModel?) {

@@ -16,4 +16,7 @@ class EbookRepository : BaseRepository() {
 
     suspend fun getSpotlightWeek() = api.getSpotlightWeek()
 
+    suspend fun getMyEbooks(idUser: Int) = api.getMyEbooks(idUser)
+
+    suspend fun getMyEbooksInLibrary(idUser: Int) = api.getMyEbooksInLibrary(idUser)
 }

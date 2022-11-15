@@ -1,25 +1,24 @@
 package com.antoniocostadossantos.onlybooks.ui.adapter
 
-
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.antoniocostadossantos.onlybooks.R
-import com.antoniocostadossantos.onlybooks.databinding.ItemEbookBinding
+import com.antoniocostadossantos.onlybooks.databinding.ItemEbookHorizontalBinding
 import com.antoniocostadossantos.onlybooks.model.EbookModel
 import com.antoniocostadossantos.onlybooks.ui.fragments.EbookDetailsFragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
-
 class EbookItemHorizontalAdapter(val context: Context) :
     RecyclerView.Adapter<EbookItemHorizontalAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        var binding =
-            ItemEbookBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ItemEbookHorizontalBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
@@ -46,12 +45,14 @@ class EbookItemHorizontalAdapter(val context: Context) :
 
     private var items: List<EbookModel> = ArrayList()
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setList(liveList: List<EbookModel>) {
         this.items = liveList
         notifyDataSetChanged()
     }
 
-    class ViewHolder(val binding: ItemEbookBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(val binding: ItemEbookHorizontalBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         private val image = binding.imageEbook
         private val genre = binding.genreEbook
 

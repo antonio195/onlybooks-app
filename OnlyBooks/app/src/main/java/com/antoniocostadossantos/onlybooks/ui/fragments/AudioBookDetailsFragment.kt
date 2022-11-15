@@ -13,6 +13,7 @@ import com.antoniocostadossantos.onlybooks.model.AudioBookModel
 import com.antoniocostadossantos.onlybooks.util.StateResource
 import com.antoniocostadossantos.onlybooks.util.toast
 import com.antoniocostadossantos.onlybooks.viewModel.ChapterViewModel
+import com.antoniocostadossantos.onlybooks.viewModel.LibraryViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -21,6 +22,9 @@ class AudioBookDetailsFragment(val audioBook: AudioBookModel) : Fragment() {
 
     private lateinit var binding: FragmentAudiobookDetailsBinding
     private val chapterViewModel: ChapterViewModel by viewModel()
+    private val libraryViewModel: LibraryViewModel by viewModel()
+
+    var ebookExistsInLibrary: Boolean = false
 
     private var URLAudioBook: String = ""
 
@@ -36,6 +40,7 @@ class AudioBookDetailsFragment(val audioBook: AudioBookModel) : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         displayData()
+        existsInLibrary()
         checkUrlExists()
         checkProperty()
 
@@ -49,6 +54,14 @@ class AudioBookDetailsFragment(val audioBook: AudioBookModel) : Fragment() {
 
         binding.ouvirAudiobook.setOnClickListener {
             listenEbook(URLAudioBook)
+        }
+
+        binding.saveAudiobook.setOnClickListener {
+            if (ebookExistsInLibrary) {
+                deleteInLibrary()
+            } else {
+                addInLibrary()
+            }
         }
     }
 
@@ -132,6 +145,77 @@ class AudioBookDetailsFragment(val audioBook: AudioBookModel) : Fragment() {
                 }
             }
 
+        }
+    }
+
+    private fun existsInLibrary() {
+        val idUser = getDataInCache("id")!!.toInt()
+        libraryViewModel.existsInLibrary(idUser, audioBook.idAudioBook)
+        verifyExistsInLibrary()
+    }
+
+    private fun verifyExistsInLibrary() {
+        libraryViewModel.existsInLibrary.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is StateResource.Success -> {
+                    if (response.data == true) {
+                        ebookExistsInLibrary = true
+                        binding.saveAudiobook.setImageResource(R.drawable.ic_favorited)
+                    }
+                }
+                is StateResource.Error -> {
+                }
+                else -> {
+                    println("AudioBookDetailsFragment linha 131")
+                }
+            }
+        }
+    }
+
+    private fun deleteInLibrary() {
+        val idUser = getDataInCache("id")!!.toInt()
+        libraryViewModel.deleteInLibrary(idUser, audioBook.idAudioBook)
+        verifyDeleteInLibrary()
+    }
+
+    private fun verifyDeleteInLibrary() {
+        libraryViewModel.deleteInLibrary.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is StateResource.Success -> {
+                    if (response.data == true) {
+                        ebookExistsInLibrary = false
+                        binding.saveAudiobook.setImageResource(R.drawable.ic_not_favorited)
+                        toast("AudioBook removido da biblioteca")
+                    }
+                }
+                is StateResource.Error -> {
+                }
+                else -> {
+                    println("AudioBookDetailsFragment linha 131")
+                }
+            }
+        }
+    }
+
+    private fun addInLibrary() {
+        val idUser = getDataInCache("id")!!.toInt()
+        libraryViewModel.addInLibrary(idUser, audioBook.idAudioBook)
+        verifyAddInLibrary()
+    }
+
+    private fun verifyAddInLibrary() {
+        libraryViewModel.addInLibrary.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is StateResource.Success -> {
+                    ebookExistsInLibrary = true
+                    binding.saveAudiobook.setImageResource(R.drawable.ic_favorited)
+                    toast("AudioBook adicionado da biblioteca")
+                }
+                is StateResource.Error -> {
+                }
+                else -> {
+                }
+            }
         }
     }
 

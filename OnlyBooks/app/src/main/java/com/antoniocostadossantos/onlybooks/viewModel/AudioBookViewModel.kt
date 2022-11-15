@@ -28,6 +28,13 @@ class AudioBookViewModel(
     private val _postAudioBook = MutableLiveData<StateResource<String>>()
     val postAudioBook: LiveData<StateResource<String>> = _postAudioBook
 
+    private val _myAudioBooks = MutableLiveData<StateResource<List<AudioBookModel>>>()
+    val myAudioBooks: LiveData<StateResource<List<AudioBookModel>>> = _myAudioBooks
+
+    private val _myAudioBooksInLibrary = MutableLiveData<StateResource<List<AudioBookModel>>>()
+    val myAudioBooksInLibrary: LiveData<StateResource<List<AudioBookModel>>> =
+        _myAudioBooksInLibrary
+
     fun getSuggestions() = viewModelScope.launch(Dispatchers.IO) {
         val response = audioBookRepository.getSuggestions()
         _suggestions.postValue(handleResponse(response))
@@ -44,6 +51,16 @@ class AudioBookViewModel(
             val response = audioBookRepository.postAudioBook(audioBook, idUser)
             _postAudioBook.postValue(handleResponse(response))
         }
+
+    fun getMyEbooks(idUsuario: Int) = viewModelScope.launch(Dispatchers.IO) {
+        val response = audioBookRepository.getMyEbooks(idUsuario)
+        _myAudioBooks.postValue(handleResponse(response))
+    }
+
+    fun getMyAudioBookssInLibrary(idUsuario: Int) = viewModelScope.launch(Dispatchers.IO) {
+        val response = audioBookRepository.getMyAudioBookssInLibrary(idUsuario)
+        _myAudioBooksInLibrary.postValue(handleResponse(response))
+    }
 
     private fun <T> handleResponse(response: Response<T>): StateResource<T> {
         if (response.isSuccessful) {

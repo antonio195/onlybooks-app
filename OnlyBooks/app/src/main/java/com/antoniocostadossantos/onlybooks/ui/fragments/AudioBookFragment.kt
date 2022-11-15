@@ -36,12 +36,6 @@ class AudioBookFragment : Fragment() {
 
         val recyclerView = binding.audiobookSugestoesRecyclerview
 
-//        recyclerView.layoutManager = LinearLayoutManager(
-//            activity?.applicationContext,
-//            LinearLayoutManager.HORIZONTAL,
-//            false
-//        )
-
         recyclerView.layoutManager = GridLayoutManager(activity?.applicationContext, 2)
 
         recyclerView.adapter = this.audioBookItemAdapter

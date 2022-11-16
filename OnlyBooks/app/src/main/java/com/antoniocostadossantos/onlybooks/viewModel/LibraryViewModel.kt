@@ -14,28 +14,55 @@ class LibraryViewModel(
     private val libraryRepository: LibraryRepository
 ) : ViewModel() {
 
-    private val _existsInLibrary = MutableLiveData<StateResource<Boolean>>()
-    val existsInLibrary: LiveData<StateResource<Boolean>> = _existsInLibrary
+    private val _existsAubioBookInLibrary = MutableLiveData<StateResource<Boolean>>()
+    val existsAubioBookInLibrary: LiveData<StateResource<Boolean>> = _existsAubioBookInLibrary
 
-    private val _deleteInLibrary = MutableLiveData<StateResource<Boolean>>()
-    val deleteInLibrary: LiveData<StateResource<Boolean>> = _deleteInLibrary
+    private val _deleteAubioBookInLibrary = MutableLiveData<StateResource<Boolean>>()
+    val deleteAubioBookInLibrary: LiveData<StateResource<Boolean>> = _deleteAubioBookInLibrary
 
-    private val _addInLibrary = MutableLiveData<StateResource<Any>>()
-    val addInLibrary: LiveData<StateResource<Any>> = _addInLibrary
+    private val _addAudioBookInLibrary = MutableLiveData<StateResource<Any>>()
+    val addAudioBookInLibrary: LiveData<StateResource<Any>> = _addAudioBookInLibrary
 
-    fun existsInLibrary(idUser: Int, idAudioBook: Int) = viewModelScope.launch(Dispatchers.IO) {
-        val response = libraryRepository.existsInLibrary(idUser, idAudioBook)
-        _existsInLibrary.postValue(handleResponse(response))
+    private val _existsEbookInLibrary = MutableLiveData<StateResource<Boolean>>()
+    val existsEbookInLibrary: LiveData<StateResource<Boolean>> = _existsEbookInLibrary
+
+    private val _deleteEbookInLibrary = MutableLiveData<StateResource<Boolean>>()
+    val deleteEbookInLibrary: LiveData<StateResource<Boolean>> = _deleteEbookInLibrary
+
+    private val _addEbookInLibrary = MutableLiveData<StateResource<Any>>()
+    val addEbookInLibrary: LiveData<StateResource<Any>> = _addEbookInLibrary
+
+    fun existsAubioBookInLibrary(idUser: Int, idAudioBook: Int) =
+        viewModelScope.launch(Dispatchers.IO) {
+            val response = libraryRepository.existsAubioBookInLibrary(idUser, idAudioBook)
+            _existsAubioBookInLibrary.postValue(handleResponse(response))
+        }
+
+    fun deleteAubioBookInLibrary(idUser: Int, idAudioBook: Int) =
+        viewModelScope.launch(Dispatchers.IO) {
+            val response = libraryRepository.deleteAudioBookInLibrary(idUser, idAudioBook)
+            _deleteAubioBookInLibrary.postValue(handleResponse(response))
+        }
+
+    fun addAudioBookInLibrary(idUser: Int, idAudioBook: Int) =
+        viewModelScope.launch(Dispatchers.IO) {
+            val response = libraryRepository.addAudioBookInLibrary(idUser, idAudioBook)
+            _addAudioBookInLibrary.postValue(handleResponse(response))
+        }
+
+    fun existsEbookInLibrary(idUser: Int, idEbook: Int) = viewModelScope.launch(Dispatchers.IO) {
+        val response = libraryRepository.existsEbookInLibrary(idUser, idEbook)
+        _existsEbookInLibrary.postValue(handleResponse(response))
     }
 
-    fun deleteInLibrary(idUser: Int, idAudioBook: Int) = viewModelScope.launch(Dispatchers.IO) {
-        val response = libraryRepository.deleteInLibrary(idUser, idAudioBook)
-        _deleteInLibrary.postValue(handleResponse(response))
+    fun deleteEbookInLibrary(idUser: Int, idEbook: Int) = viewModelScope.launch(Dispatchers.IO) {
+        val response = libraryRepository.deleteEbookInLibrary(idUser, idEbook)
+        _deleteEbookInLibrary.postValue(handleResponse(response))
     }
 
-    fun addInLibrary(idUser: Int, idAudioBook: Int) = viewModelScope.launch(Dispatchers.IO) {
-        val response = libraryRepository.addInLibrary(idUser, idAudioBook)
-        _addInLibrary.postValue(handleResponse(response))
+    fun addEbookInLibrary(idUser: Int, idEbook: Int) = viewModelScope.launch(Dispatchers.IO) {
+        val response = libraryRepository.addEbookInLibrary(idUser, idEbook)
+        _addEbookInLibrary.postValue(handleResponse(response))
     }
 
     private fun <T> handleResponse(response: Response<T>): StateResource<T> {
@@ -46,5 +73,4 @@ class LibraryViewModel(
         }
         return StateResource.Error(response.message())
     }
-
 }

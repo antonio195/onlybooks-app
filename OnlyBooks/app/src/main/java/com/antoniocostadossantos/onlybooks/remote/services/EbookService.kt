@@ -35,4 +35,9 @@ interface EbookService {
         @Path("idUser") idUser: Int
     ): Response<List<EbookModel>>
 
+    @DELETE("/ebook/delete-ebook/{idEbook}")
+    suspend fun deleteEbook(
+        @Path("idEbook") idEbook: Int
+    ): Response<String>
+
 }

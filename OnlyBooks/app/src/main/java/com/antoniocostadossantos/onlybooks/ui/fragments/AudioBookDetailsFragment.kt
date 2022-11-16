@@ -12,6 +12,7 @@ import com.antoniocostadossantos.onlybooks.databinding.FragmentAudiobookDetailsB
 import com.antoniocostadossantos.onlybooks.model.AudioBookModel
 import com.antoniocostadossantos.onlybooks.util.StateResource
 import com.antoniocostadossantos.onlybooks.util.toast
+import com.antoniocostadossantos.onlybooks.viewModel.AudioBookViewModel
 import com.antoniocostadossantos.onlybooks.viewModel.ChapterViewModel
 import com.antoniocostadossantos.onlybooks.viewModel.LibraryViewModel
 import com.bumptech.glide.Glide
@@ -23,8 +24,9 @@ class AudioBookDetailsFragment(val audioBook: AudioBookModel) : Fragment() {
     private lateinit var binding: FragmentAudiobookDetailsBinding
     private val chapterViewModel: ChapterViewModel by viewModel()
     private val libraryViewModel: LibraryViewModel by viewModel()
+    private val audioBookViewModel: AudioBookViewModel by viewModel()
 
-    var ebookExistsInLibrary: Boolean = false
+    var audioBookExistsInLibrary: Boolean = false
 
     private var URLAudioBook: String = ""
 
@@ -40,7 +42,7 @@ class AudioBookDetailsFragment(val audioBook: AudioBookModel) : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         displayData()
-        existsInLibrary()
+        existsAudioBookInLibrary()
         checkUrlExists()
         checkProperty()
 
@@ -57,11 +59,15 @@ class AudioBookDetailsFragment(val audioBook: AudioBookModel) : Fragment() {
         }
 
         binding.saveAudiobook.setOnClickListener {
-            if (ebookExistsInLibrary) {
-                deleteInLibrary()
+            if (audioBookExistsInLibrary) {
+                deleteAudioBookInLibrary()
             } else {
-                addInLibrary()
+                addAudioBookInLibrary()
             }
+        }
+
+        binding.deleteAudiobook.setOnClickListener {
+            deleteAudioBook()
         }
     }
 
@@ -94,6 +100,7 @@ class AudioBookDetailsFragment(val audioBook: AudioBookModel) : Fragment() {
         if (audioBook.idUsuario.id == getDataInCache("id")?.toInt()) {
             binding.editEbook.show()
             binding.newChapter.show()
+            binding.deleteAudiobook.show()
         }
     }
 
@@ -148,18 +155,18 @@ class AudioBookDetailsFragment(val audioBook: AudioBookModel) : Fragment() {
         }
     }
 
-    private fun existsInLibrary() {
+    private fun existsAudioBookInLibrary() {
         val idUser = getDataInCache("id")!!.toInt()
-        libraryViewModel.existsInLibrary(idUser, audioBook.idAudioBook)
-        verifyExistsInLibrary()
+        libraryViewModel.existsAubioBookInLibrary(idUser, audioBook.idAudioBook)
+        verifyExistsAudioBookInLibrary()
     }
 
-    private fun verifyExistsInLibrary() {
-        libraryViewModel.existsInLibrary.observe(viewLifecycleOwner) { response ->
+    private fun verifyExistsAudioBookInLibrary() {
+        libraryViewModel.existsAubioBookInLibrary.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is StateResource.Success -> {
                     if (response.data == true) {
-                        ebookExistsInLibrary = true
+                        audioBookExistsInLibrary = true
                         binding.saveAudiobook.setImageResource(R.drawable.ic_favorited)
                     }
                 }
@@ -172,18 +179,18 @@ class AudioBookDetailsFragment(val audioBook: AudioBookModel) : Fragment() {
         }
     }
 
-    private fun deleteInLibrary() {
+    private fun deleteAudioBookInLibrary() {
         val idUser = getDataInCache("id")!!.toInt()
-        libraryViewModel.deleteInLibrary(idUser, audioBook.idAudioBook)
-        verifyDeleteInLibrary()
+        libraryViewModel.deleteAubioBookInLibrary(idUser, audioBook.idAudioBook)
+        verifyDeleteAudioBookInLibrary()
     }
 
-    private fun verifyDeleteInLibrary() {
-        libraryViewModel.deleteInLibrary.observe(viewLifecycleOwner) { response ->
+    private fun verifyDeleteAudioBookInLibrary() {
+        libraryViewModel.deleteAubioBookInLibrary.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is StateResource.Success -> {
                     if (response.data == true) {
-                        ebookExistsInLibrary = false
+                        audioBookExistsInLibrary = false
                         binding.saveAudiobook.setImageResource(R.drawable.ic_not_favorited)
                         toast("AudioBook removido da biblioteca")
                     }
@@ -197,17 +204,17 @@ class AudioBookDetailsFragment(val audioBook: AudioBookModel) : Fragment() {
         }
     }
 
-    private fun addInLibrary() {
+    private fun addAudioBookInLibrary() {
         val idUser = getDataInCache("id")!!.toInt()
-        libraryViewModel.addInLibrary(idUser, audioBook.idAudioBook)
-        verifyAddInLibrary()
+        libraryViewModel.addAudioBookInLibrary(idUser, audioBook.idAudioBook)
+        verifyAddAudioBookInLibrary()
     }
 
-    private fun verifyAddInLibrary() {
-        libraryViewModel.addInLibrary.observe(viewLifecycleOwner) { response ->
+    private fun verifyAddAudioBookInLibrary() {
+        libraryViewModel.addAudioBookInLibrary.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is StateResource.Success -> {
-                    ebookExistsInLibrary = true
+                    audioBookExistsInLibrary = true
                     binding.saveAudiobook.setImageResource(R.drawable.ic_favorited)
                     toast("AudioBook adicionado da biblioteca")
                 }
@@ -217,6 +224,37 @@ class AudioBookDetailsFragment(val audioBook: AudioBookModel) : Fragment() {
                 }
             }
         }
+    }
+
+    private fun deleteAudioBook() {
+        val idAudioBook = audioBook.idAudioBook
+        audioBookViewModel.deleteAudioBook(idAudioBook)
+        verifyDeleteAudioBook()
+    }
+
+    private fun verifyDeleteAudioBook() {
+        audioBookViewModel.deleteAudioBook.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is StateResource.Success -> {
+                    toast("AudioBook deletado")
+                    goToAudioBookFragment()
+                }
+                is StateResource.Error -> {
+                    toast("Erro ao deletar")
+                }
+                else -> {
+                }
+            }
+        }
+    }
+
+    private fun goToAudioBookFragment() {
+        val transaction =
+            (context as FragmentActivity).supportFragmentManager.beginTransaction()
+
+        transaction.replace(R.id.nav_host_fragment, AudioBookFragment())
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 
     private fun getDataInCache(key: String): String? {

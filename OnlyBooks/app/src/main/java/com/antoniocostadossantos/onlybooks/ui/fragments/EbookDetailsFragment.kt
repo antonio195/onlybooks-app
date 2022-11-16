@@ -15,6 +15,8 @@ import com.antoniocostadossantos.onlybooks.ui.ReadPDFURLActivity
 import com.antoniocostadossantos.onlybooks.util.StateResource
 import com.antoniocostadossantos.onlybooks.util.toast
 import com.antoniocostadossantos.onlybooks.viewModel.ChapterViewModel
+import com.antoniocostadossantos.onlybooks.viewModel.EbookViewModel
+import com.antoniocostadossantos.onlybooks.viewModel.LibraryViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -23,6 +25,10 @@ class EbookDetailsFragment(val ebook: EbookModel) : Fragment() {
 
     private lateinit var binding: FragmentEbookDetailsBinding
     private val chapterViewModel: ChapterViewModel by viewModel()
+    private val libraryViewModel: LibraryViewModel by viewModel()
+    private val ebookViewModel: EbookViewModel by viewModel()
+    var ebookExistsInLibrary: Boolean = false
+
 
     private var URLEbook: String = ""
 
@@ -38,6 +44,7 @@ class EbookDetailsFragment(val ebook: EbookModel) : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         displayData()
+        existsEbookInLibrary()
         checkUrlExists()
         checkProperty()
 
@@ -51,6 +58,18 @@ class EbookDetailsFragment(val ebook: EbookModel) : Fragment() {
 
         binding.lerEbook.setOnClickListener {
             readEbook()
+        }
+
+        binding.saveEbook.setOnClickListener {
+            if (ebookExistsInLibrary) {
+                deleteEbookInLibrary()
+            } else {
+                addEbookInLibrary()
+            }
+        }
+
+        binding.deleteEbook.setOnClickListener {
+            deleteEbook()
         }
     }
 
@@ -80,6 +99,7 @@ class EbookDetailsFragment(val ebook: EbookModel) : Fragment() {
         if (ebook.idUsuario.id == getDataInCache("id")?.toInt()) {
             binding.editEbook.show()
             binding.newChapter.show()
+            binding.deleteEbook.show()
         }
     }
 
@@ -132,6 +152,107 @@ class EbookDetailsFragment(val ebook: EbookModel) : Fragment() {
             }
 
         }
+    }
+
+
+    private fun existsEbookInLibrary() {
+        val idUser = getDataInCache("id")!!.toInt()
+        libraryViewModel.existsEbookInLibrary(idUser, ebook.idEbook)
+        verifyExistsEbookInLibrary()
+    }
+
+    private fun verifyExistsEbookInLibrary() {
+        libraryViewModel.existsEbookInLibrary.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is StateResource.Success -> {
+                    if (response.data == true) {
+                        ebookExistsInLibrary = true
+                        binding.saveEbook.setImageResource(R.drawable.ic_favorited)
+                    }
+                }
+                is StateResource.Error -> {
+                }
+                else -> {
+                }
+            }
+        }
+    }
+
+    private fun deleteEbookInLibrary() {
+        val idUser = getDataInCache("id")!!.toInt()
+        libraryViewModel.deleteEbookInLibrary(idUser, ebook.idEbook)
+        verifyDeleteEbookInLibrary()
+    }
+
+    private fun verifyDeleteEbookInLibrary() {
+        libraryViewModel.deleteEbookInLibrary.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is StateResource.Success -> {
+                    if (response.data == true) {
+                        ebookExistsInLibrary = false
+                        binding.saveEbook.setImageResource(R.drawable.ic_not_favorited)
+                        toast("Ebook removido da biblioteca")
+                    }
+                }
+                is StateResource.Error -> {
+                }
+                else -> {
+                }
+            }
+        }
+    }
+
+    private fun addEbookInLibrary() {
+        val idUser = getDataInCache("id")!!.toInt()
+        libraryViewModel.addEbookInLibrary(idUser, ebook.idEbook)
+        verifyAddEbookInLibrary()
+    }
+
+    private fun verifyAddEbookInLibrary() {
+        libraryViewModel.addEbookInLibrary.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is StateResource.Success -> {
+                    ebookExistsInLibrary = true
+                    binding.saveEbook.setImageResource(R.drawable.ic_favorited)
+                    toast("Ebook adicionado da biblioteca")
+                }
+                is StateResource.Error -> {
+                }
+                else -> {
+                }
+            }
+        }
+    }
+
+    private fun deleteEbook() {
+        val idEbook = ebook.idEbook
+        ebookViewModel.deleteEbook(idEbook)
+        verifyDeleteEbook()
+    }
+
+    private fun verifyDeleteEbook() {
+        ebookViewModel.deleteEbook.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is StateResource.Success -> {
+                    toast("Ebook deletado")
+                    goToEbookFragment()
+                }
+                is StateResource.Error -> {
+                    toast("Erro ao deletar")
+                }
+                else -> {
+                }
+            }
+        }
+    }
+
+    private fun goToEbookFragment() {
+        val transaction =
+            (context as FragmentActivity).supportFragmentManager.beginTransaction()
+
+        transaction.replace(R.id.nav_host_fragment, EbookFragment())
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 
     private fun getDataInCache(key: String): String? {

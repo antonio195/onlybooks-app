@@ -10,7 +10,7 @@ import retrofit2.http.Path
 interface LibraryService {
 
     @GET("/library/exists-audiobook-in-library/{idAudioBook}/{idUser}")
-    suspend fun existsInLibrary(
+    suspend fun audioBookExistsInLibrary(
         @Path("idAudioBook") idAudioBook: Int,
         @Path("idUser") idUser: Int
     ): Response<Boolean>
@@ -22,8 +22,26 @@ interface LibraryService {
     ): Response<Boolean>
 
     @POST("/library/add-audibook-library/{idAudioBook}/{idUser}")
-    suspend fun addInLibrary(
+    suspend fun addAudioBookInLibrary(
         @Path("idAudioBook") idAudioBook: Int,
+        @Path("idUser") idUser: Int
+    ): Response<String>
+
+    @GET("/library/exists-ebook-in-library/{idEbook}/{idUser}")
+    suspend fun ebookExistsInLibrary(
+        @Path("idEbook") idEbook: Int,
+        @Path("idUser") idUser: Int
+    ): Response<Boolean>
+
+    @DELETE("/library/delete-ebook-library-mobile/{idEbook}/{idUser}")
+    suspend fun deleteEbookInLibrary(
+        @Path("idEbook") idEbook: Int,
+        @Path("idUser") idUser: Int
+    ): Response<Boolean>
+
+    @POST("/library/add-ebook-library/{idEbook}/{idUser}")
+    suspend fun addEbookInLibrary(
+        @Path("idEbook") idEbook: Int,
         @Path("idUser") idUser: Int
     ): Response<String>
 

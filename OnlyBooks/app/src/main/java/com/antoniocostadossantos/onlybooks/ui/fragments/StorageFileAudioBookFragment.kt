@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.antoniocostadossantos.onlybooks.R
-import com.antoniocostadossantos.onlybooks.databinding.ActivityStorageFileBinding
+import com.antoniocostadossantos.onlybooks.databinding.ActivityStorageAudio2Binding
 import com.antoniocostadossantos.onlybooks.model.AudioBookModel
 import com.antoniocostadossantos.onlybooks.model.ChapterEbookMobile
 import com.antoniocostadossantos.onlybooks.util.StateResource
@@ -24,7 +24,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class StorageFileAudioBookFragment(val audioBookBase: AudioBookModel) : Fragment() {
-    lateinit var binding: ActivityStorageFileBinding
+    lateinit var binding: ActivityStorageAudio2Binding
     lateinit var fileUri: Uri
     private val chapterViewModel: ChapterViewModel by viewModel()
 
@@ -33,7 +33,7 @@ class StorageFileAudioBookFragment(val audioBookBase: AudioBookModel) : Fragment
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = ActivityStorageFileBinding.inflate(inflater, container, false)
+        binding = ActivityStorageAudio2Binding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -100,7 +100,7 @@ class StorageFileAudioBookFragment(val audioBookBase: AudioBookModel) : Fragment
 
     fun selectFile() {
         val intent = Intent()
-        intent.type = "application/pdf"
+        intent.type = "audio/mp3"
         intent.action = Intent.ACTION_GET_CONTENT
         resultLauncher.launch(intent)
     }
@@ -110,7 +110,7 @@ class StorageFileAudioBookFragment(val audioBookBase: AudioBookModel) : Fragment
         val now = Date()
         val fileName = formatter.format(now)
 
-        val storageReference = FirebaseStorage.getInstance().getReference("documents/$fileName")
+        val storageReference = FirebaseStorage.getInstance().getReference("audios/$fileName")
 
         storageReference.putFile(fileUri).addOnSuccessListener {
             toast("Sucesso ao subir")

@@ -44,16 +44,19 @@
             android:exported="false" />
         <activity
             android:name=".ui.fragments.StorageFileEbookFragment"
-            android:exported="false" />
+            android:exported="false"
+            tools:ignore="Instantiatable" />
         <activity
             android:name=".ui.fragments.StorageImageEbookFragment"
-            android:exported="false" />
+            android:exported="false"
+            tools:ignore="Instantiatable" />
         <activity
             android:name=".ui.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".ui.fragments.CreateEbookFragment"
-            android:exported="false" />
+            android:exported="false"
+            tools:ignore="Instantiatable" />
         <activity
             android:name=".ui.ForgotPasswordActivity"
             android:exported="false" />

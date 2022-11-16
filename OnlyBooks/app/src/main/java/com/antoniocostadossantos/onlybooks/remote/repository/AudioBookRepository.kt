@@ -20,4 +20,6 @@ class AudioBookRepository : BaseRepository() {
 
     suspend fun getMyAudioBookssInLibrary(idUser: Int) = api.getMyAudioBookssInLibrary(idUser)
 
+    suspend fun deleteAudioBook(idAudioBook: Int) = api.deleteAudioBook(idAudioBook)
+
 }

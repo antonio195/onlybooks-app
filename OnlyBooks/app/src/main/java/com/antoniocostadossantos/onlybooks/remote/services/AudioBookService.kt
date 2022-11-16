@@ -32,4 +32,9 @@ interface AudioBookService {
         @Path("idUser") idUser: Int
     ): Response<List<AudioBookModel>>
 
+    @DELETE("/audiobook/delete-audiobook/{idAudioBook}")
+    suspend fun deleteAudioBook(
+        @Path("idAudioBook") idAudioBook: Int
+    ): Response<String>
+
 }

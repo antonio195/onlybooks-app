@@ -55,9 +55,32 @@ class EbookItemHorizontalAdapter(val context: Context) :
         RecyclerView.ViewHolder(binding.root) {
         private val image = binding.imageEbook
         private val genre = binding.genreEbook
+        private val title = binding.titleEbook
 
         fun bind(ebook: EbookModel) {
             genre.text = ebook.genreEbook
+            title.text = ebook.nameEbook
+
+            when (ebook.classificacao) {
+                "Livre" -> {
+                    binding.parentalRating.setImageResource(R.drawable.class_indicativa_livre)
+                }
+                "10" -> {
+                    binding.parentalRating.setImageResource(R.drawable.class_indicativa_10)
+                }
+                "12" -> {
+                    binding.parentalRating.setImageResource(R.drawable.class_indicativa_12)
+                }
+                "14" -> {
+                    binding.parentalRating.setImageResource(R.drawable.class_indicativa_14)
+                }
+                "16" -> {
+                    binding.parentalRating.setImageResource(R.drawable.class_indicativa_16)
+                }
+                "18" -> {
+                    binding.parentalRating.setImageResource(R.drawable.class_indicativa_18)
+                }
+            }
 
             val requestOptions = RequestOptions()
                 .placeholder(R.drawable.baixando_capa)

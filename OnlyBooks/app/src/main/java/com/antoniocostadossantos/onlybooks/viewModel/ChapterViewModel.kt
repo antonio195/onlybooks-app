@@ -16,26 +16,35 @@ class ChapterViewModel(
     private val chapterRepository: ChapterRepository
 ) : ViewModel() {
 
-    private val _chapterResponse = MutableLiveData<StateResource<String>>()
-    val chapterResponse: LiveData<StateResource<String>> = _chapterResponse
+    private val _chapterEbookResponse = MutableLiveData<StateResource<String>>()
+    val chapterEbookResponse: LiveData<StateResource<String>> = _chapterEbookResponse
 
     private val _getChapterEbook = MutableLiveData<StateResource<List<ChapterEbookMobile>>>()
     val getChapterEbook: LiveData<StateResource<List<ChapterEbookMobile>>> = _getChapterEbook
+
+    private val _chapterAudioBookResponse = MutableLiveData<StateResource<String>>()
+    val chapterAudioBookResponse: LiveData<StateResource<String>> = _chapterAudioBookResponse
 
     private val _getChapterAudioBook =
         MutableLiveData<StateResource<List<ChapterAudioBookMobile>>>()
     val getChapterAudioBook: LiveData<StateResource<List<ChapterAudioBookMobile>>> =
         _getChapterAudioBook
 
-    fun postChapter(chapter: ChapterEbookMobile) = viewModelScope.launch(Dispatchers.IO) {
+    fun postChapterEbook(chapter: ChapterEbookMobile) = viewModelScope.launch(Dispatchers.IO) {
         val response = chapterRepository.postChapterEbook(chapter)
-        _chapterResponse.postValue(handleResponse(response))
+        _chapterEbookResponse.postValue(handleResponse(response))
     }
 
     fun getChapterEbook(idEbook: Int) = viewModelScope.launch(Dispatchers.IO) {
         val response = chapterRepository.getChapterEbook(idEbook)
         _getChapterEbook.postValue(handleResponse(response))
     }
+
+    fun postChapterAudioBook(chapter: ChapterAudioBookMobile) =
+        viewModelScope.launch(Dispatchers.IO) {
+            val response = chapterRepository.postChapterAudioBook(chapter)
+            _chapterAudioBookResponse.postValue(handleResponse(response))
+        }
 
     fun getChapterAudioBook(idAudioBook: Int) = viewModelScope.launch(Dispatchers.IO) {
         val response = chapterRepository.getChapterAudioBook(idAudioBook)

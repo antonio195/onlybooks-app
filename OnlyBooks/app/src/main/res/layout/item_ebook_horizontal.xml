@@ -17,18 +17,40 @@
         app:shapeAppearanceOverlay="@style/rounded_edges_imageView_10" />
 
     <TextView
+        android:id="@+id/title_ebook"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:fontFamily="@font/source_sans_pro"
+        android:text="O menino do dedo verde"
+        android:textAlignment="center"
+        android:textColor="@color/azulEscuro"
+        app:layout_constraintEnd_toEndOf="@id/image_ebook"
+        app:layout_constraintStart_toStartOf="@id/image_ebook"
+        app:layout_constraintTop_toBottomOf="@id/image_ebook" />
+
+    <TextView
         android:id="@+id/genre_ebook"
         android:layout_width="wrap_content"
         android:layout_height="25dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="2dp"
         android:background="@drawable/edi_text_rounded5_blue_dark_stroke"
         android:gravity="center_horizontal|center_vertical"
         android:paddingHorizontal="16dp"
         android:text="Drama"
         android:textColor="@color/azulEscuro"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@id/image_ebook"
+        android:textStyle="normal"
         app:layout_constraintStart_toStartOf="@id/image_ebook"
-        app:layout_constraintTop_toBottomOf="@id/image_ebook" />
+        app:layout_constraintEnd_toStartOf="@id/parental_rating"
+        app:layout_constraintTop_toBottomOf="@id/title_ebook" />
+
+    <ImageView
+        android:id="@+id/parental_rating"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/class_indicativa_livre"
+        app:layout_constraintEnd_toEndOf="@id/image_ebook"
+        app:layout_constraintStart_toEndOf="@id/genre_ebook"
+        app:layout_constraintTop_toTopOf="@id/genre_ebook" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

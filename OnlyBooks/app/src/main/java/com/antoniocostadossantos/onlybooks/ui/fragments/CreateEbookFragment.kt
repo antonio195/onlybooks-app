@@ -163,9 +163,19 @@ class CreateEbookFragment(var ebookBase: EbookModel) : Fragment() {
             ebookBase.descricao = binding.inputSinopse.text.toString()
 
             postEbook(ebookBase)
+            goToNewBookFragment()
         } else {
             updateEbook()
         }
+    }
+
+    private fun goToNewBookFragment() {
+        val transaction =
+            (context as FragmentActivity).supportFragmentManager.beginTransaction()
+
+        transaction.replace(R.id.nav_host_fragment, NewBookFragment())
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 
     private fun postEbook(ebookBase: EbookModel) {

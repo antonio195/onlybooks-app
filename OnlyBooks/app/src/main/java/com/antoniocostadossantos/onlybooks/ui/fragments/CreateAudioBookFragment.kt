@@ -81,6 +81,15 @@ class CreateAudioBookFragment(var audioBookBase: AudioBookModel) : Fragment() {
         transaction.commit()
     }
 
+    private fun goToNewBookFragment() {
+        val transaction =
+            (context as FragmentActivity).supportFragmentManager.beginTransaction()
+
+        transaction.replace(R.id.nav_host_fragment, NewBookFragment())
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
+
     private fun checkFields() {
         when {
             binding.inputTitle.text.toString().isEmpty() -> {
@@ -168,6 +177,8 @@ class CreateAudioBookFragment(var audioBookBase: AudioBookModel) : Fragment() {
             audioBookBase.statusAudioBook = true
 
             postAudioBook(audioBookBase)
+
+            goToNewBookFragment()
         } else {
             updateEbook()
         }

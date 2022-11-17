@@ -48,19 +48,12 @@ class ProfileFragment : Fragment() {
         getMyAudioBooks()
         getMyEbookInLibrary()
         getMyAudioBookssInLibrary()
-        showEbookLibrary()
+        binding.viewMyWorks.gone()
         binding.showMyAudiobooks.alpha = 0.5F
 
         binding.switchMyWorks.setOnClickListener {
-            if (!binding.switchMyWorks.isChecked) {
-                checked = false
-                checkSwitchMyWorks(checked)
-
-            } else {
-                checked = true
-                checkSwitchMyWorks(checked)
-            }
-
+            checkSwitchMyWorks(checked)
+            checked = checked != true
         }
 
         binding.showMyEbooks.setOnClickListener {
@@ -99,10 +92,14 @@ class ProfileFragment : Fragment() {
     }
 
     private fun checkSwitchMyWorks(checked: Boolean) {
-        if (checked) {
-            binding.viewMyWorks.show()
-        } else {
-            binding.viewMyWorks.gone()
+
+        when (checked) {
+            true -> {
+                binding.viewMyWorks.show()
+            }
+            false -> {
+                binding.viewMyWorks.gone()
+            }
         }
     }
 

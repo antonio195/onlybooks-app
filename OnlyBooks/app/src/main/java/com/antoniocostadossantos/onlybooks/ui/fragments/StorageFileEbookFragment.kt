@@ -1,5 +1,6 @@
 package com.antoniocostadossantos.onlybooks.ui.fragments
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
@@ -14,6 +15,8 @@ import com.antoniocostadossantos.onlybooks.databinding.ActivityStorageFileBindin
 import com.antoniocostadossantos.onlybooks.model.ChapterEbookMobile
 import com.antoniocostadossantos.onlybooks.model.EbookModel
 import com.antoniocostadossantos.onlybooks.util.StateResource
+import com.antoniocostadossantos.onlybooks.util.gone
+import com.antoniocostadossantos.onlybooks.util.show
 import com.antoniocostadossantos.onlybooks.util.toast
 import com.antoniocostadossantos.onlybooks.viewModel.ChapterViewModel
 import com.bumptech.glide.Glide
@@ -46,7 +49,13 @@ class StorageFileEbookFragment(val ebookBase: EbookModel) : Fragment() {
         }
 
         binding.uploadFile.setOnClickListener {
-            uploadImage()
+            if (::fileUri.isInitialized) {
+                uploadImage()
+                progressBar("bla")
+            } else {
+                toast("Selecione um arquivo primeiro")
+            }
+
         }
     }
 
@@ -62,18 +71,18 @@ class StorageFileEbookFragment(val ebookBase: EbookModel) : Fragment() {
 
     private fun postChapter(urlChapter: String) {
         val chapter = ChapterEbookMobile(ebookBase.idEbook, ebookBase.idUsuario.id, urlChapter)
-        chapterViewModel.postChapter(chapter)
+        chapterViewModel.postChapterEbook(chapter)
         verifyUpdate()
     }
 
     private fun verifyUpdate() {
-        chapterViewModel.chapterResponse.observe(viewLifecycleOwner) { response ->
+        chapterViewModel.chapterEbookResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is StateResource.Success -> {
-                    toast("Sucesso ao enviar capítulo")
+                    progressBar("sucess")
                 }
                 is StateResource.Error -> {
-                    toast("Erro ao enviar capítulo")
+                    progressBar("error")
                 }
                 else -> {
                     toast("Erro inesperado ao enviar capítulo.")
@@ -112,10 +121,10 @@ class StorageFileEbookFragment(val ebookBase: EbookModel) : Fragment() {
         val storageReference = FirebaseStorage.getInstance().getReference("documents/$fileName")
 
         storageReference.putFile(fileUri).addOnSuccessListener {
-            toast("Sucesso ao subir")
             getURL(fileName)
+            progressBar("sucess")
         }.addOnFailureListener {
-            toast("Falha ao subir")
+            progressBar("error")
         }
     }
 
@@ -127,4 +136,27 @@ class StorageFileEbookFragment(val ebookBase: EbookModel) : Fragment() {
                 fileUri = data?.data!!
             }
         }
+
+    @SuppressLint("ResourceAsColor")
+    private fun progressBar(status: String) {
+        when (status) {
+            "error" -> {
+                binding.textProguess.show()
+                binding.textProguess.setTextColor(R.color.red)
+                binding.textProguess.text = "Erro ao enviar PDF"
+                binding.progressBar.gone()
+            }
+
+            "sucess" -> {
+                binding.textProguess.show()
+                binding.textProguess.setTextColor(R.color.green)
+                binding.textProguess.text = "Sucesso ao enviar PDF"
+                binding.progressBar.gone()
+            }
+            else -> {
+                binding.textProguess.show()
+                binding.progressBar.show()
+            }
+        }
+    }
 }

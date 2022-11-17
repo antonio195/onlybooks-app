@@ -59,9 +59,33 @@ class AudiobookItemVerticalAdapter(val context: Context) :
         RecyclerView.ViewHolder(binding.root) {
         private val image = binding.imageEbook
         private val genre = binding.genreEbook
+        private val title = binding.titleAudiobook
 
         fun bind(audioBookModel: AudioBookModel) {
             genre.text = audioBookModel.genreAudioBook
+            title.text = audioBookModel.nameAudioBook
+
+            when (audioBookModel.classificacao) {
+                "Livre" -> {
+                    binding.parentalRating.setImageResource(R.drawable.class_indicativa_livre)
+                }
+                "10" -> {
+                    binding.parentalRating.setImageResource(R.drawable.class_indicativa_10)
+                }
+                "12" -> {
+                    binding.parentalRating.setImageResource(R.drawable.class_indicativa_12)
+                }
+                "14" -> {
+                    binding.parentalRating.setImageResource(R.drawable.class_indicativa_14)
+                }
+                "16" -> {
+                    binding.parentalRating.setImageResource(R.drawable.class_indicativa_16)
+                }
+                "18" -> {
+                    binding.parentalRating.setImageResource(R.drawable.class_indicativa_18)
+                }
+            }
+
 
             binding.audioCover.show()
             binding.imageEbook.alpha = 0.9F

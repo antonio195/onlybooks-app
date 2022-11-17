@@ -1,5 +1,6 @@
 package com.antoniocostadossantos.onlybooks.ui.fragments
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
@@ -12,8 +13,10 @@ import androidx.fragment.app.Fragment
 import com.antoniocostadossantos.onlybooks.R
 import com.antoniocostadossantos.onlybooks.databinding.ActivityStorageAudio2Binding
 import com.antoniocostadossantos.onlybooks.model.AudioBookModel
-import com.antoniocostadossantos.onlybooks.model.ChapterEbookMobile
+import com.antoniocostadossantos.onlybooks.model.ChapterAudioBookMobile
 import com.antoniocostadossantos.onlybooks.util.StateResource
+import com.antoniocostadossantos.onlybooks.util.gone
+import com.antoniocostadossantos.onlybooks.util.show
 import com.antoniocostadossantos.onlybooks.util.toast
 import com.antoniocostadossantos.onlybooks.viewModel.ChapterViewModel
 import com.bumptech.glide.Glide
@@ -46,14 +49,20 @@ class StorageFileAudioBookFragment(val audioBookBase: AudioBookModel) : Fragment
         }
 
         binding.uploadFile.setOnClickListener {
-            uploadImage()
+            if (::fileUri.isInitialized) {
+                uploadImage()
+                progressBar("bla")
+            } else {
+                toast("Selecione um arquivo primeiro")
+            }
+
         }
     }
 
 
     fun getURL(name: String) {
         FirebaseStorage.getInstance()
-            .getReference("documents/$name").downloadUrl.addOnSuccessListener {
+            .getReference("audios/$name").downloadUrl.addOnSuccessListener {
                 postChapter(it.toString())
             }.addOnFailureListener {
                 toast("Erro ao pegar URL")
@@ -62,19 +71,23 @@ class StorageFileAudioBookFragment(val audioBookBase: AudioBookModel) : Fragment
 
     private fun postChapter(urlChapter: String) {
         val chapter =
-            ChapterEbookMobile(audioBookBase.idAudioBook, audioBookBase.idUsuario.id, urlChapter)
-        chapterViewModel.postChapter(chapter)
+            ChapterAudioBookMobile(
+                audioBookBase.idAudioBook,
+                audioBookBase.idUsuario.id,
+                urlChapter
+            )
+        chapterViewModel.postChapterAudioBook(chapter)
         verifyUpdate()
     }
 
     private fun verifyUpdate() {
-        chapterViewModel.chapterResponse.observe(viewLifecycleOwner) { response ->
+        chapterViewModel.chapterAudioBookResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is StateResource.Success -> {
-                    toast("Sucesso ao enviar capítulo")
+                    progressBar("sucess")
                 }
                 is StateResource.Error -> {
-                    toast("Erro ao enviar capítulo")
+                    progressBar("error")
                 }
                 else -> {
                     toast("Erro inesperado ao enviar capítulo.")
@@ -83,7 +96,6 @@ class StorageFileAudioBookFragment(val audioBookBase: AudioBookModel) : Fragment
 
         }
     }
-
 
     private fun displayData() {
         binding.titleEbook.text = audioBookBase.nameAudioBook
@@ -100,7 +112,7 @@ class StorageFileAudioBookFragment(val audioBookBase: AudioBookModel) : Fragment
 
     fun selectFile() {
         val intent = Intent()
-        intent.type = "audio/mp3"
+        intent.type = "audio/*"
         intent.action = Intent.ACTION_GET_CONTENT
         resultLauncher.launch(intent)
     }
@@ -113,10 +125,10 @@ class StorageFileAudioBookFragment(val audioBookBase: AudioBookModel) : Fragment
         val storageReference = FirebaseStorage.getInstance().getReference("audios/$fileName")
 
         storageReference.putFile(fileUri).addOnSuccessListener {
-            toast("Sucesso ao subir")
             getURL(fileName)
+            progressBar("sucess")
         }.addOnFailureListener {
-            toast("Falha ao subir")
+            progressBar("error")
         }
     }
 
@@ -128,4 +140,26 @@ class StorageFileAudioBookFragment(val audioBookBase: AudioBookModel) : Fragment
                 fileUri = data?.data!!
             }
         }
+
+    @SuppressLint("ResourceAsColor")
+    private fun progressBar(status: String) {
+        when (status) {
+            "error" -> {
+                binding.textProguess.show()
+                binding.textProguess.setTextColor(R.color.red)
+                binding.textProguess.text = "Erro ao enviar o áudio"
+                binding.progressBar.gone()
+            }
+            "sucess" -> {
+                binding.textProguess.show()
+                binding.textProguess.setTextColor(R.color.green)
+                binding.textProguess.text = "Sucesso ao enviar o áudio"
+                binding.progressBar.gone()
+            }
+            else -> {
+                binding.textProguess.show()
+                binding.progressBar.show()
+            }
+        }
+    }
 }

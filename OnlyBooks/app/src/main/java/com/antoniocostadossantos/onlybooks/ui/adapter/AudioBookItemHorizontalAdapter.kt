@@ -19,7 +19,7 @@ class AudioBookItemHorizontalAdapter(val context: Context) :
     RecyclerView.Adapter<AudioBookItemHorizontalAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        var binding =
+        val binding =
             ItemAudiobookHorizontalBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
@@ -63,12 +63,35 @@ class AudioBookItemHorizontalAdapter(val context: Context) :
         RecyclerView.ViewHolder(binding.root) {
         private val image = binding.imageEbook
         private val genre = binding.genreEbook
+        private val title = binding.titleAudiobook
 
         fun bind(audioBook: AudioBookModel) {
             genre.text = audioBook.genreAudioBook
+            title.text = audioBook.nameAudioBook
 
             binding.audioCover.show()
             binding.imageEbook.alpha = 0.9F
+
+            when (audioBook.classificacao) {
+                "Livre" -> {
+                    binding.parentalRating.setImageResource(R.drawable.class_indicativa_livre)
+                }
+                "10" -> {
+                    binding.parentalRating.setImageResource(R.drawable.class_indicativa_10)
+                }
+                "12" -> {
+                    binding.parentalRating.setImageResource(R.drawable.class_indicativa_12)
+                }
+                "14" -> {
+                    binding.parentalRating.setImageResource(R.drawable.class_indicativa_14)
+                }
+                "16" -> {
+                    binding.parentalRating.setImageResource(R.drawable.class_indicativa_16)
+                }
+                "18" -> {
+                    binding.parentalRating.setImageResource(R.drawable.class_indicativa_18)
+                }
+            }
 
             val requestOptions = RequestOptions()
                 .placeholder(R.drawable.baixando_capa)

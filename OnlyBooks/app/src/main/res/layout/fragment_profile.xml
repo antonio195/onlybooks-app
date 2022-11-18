@@ -204,7 +204,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/my_work_recyclerview_ebook"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="8dp"
                     android:orientation="horizontal"
@@ -215,7 +215,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/my_work_recyclerview_audiobook"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="8dp"
                     android:orientation="horizontal"
@@ -289,7 +289,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/my_work_recyclerview_ebook_librabry"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="8dp"
                     android:orientation="horizontal"
@@ -301,7 +301,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/my_work_recyclerview_audiobook_librabry"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="8dp"
                     android:orientation="horizontal"

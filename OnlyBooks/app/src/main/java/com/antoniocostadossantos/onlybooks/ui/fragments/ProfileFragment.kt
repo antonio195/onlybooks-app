@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.antoniocostadossantos.onlybooks.R
 import com.antoniocostadossantos.onlybooks.databinding.FragmentProfileBinding
@@ -71,8 +72,11 @@ class ProfileFragment : Fragment() {
             showEbookLibrary()
         }
 
-    }
+        binding.settingsButton.setOnClickListener {
+            goToSettings()
+        }
 
+    }
 
     private fun displayData() {
         binding.textName.text = getDataInCache("name")
@@ -256,6 +260,14 @@ class ProfileFragment : Fragment() {
         }
     }
 
+    private fun goToSettings() {
+        val transaction =
+            (context as FragmentActivity).supportFragmentManager.beginTransaction()
+
+        transaction.replace(R.id.nav_host_fragment, SettingsFragment())
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
 
     private fun getDataInCache(key: String): String? {
         val preferences = activity?.getSharedPreferences(

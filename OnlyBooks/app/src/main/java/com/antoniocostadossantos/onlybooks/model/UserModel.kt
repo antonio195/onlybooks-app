@@ -4,26 +4,26 @@ import com.google.gson.annotations.SerializedName
 
 data class UserModel(
     @SerializedName("description")
-    val descricao: String,
+    var descricao: String,
 
     @SerializedName("email")
-    val email: String,
+    var email: String,
 
     @SerializedName("headerURL")
-    val header: String,
+    var header: String,
 
     @SerializedName("id")
-    val id: Int,
+    var id: Int,
 
     @SerializedName("isAdm")
-    val isAdm: Boolean,
+    var isAdm: Boolean,
 
     @SerializedName("nome")
-    val nome: String,
+    var nome: String,
 
     @SerializedName("photoURL")
-    val photo: String,
+    var photo: String,
 
     @SerializedName("senha")
-    val senha: String
+    var senha: String
 )

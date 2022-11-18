@@ -56,10 +56,19 @@ class CreateAudioBookFragment(var audioBookBase: AudioBookModel) : Fragment() {
         binding.inputGenre1.setText(audioBookBase.genreAudioBook)
         binding.inputGenre2.setText(audioBookBase.genre1AudioBook)
         binding.inputGenre3.setText(audioBookBase.genre2AudioBook)
-        binding.inputClass.setText(audioBookBase.classificacao)
         binding.inputSinopse.setText(audioBookBase.descricao)
         binding.inputStoryteller1.setText(audioBookBase.narradorAudioBook)
         binding.inputStoryteller2.setText(audioBookBase.narrador2AudioBook)
+
+        when (audioBookBase.classificacao) {
+            "Livre" -> binding.classLivre.isChecked = true
+            "10" -> binding.class10.isChecked = true
+            "12" -> binding.class12.isChecked = true
+            "14" -> binding.class14.isChecked = true
+            "16" -> binding.class16.isChecked = true
+            "18" -> binding.class18.isChecked = true
+        }
+
         val image = audioBookBase.urlAudioBook
 
         val requestOptions = RequestOptions()
@@ -98,11 +107,11 @@ class CreateAudioBookFragment(var audioBookBase: AudioBookModel) : Fragment() {
             binding.inputStoryteller1.text.toString().isEmpty() -> {
                 binding.inputStoryteller1.error = "Preencha esse campo"
             }
+            binding.classRadioGroup.checkedRadioButtonId == -1 -> {
+                toast("Selecione uma classificação indicativa")
+            }
             binding.inputGenre1.text.toString().isEmpty() -> {
                 binding.inputGenre1.error = "Preencha esse campo"
-            }
-            binding.inputClass.text.toString().isEmpty() -> {
-                binding.inputClass.error = "Preencha esse campo"
             }
             binding.inputSinopse.text.toString().isEmpty() -> {
                 binding.inputSinopse.error = "Preencha esse campo"
@@ -118,8 +127,17 @@ class CreateAudioBookFragment(var audioBookBase: AudioBookModel) : Fragment() {
         audioBookBase.genreAudioBook = binding.inputGenre1.text.toString()
         audioBookBase.genre1AudioBook = binding.inputGenre2.text.toString()
         audioBookBase.genre2AudioBook = binding.inputGenre3.text.toString()
-        audioBookBase.classificacao = binding.inputClass.text.toString()
         audioBookBase.descricao = binding.inputSinopse.text.toString()
+
+        when (audioBookBase.classificacao) {
+            "Livre" -> binding.classLivre.isChecked = true
+            "10" -> binding.class10.isChecked = true
+            "12" -> binding.class12.isChecked = true
+            "14" -> binding.class14.isChecked = true
+            "16" -> binding.class16.isChecked = true
+            "18" -> binding.class18.isChecked = true
+        }
+
 
         audioBookViewModel.updateAudioBook(audioBookBase, audioBookBase.idAudioBook)
         verifyUpdate()
@@ -163,7 +181,6 @@ class CreateAudioBookFragment(var audioBookBase: AudioBookModel) : Fragment() {
         if (!isNewEbook.isNullOrEmpty()) {
 
             audioBookBase.authorAudioBook = getDataInCache("name")!!
-            audioBookBase.classificacao = binding.inputClass.text.toString()
             audioBookBase.coAuthorAudioBook = binding.inputCoAuthor.text.toString()
             audioBookBase.descricao = binding.inputSinopse.text.toString()
             audioBookBase.isEbook = true
@@ -176,10 +193,32 @@ class CreateAudioBookFragment(var audioBookBase: AudioBookModel) : Fragment() {
             audioBookBase.narradorAudioBook = binding.inputStoryteller1.text.toString()
             audioBookBase.statusAudioBook = true
 
+            val radioButtonSelected = binding.classRadioGroup.checkedRadioButtonId
+
+            when (radioButtonSelected) {
+                binding.classLivre.id -> audioBookBase.classificacao = "Livre"
+                binding.class10.id -> audioBookBase.classificacao = "10"
+                binding.class12.id -> audioBookBase.classificacao = "12"
+                binding.class14.id -> audioBookBase.classificacao = "14"
+                binding.class16.id -> audioBookBase.classificacao = "16"
+                binding.class18.id -> audioBookBase.classificacao = "18"
+            }
+
             postAudioBook(audioBookBase)
 
             goToNewBookFragment()
         } else {
+            val radioButtonSelected = binding.classRadioGroup.checkedRadioButtonId
+
+            when (radioButtonSelected) {
+                binding.classLivre.id -> audioBookBase.classificacao = "Livre"
+                binding.class10.id -> audioBookBase.classificacao = "10"
+                binding.class12.id -> audioBookBase.classificacao = "12"
+                binding.class14.id -> audioBookBase.classificacao = "14"
+                binding.class16.id -> audioBookBase.classificacao = "16"
+                binding.class18.id -> audioBookBase.classificacao = "18"
+            }
+
             updateEbook()
         }
     }
@@ -213,6 +252,10 @@ class CreateAudioBookFragment(var audioBookBase: AudioBookModel) : Fragment() {
             binding.sendBookImage.gone()
             binding.infoBoxCover.show()
         }
+    }
+
+    private fun setClass() {
+
     }
 
     private fun getDataInCache(key: String): String? {

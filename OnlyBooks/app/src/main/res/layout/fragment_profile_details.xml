@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cinzaClaro"
+    android:fitsSystemWindows="true"
+    tools:context=".ui.fragments.ProfileDetailsFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:id="@+id/title_profile_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/source_sans_pro"
+            android:text="Detalhes do perfil"
+            android:textAlignment="center"
+            android:textColor="@color/azulEscuro"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/title_nickname"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/source_sans_pro"
+            android:hint="Apelido"
+            android:textColorHint="@color/azulEscuro"
+            app:boxStrokeColor="@color/azulEscuro"
+            app:counterEnabled="true"
+            app:counterMaxLength="20"
+            app:counterTextColor="@color/azulEscuro"
+            app:hintTextColor="@color/azulEscuro"
+            app:layout_constraintTop_toBottomOf="@id/title_profile_details">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/input_nickname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/source_sans_pro"
+                android:textColor="@color/azulEscuro"
+                android:textCursorDrawable="@null" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/title_description"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/source_sans_pro"
+            android:hint="Descrição"
+            android:textColorHint="@color/azulEscuro"
+            app:boxStrokeColor="@color/azulEscuro"
+            app:counterEnabled="true"
+            app:counterMaxLength="500"
+            app:counterTextColor="@color/azulEscuro"
+            app:hintTextColor="@color/azulEscuro"
+            app:layout_constraintTop_toBottomOf="@id/title_nickname">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/input_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/source_sans_pro"
+                android:textColor="@color/azulEscuro"
+                android:textCursorDrawable="@null" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/title_email"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/source_sans_pro"
+            android:hint="Email"
+            android:textColorHint="@color/azulEscuro"
+            app:boxStrokeColor="@color/azulEscuro"
+            app:hintTextColor="@color/azulEscuro"
+            app:layout_constraintTop_toBottomOf="@id/title_description">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/input_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/source_sans_pro"
+                android:textColor="@color/azulEscuro"
+                android:textCursorDrawable="@null" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/title_password"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/source_sans_pro"
+            android:hint="Senha"
+            android:textColorHint="@color/azulEscuro"
+            app:boxStrokeColor="@color/azulEscuro"
+            app:counterEnabled="true"
+            app:counterMaxLength="30"
+            app:counterTextColor="@color/azulEscuro"
+            app:endIconMode="password_toggle"
+            app:endIconTint="@color/azulEscuro"
+            app:hintTextColor="@color/azulEscuro"
+            app:layout_constraintTop_toBottomOf="@id/title_email">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/input_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/source_sans_pro"
+                android:inputType="textPassword"
+                android:textColor="@color/azulEscuro"
+                android:textCursorDrawable="@null" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/edit_profile"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/azulEscuro"
+            android:fontFamily="@font/source_sans_pro"
+            android:hint="Atualizar perfil"
+            android:paddingVertical="10dp"
+            android:textColorHint="@color/azulClaro"
+            android:textSize="20sp"
+            app:iconPadding="10dp"
+            app:iconTint="@color/azulEscuro"
+            app:layout_constraintTop_toBottomOf="@+id/title_password"
+            app:rippleColor="@color/azulClaro" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

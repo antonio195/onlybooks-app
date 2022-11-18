@@ -219,24 +219,78 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/source_sans_pro"
-                android:text="Classificação *"
+                android:text="Classificação indicativa *"
                 android:textColor="@color/azulEscuro"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/input_genre3" />
 
-            <EditText
-                android:id="@+id/input_class"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/edi_text_rounded5_blue_light"
-                android:fontFamily="@font/source_sans_pro"
-                android:paddingStart="10dp"
-                android:textColor="@color/azulEscuro"
+            <RadioGroup
+                android:id="@+id/class_radio_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_class" />
+                app:layout_constraintTop_toBottomOf="@id/text_class">
+
+                <RadioButton
+                    android:id="@+id/class_livre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/class_indicativa_livre"
+                    android:drawablePadding="2dp"
+                    android:fontFamily="@font/source_sans_pro"
+
+                    android:textColor="@color/azulEscuro"
+                    app:buttonTint="@color/azulEscuro" />
+
+                <RadioButton
+                    android:id="@+id/class_10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/class_indicativa_10"
+                    android:fontFamily="@font/source_sans_pro"
+                    android:textColor="@color/azulEscuro"
+                    app:buttonTint="@color/azulEscuro" />
+
+                <RadioButton
+                    android:id="@+id/class_12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/class_indicativa_12"
+                    android:fontFamily="@font/source_sans_pro"
+                    android:textColor="@color/azulEscuro"
+                    app:buttonTint="@color/azulEscuro" />
+
+                <RadioButton
+                    android:id="@+id/class_14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/class_indicativa_14"
+                    android:fontFamily="@font/source_sans_pro"
+                    android:textColor="@color/azulEscuro"
+                    app:buttonTint="@color/azulEscuro" />
+
+                <RadioButton
+                    android:id="@+id/class_16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/class_indicativa_16"
+                    android:fontFamily="@font/source_sans_pro"
+                    android:textColor="@color/azulEscuro"
+                    app:buttonTint="@color/azulEscuro" />
+
+                <RadioButton
+                    android:id="@+id/class_18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/class_indicativa_18"
+                    android:fontFamily="@font/source_sans_pro"
+                    android:textColor="@color/azulEscuro"
+                    app:buttonTint="@color/azulEscuro" />
+
+            </RadioGroup>
 
             <TextView
                 android:id="@+id/text_sinopse"
@@ -249,7 +303,7 @@
                 android:textColor="@color/azulEscuro"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/input_class" />
+                app:layout_constraintTop_toBottomOf="@id/class_radio_group" />
 
             <EditText
                 android:id="@+id/input_sinopse"

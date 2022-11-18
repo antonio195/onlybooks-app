@@ -6,7 +6,6 @@ import com.antoniocostadossantos.onlybooks.model.UserModelDTO
 import retrofit2.Response
 import retrofit2.http.*
 
-
 interface UserService {
 
     @GET("/users/user-login-mobile/{email}/{senha}")
@@ -40,6 +39,14 @@ interface UserService {
     suspend fun recoveryPassword(
         @Path("email")
         email: String
+    ): Response<String>
+
+    @Headers("Content-Type: application/json")
+    @PATCH("/users/update-user/{idUser}")
+    suspend fun updateUser(
+        @Path("idUser")
+        idUser: Int,
+        @Body userModel: UserModel?
     ): Response<String>
 
 }

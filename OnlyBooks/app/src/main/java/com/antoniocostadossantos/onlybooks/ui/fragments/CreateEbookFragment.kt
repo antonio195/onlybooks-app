@@ -56,8 +56,17 @@ class CreateEbookFragment(var ebookBase: EbookModel) : Fragment() {
         binding.inputGenre1.setText(this.ebookBase.genreEbook)
         binding.inputGenre2.setText(this.ebookBase.genre1Ebook)
         binding.inputGenre3.setText(this.ebookBase.genre2Ebook)
-        binding.inputClass.setText(this.ebookBase.classificacao)
         binding.inputSinopse.setText(this.ebookBase.descricao)
+
+        when (ebookBase.classificacao) {
+            "Livre" -> binding.classLivre.isChecked = true
+            "10" -> binding.class10.isChecked = true
+            "12" -> binding.class12.isChecked = true
+            "14" -> binding.class14.isChecked = true
+            "16" -> binding.class16.isChecked = true
+            "18" -> binding.class18.isChecked = true
+        }
+
         val image = ebook.url
 
         val requestOptions = RequestOptions()
@@ -84,19 +93,15 @@ class CreateEbookFragment(var ebookBase: EbookModel) : Fragment() {
             binding.inputTitle.text.toString().isEmpty() -> {
                 binding.inputTitle.error = "Preencha esse campo"
             }
-
             binding.inputGenre1.text.toString().isEmpty() -> {
                 binding.inputGenre1.error = "Preencha esse campo"
             }
-
-            binding.inputClass.text.toString().isEmpty() -> {
-                binding.inputClass.error = "Preencha esse campo"
+            binding.classRadioGroup.checkedRadioButtonId == -1 -> {
+                toast("Selecione uma classificação indicativa")
             }
-
             binding.inputSinopse.text.toString().isEmpty() -> {
                 binding.inputSinopse.error = "Preencha esse campo"
             }
-
             else -> {
                 postOrUpdate()
             }
@@ -108,10 +113,16 @@ class CreateEbookFragment(var ebookBase: EbookModel) : Fragment() {
         ebookBase.genreEbook = binding.inputGenre1.text.toString()
         ebookBase.genre1Ebook = binding.inputGenre2.text.toString()
         ebookBase.genre2Ebook = binding.inputGenre3.text.toString()
-        ebookBase.classificacao = binding.inputClass.text.toString()
         ebookBase.descricao = binding.inputSinopse.text.toString()
 
-        println(ebookBase)
+        when (ebookBase.classificacao) {
+            "Livre" -> binding.classLivre.isChecked = true
+            "10" -> binding.class10.isChecked = true
+            "12" -> binding.class12.isChecked = true
+            "14" -> binding.class14.isChecked = true
+            "16" -> binding.class16.isChecked = true
+            "18" -> binding.class18.isChecked = true
+        }
         ebookViewModel.updateEbook(ebookBase, ebookBase.idEbook)
         verifyUpdate()
     }
@@ -159,12 +170,34 @@ class CreateEbookFragment(var ebookBase: EbookModel) : Fragment() {
             ebookBase.genreEbook = binding.inputGenre1.text.toString()
             ebookBase.genre1Ebook = binding.inputGenre2.text.toString()
             ebookBase.genre2Ebook = binding.inputGenre3.text.toString()
-            ebookBase.classificacao = binding.inputClass.text.toString()
             ebookBase.descricao = binding.inputSinopse.text.toString()
+
+            val radioButtonSelected = binding.classRadioGroup.checkedRadioButtonId
+
+            when (radioButtonSelected) {
+                binding.classLivre.id -> ebookBase.classificacao = "Livre"
+                binding.class10.id -> ebookBase.classificacao = "10"
+                binding.class12.id -> ebookBase.classificacao = "12"
+                binding.class14.id -> ebookBase.classificacao = "14"
+                binding.class16.id -> ebookBase.classificacao = "16"
+                binding.class18.id -> ebookBase.classificacao = "18"
+            }
 
             postEbook(ebookBase)
             goToNewBookFragment()
         } else {
+
+            val radioButtonSelected = binding.classRadioGroup.checkedRadioButtonId
+
+            when (radioButtonSelected) {
+                binding.classLivre.id -> ebookBase.classificacao = "Livre"
+                binding.class10.id -> ebookBase.classificacao = "10"
+                binding.class12.id -> ebookBase.classificacao = "12"
+                binding.class14.id -> ebookBase.classificacao = "14"
+                binding.class16.id -> ebookBase.classificacao = "16"
+                binding.class18.id -> ebookBase.classificacao = "18"
+            }
+
             updateEbook()
         }
     }

@@ -86,7 +86,6 @@ class AudiobookItemVerticalAdapter(val context: Context) :
                 }
             }
 
-
             binding.audioCover.show()
             binding.imageEbook.alpha = 0.9F
 

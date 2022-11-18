@@ -28,6 +28,9 @@ class UserViewModel(
     private val _userIdResponse = MutableLiveData<StateResource<UserModel>>()
     val userIdResponse: LiveData<StateResource<UserModel>> = _userIdResponse
 
+    private val _updateUser = MutableLiveData<StateResource<String>>()
+    val updateUser: LiveData<StateResource<String>> = _updateUser
+
     fun login(email: String, password: String) = viewModelScope.launch(Dispatchers.IO) {
         val response = userRepository.login(email, password)
         _login.postValue(handleResponse(response))
@@ -46,6 +49,11 @@ class UserViewModel(
     fun getUserById(idUser: Int) = viewModelScope.launch(Dispatchers.IO) {
         val response = userRepository.getUserById(idUser)
         _userIdResponse.postValue(handleResponse(response))
+    }
+
+    fun updateUser(idUser: Int, userModel: UserModel) = viewModelScope.launch(Dispatchers.IO) {
+        val response = userRepository.updateUser(idUser, userModel)
+        _updateUser.postValue(handleResponse(response))
     }
 
 

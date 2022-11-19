@@ -1,9 +1,12 @@
 package com.antoniocostadossantos.onlybooks.ui.fragments
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -14,12 +17,10 @@ import com.antoniocostadossantos.onlybooks.model.AudioBookModel
 import com.antoniocostadossantos.onlybooks.model.EbookModel
 import com.antoniocostadossantos.onlybooks.ui.adapter.AudiobookItemVerticalAdapter
 import com.antoniocostadossantos.onlybooks.ui.adapter.EbookItemVerticalAdapter
-import com.antoniocostadossantos.onlybooks.util.StateResource
-import com.antoniocostadossantos.onlybooks.util.gone
-import com.antoniocostadossantos.onlybooks.util.hide
-import com.antoniocostadossantos.onlybooks.util.show
+import com.antoniocostadossantos.onlybooks.util.*
 import com.antoniocostadossantos.onlybooks.viewModel.AudioBookViewModel
 import com.antoniocostadossantos.onlybooks.viewModel.EbookViewModel
+import com.antoniocostadossantos.onlybooks.viewModel.LibraryViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -28,11 +29,14 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class ProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentProfileBinding
-    private var checked = true
     private lateinit var ebookAdapter: EbookItemVerticalAdapter
-    private val ebookViewModel: EbookViewModel by viewModel()
     private lateinit var audioBookItemAdapter: AudiobookItemVerticalAdapter
     private val audioBookViewModel: AudioBookViewModel by viewModel()
+    private val libraryViewModel: LibraryViewModel by viewModel()
+    private val ebookViewModel: EbookViewModel by viewModel()
+    private var checked = true
+    private lateinit var dialogOptions: AlertDialog
+    private lateinit var dialogPhoto: AlertDialog
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,11 +48,7 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        displayData()
-        getMyEbooks()
-        getMyAudioBooks()
-        getMyEbookInLibrary()
-        getMyAudioBookssInLibrary()
+        startDataOnScreen()
         binding.viewMyWorks.gone()
         binding.showMyAudiobooks.alpha = 0.5F
 
@@ -76,6 +76,54 @@ class ProfileFragment : Fragment() {
             goToSettings()
         }
 
+        binding.profileImage.setOnClickListener {
+            showDialogOptions()
+        }
+    }
+
+    private fun startDataOnScreen() {
+        displayData()
+        getMyEbooks()
+        getMyAudioBooks()
+        getMyEbookInLibrary()
+        getMyAudioBookssInLibrary()
+        countEbookForId()
+        countAudioBookForId()
+    }
+
+    private fun showDialogOptions() {
+        val build = AlertDialog.Builder(context as FragmentActivity)
+        val view = layoutInflater.inflate(R.layout.custom_dialog_options, null)
+        build.setView(view)
+        val seePhoto = view.findViewById<Button>(R.id.btn_see_photo)
+        val chancePhoto = view.findViewById<Button>(R.id.btn_change_photo)
+        seePhoto.setOnClickListener {
+            showDialogPhoto(getDataInCache("photo")!!)
+        }
+        chancePhoto.setOnClickListener {
+            toast("Saindo...")
+        }
+        dialogOptions = build.create()
+        dialogOptions.show()
+    }
+
+    private fun showDialogPhoto(photoURL: String) {
+        val build = AlertDialog.Builder(context as FragmentActivity)
+        val view = layoutInflater.inflate(R.layout.custom_dialog_photo_view, null)
+        build.setView(view)
+        val seePhoto = view.findViewById<ImageView>(R.id.photo_image)
+        val closePhoto = view.findViewById<ImageView>(R.id.close_photo)
+
+        closePhoto.setOnClickListener {
+            dialogPhoto.dismiss()
+        }
+
+        dialogPhoto = build.create()
+        dialogPhoto.show()
+
+        Glide.with(seePhoto)
+            .load(photoURL)
+            .into(seePhoto)
     }
 
     private fun displayData() {
@@ -250,6 +298,48 @@ class ProfileFragment : Fragment() {
             when (response) {
                 is StateResource.Success -> {
                     setupEbookLibrary(response.data!!)
+                }
+                is StateResource.Error -> {
+                }
+                else -> {
+                    println(response)
+                }
+            }
+        }
+    }
+
+    private fun countEbookForId() {
+        val idUser = getDataInCache("id")!!.toInt()
+        libraryViewModel.countEbookForId(idUser)
+        verifyCountEbookForId()
+    }
+
+    private fun verifyCountEbookForId() {
+        libraryViewModel.countEbookForId.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is StateResource.Success -> {
+                    binding.qntsEbooks.text = response.data!!.toString()
+                }
+                is StateResource.Error -> {
+                }
+                else -> {
+                    println(response)
+                }
+            }
+        }
+    }
+
+    private fun countAudioBookForId() {
+        val idUser = getDataInCache("id")!!.toInt()
+        libraryViewModel.countAudioBookForId(idUser)
+        verifyCountAudioBookForId()
+    }
+
+    private fun verifyCountAudioBookForId() {
+        libraryViewModel.countAudioBookForId.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is StateResource.Success -> {
+                    binding.qntsAudiobooks.text = response.data!!.toString()
                 }
                 is StateResource.Error -> {
                 }

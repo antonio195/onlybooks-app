@@ -48,22 +48,24 @@ class LoginActivity : AppCompatActivity() {
     private fun checkFields() {
         when {
             binding.emailInput.text.toString().isEmpty() -> {
-                binding.emailInput.error = "Digite o email"
+                binding.titleEmail.error = "Digite o email"
             }
 
             !emailValidation(binding.emailInput.text.toString()) -> {
-                binding.emailInput.error = "Digite um email válido"
+                binding.titleEmail.error = "Digite um email válido"
             }
 
             binding.passwordInput.text.toString().isEmpty() -> {
-                binding.passwordInput.error = "Digite a senha"
+                binding.titlePassword.error = "Digite a senha"
             }
 
             binding.passwordInput.text.toString().length < 5 -> {
-                binding.passwordInput.error = "Senha muito pequena"
+                binding.titlePassword.error = "Senha muito pequena"
             }
 
             else -> {
+                binding.titleEmail.error = null
+                binding.titlePassword.error = null
                 login()
             }
         }

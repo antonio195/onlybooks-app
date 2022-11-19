@@ -39,33 +39,36 @@ class RegisterActivity : AppCompatActivity() {
     private fun checkFields() {
         when {
             binding.userInput.text.toString().isEmpty() -> {
-                binding.userInput.error = "Digite o usuário"
+                binding.titleNickname.error = "Digite o usuário"
             }
             binding.userInput.text.toString().length < 3 -> {
-                binding.userInput.error = "Nome de usuário muito pequeno"
+                binding.titleNickname.error = "Nome de usuário muito pequeno"
             }
 
             binding.userInput.text.toString().length > 20 -> {
-                binding.userInput.error = "Nome de usuário muito grande"
+                binding.titleNickname.error = "Nome de usuário muito grande"
             }
 
             binding.emailInput.text.toString().isEmpty() -> {
-                binding.emailInput.error = "Digite o email"
+                binding.titleEmail.error = "Digite o email"
             }
 
             !emailValidation(binding.emailInput.text.toString()) -> {
-                binding.emailInput.error = "Digite um email válido"
+                binding.titleEmail.error = "Digite um email válido"
             }
 
             binding.passwordInput.text.toString().isEmpty() -> {
-                binding.passwordInput.error = "Digite a senha"
+                binding.titlePassword.error = "Digite a senha"
             }
 
             binding.passwordInput.text.toString().length < 5 -> {
-                binding.passwordInput.error = "Senha muito pequena"
+                binding.titlePassword.error = "Senha muito pequena"
             }
 
             else -> {
+                binding.titleNickname.error = null
+                binding.titleEmail.error = null
+                binding.titlePassword.error = null
                 register()
             }
         }

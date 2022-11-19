@@ -16,6 +16,8 @@ class LibraryRepository : BaseRepository() {
     suspend fun addAudioBookInLibrary(idUser: Int, idAudioBook: Int) =
         api.addAudioBookInLibrary(idAudioBook, idUser)
 
+    suspend fun countAudioBookForId(idUser: Int) = api.countAudioBookForId(idUser)
+
     suspend fun existsEbookInLibrary(idUser: Int, idEbook: Int) =
         api.ebookExistsInLibrary(idEbook, idUser)
 
@@ -24,4 +26,6 @@ class LibraryRepository : BaseRepository() {
 
     suspend fun addEbookInLibrary(idUser: Int, idEbook: Int) =
         api.addEbookInLibrary(idEbook, idUser)
+
+    suspend fun countEbookForId(idUser: Int) = api.countEbookForId(idUser)
 }

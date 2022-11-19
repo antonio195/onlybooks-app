@@ -4,7 +4,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 
 fun AppCompatActivity.toast(message: String, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(
@@ -28,7 +27,7 @@ fun View.gone() {
 
 fun Fragment.toast(message: String, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(
-        (context as FragmentActivity),
+        requireContext(),
         message,
         duration
     ).show()

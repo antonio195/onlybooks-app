@@ -27,6 +27,11 @@ interface LibraryService {
         @Path("idUser") idUser: Int
     ): Response<String>
 
+    @GET("/library/count-audiobook-for-id/{idUser}")
+    suspend fun countAudioBookForId(
+        @Path("idUser") idUser: Int
+    ): Response<String>
+
     @GET("/library/exists-ebook-in-library/{idEbook}/{idUser}")
     suspend fun ebookExistsInLibrary(
         @Path("idEbook") idEbook: Int,
@@ -42,6 +47,11 @@ interface LibraryService {
     @POST("/library/add-ebook-library/{idEbook}/{idUser}")
     suspend fun addEbookInLibrary(
         @Path("idEbook") idEbook: Int,
+        @Path("idUser") idUser: Int
+    ): Response<String>
+
+    @GET("/library/count-ebook-for-id/{idUser}")
+    suspend fun countEbookForId(
         @Path("idUser") idUser: Int
     ): Response<String>
 

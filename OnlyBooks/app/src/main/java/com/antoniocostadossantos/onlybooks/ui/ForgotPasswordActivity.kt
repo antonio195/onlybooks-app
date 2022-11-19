@@ -40,13 +40,14 @@ class ForgotPasswordActivity : AppCompatActivity() {
     private fun checkFields() {
         when {
             binding.emailInput.text.toString().isEmpty() -> {
-                binding.emailInput.error = "Digite o email"
+                binding.titleEmail.error = "Digite o email"
             }
-
             !emailValidation(binding.emailInput.text.toString()) -> {
-                binding.emailInput.error = "Digite um email válido"
+                binding.titleEmail.error = "Digite um email válido"
             }
             else -> {
+                binding.titleEmail.error = null
+                binding.titleEmail.error = null
                 getNewPassword()
             }
         }

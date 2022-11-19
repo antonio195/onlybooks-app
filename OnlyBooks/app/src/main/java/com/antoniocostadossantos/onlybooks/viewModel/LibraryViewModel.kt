@@ -23,6 +23,9 @@ class LibraryViewModel(
     private val _addAudioBookInLibrary = MutableLiveData<StateResource<Any>>()
     val addAudioBookInLibrary: LiveData<StateResource<Any>> = _addAudioBookInLibrary
 
+    private val _countAudioBookForId = MutableLiveData<StateResource<Any>>()
+    val countAudioBookForId: LiveData<StateResource<Any>> = _countAudioBookForId
+
     private val _existsEbookInLibrary = MutableLiveData<StateResource<Boolean>>()
     val existsEbookInLibrary: LiveData<StateResource<Boolean>> = _existsEbookInLibrary
 
@@ -31,6 +34,9 @@ class LibraryViewModel(
 
     private val _addEbookInLibrary = MutableLiveData<StateResource<Any>>()
     val addEbookInLibrary: LiveData<StateResource<Any>> = _addEbookInLibrary
+
+    private val _countEbookForId = MutableLiveData<StateResource<Any>>()
+    val countEbookForId: LiveData<StateResource<Any>> = _countEbookForId
 
     fun existsAubioBookInLibrary(idUser: Int, idAudioBook: Int) =
         viewModelScope.launch(Dispatchers.IO) {
@@ -50,6 +56,11 @@ class LibraryViewModel(
             _addAudioBookInLibrary.postValue(handleResponse(response))
         }
 
+    fun countAudioBookForId(idUser: Int) = viewModelScope.launch(Dispatchers.IO) {
+        val response = libraryRepository.countAudioBookForId(idUser)
+        _countAudioBookForId.postValue(handleResponse(response))
+    }
+
     fun existsEbookInLibrary(idUser: Int, idEbook: Int) = viewModelScope.launch(Dispatchers.IO) {
         val response = libraryRepository.existsEbookInLibrary(idUser, idEbook)
         _existsEbookInLibrary.postValue(handleResponse(response))
@@ -63,6 +74,11 @@ class LibraryViewModel(
     fun addEbookInLibrary(idUser: Int, idEbook: Int) = viewModelScope.launch(Dispatchers.IO) {
         val response = libraryRepository.addEbookInLibrary(idUser, idEbook)
         _addEbookInLibrary.postValue(handleResponse(response))
+    }
+
+    fun countEbookForId(idUser: Int) = viewModelScope.launch(Dispatchers.IO) {
+        val response = libraryRepository.countEbookForId(idUser)
+        _countEbookForId.postValue(handleResponse(response))
     }
 
     private fun <T> handleResponse(response: Response<T>): StateResource<T> {

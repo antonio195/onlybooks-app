@@ -102,21 +102,25 @@ class CreateAudioBookFragment(var audioBookBase: AudioBookModel) : Fragment() {
     private fun checkFields() {
         when {
             binding.inputTitle.text.toString().isEmpty() -> {
-                binding.inputTitle.error = "Preencha esse campo"
+                binding.textTitle.error = "Preencha esse campo"
             }
             binding.inputStoryteller1.text.toString().isEmpty() -> {
-                binding.inputStoryteller1.error = "Preencha esse campo"
+                binding.textStoryteller1.error = "Preencha esse campo"
+            }
+            binding.inputGenre1.text.toString().isEmpty() -> {
+                binding.textGenre1.error = "Preencha esse campo"
             }
             binding.classRadioGroup.checkedRadioButtonId == -1 -> {
                 toast("Selecione uma classificação indicativa")
             }
-            binding.inputGenre1.text.toString().isEmpty() -> {
-                binding.inputGenre1.error = "Preencha esse campo"
-            }
             binding.inputSinopse.text.toString().isEmpty() -> {
-                binding.inputSinopse.error = "Preencha esse campo"
+                binding.textSinopse.error = "Preencha esse campo"
             }
             else -> {
+                binding.textTitle.error = null
+                binding.textStoryteller1.error = null
+                binding.textGenre1.error = null
+                binding.textSinopse.error = null
                 postOrUpdate()
             }
         }

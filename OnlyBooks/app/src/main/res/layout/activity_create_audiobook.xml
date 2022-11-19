@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,367 +8,362 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     android:scrollbars="none"
-    tools:context=".ui.fragments.CreateEbookFragment">
+    tools:context=".ui.fragments.CreateAudioBookFragment">
 
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/image_ebook"
+            android:layout_width="180dp"
+            android:layout_height="250dp"
+            android:layout_marginTop="16dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_launcher_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/rounded_edges_imageView_5" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_title"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/source_sans_pro"
+            android:hint="Título *"
+            android:textColorHint="@color/azulEscuro"
+            app:boxStrokeColor="@color/azulEscuro"
+            app:counterTextColor="@color/azulEscuro"
+            app:hintTextColor="@color/azulEscuro"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image_ebook">
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/image_ebook"
-                android:layout_width="180dp"
-                android:layout_height="250dp"
-                android:layout_marginTop="16dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/ic_launcher_background"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:shapeAppearanceOverlay="@style/rounded_edges_imageView_5" />
-
-            <TextView
-                android:id="@+id/text_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="30dp"
-                android:fontFamily="@font/source_sans_pro"
-                android:text="Título *"
-                android:textColor="@color/azulEscuro"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/image_ebook" />
-
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/input_title"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/edi_text_rounded5_blue_light"
-                android:fontFamily="@font/source_sans_pro"
-                android:paddingStart="10dp"
-                android:textColor="@color/azulEscuro"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_title" />
-
-            <TextView
-                android:id="@+id/text_co_author"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="5dp"
                 android:fontFamily="@font/source_sans_pro"
-                android:text="Co autor"
                 android:textColor="@color/azulEscuro"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/input_title" />
+                android:textCursorDrawable="@null" />
 
-            <EditText
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_co_author"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/source_sans_pro"
+            android:hint="Co Autor"
+            android:textColorHint="@color/azulEscuro"
+            app:boxStrokeColor="@color/azulEscuro"
+            app:counterTextColor="@color/azulEscuro"
+            app:hintTextColor="@color/azulEscuro"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_title">
+
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/input_co_author"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/edi_text_rounded5_blue_light"
-                android:fontFamily="@font/source_sans_pro"
-                android:paddingStart="10dp"
-                android:textColor="@color/azulEscuro"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_co_author" />
-
-            <TextView
-                android:id="@+id/text_storyteller1"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="5dp"
                 android:fontFamily="@font/source_sans_pro"
-                android:text="Narrador primário *"
                 android:textColor="@color/azulEscuro"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/input_co_author" />
+                android:textCursorDrawable="@null" />
 
-            <EditText
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_storyteller1"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/source_sans_pro"
+            android:hint="Narrador primário *"
+            android:textColorHint="@color/azulEscuro"
+            app:boxStrokeColor="@color/azulEscuro"
+            app:counterTextColor="@color/azulEscuro"
+            app:hintTextColor="@color/azulEscuro"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_co_author">
+
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/input_storyteller1"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/edi_text_rounded5_blue_light"
-                android:fontFamily="@font/source_sans_pro"
-                android:paddingStart="10dp"
-                android:textColor="@color/azulEscuro"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_storyteller1" />
-
-            <TextView
-                android:id="@+id/text_storyteller2"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="5dp"
                 android:fontFamily="@font/source_sans_pro"
-                android:text="Narrador secundário"
                 android:textColor="@color/azulEscuro"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/input_storyteller1" />
+                android:textCursorDrawable="@null" />
 
-            <EditText
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_storyteller2"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/source_sans_pro"
+            android:hint="Narrador secundário"
+            android:textColorHint="@color/azulEscuro"
+            app:boxStrokeColor="@color/azulEscuro"
+            app:counterTextColor="@color/azulEscuro"
+            app:hintTextColor="@color/azulEscuro"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_storyteller1">
+
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/input_storyteller2"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/edi_text_rounded5_blue_light"
-                android:fontFamily="@font/source_sans_pro"
-                android:paddingStart="10dp"
-                android:textColor="@color/azulEscuro"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_storyteller2" />
-
-            <TextView
-                android:id="@+id/text_genre1"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="10dp"
                 android:fontFamily="@font/source_sans_pro"
-                android:text="Gênero 1 *"
                 android:textColor="@color/azulEscuro"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/input_storyteller2" />
+                android:textCursorDrawable="@null" />
 
-            <EditText
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_genre1"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/source_sans_pro"
+            android:hint="Gênero 1 *"
+            android:textColorHint="@color/azulEscuro"
+            app:boxStrokeColor="@color/azulEscuro"
+            app:counterTextColor="@color/azulEscuro"
+            app:hintTextColor="@color/azulEscuro"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_storyteller2">
+
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/input_genre1"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/edi_text_rounded5_blue_light"
-                android:fontFamily="@font/source_sans_pro"
-                android:paddingStart="10dp"
-                android:textColor="@color/azulEscuro"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_genre1" />
-
-            <TextView
-                android:id="@+id/text_genre2"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="10dp"
                 android:fontFamily="@font/source_sans_pro"
-                android:text="Gênero 2"
                 android:textColor="@color/azulEscuro"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/input_genre1" />
+                android:textCursorDrawable="@null" />
 
-            <EditText
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_genre2"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/source_sans_pro"
+            android:hint="Gênero 2"
+            android:textColorHint="@color/azulEscuro"
+            app:boxStrokeColor="@color/azulEscuro"
+            app:counterTextColor="@color/azulEscuro"
+            app:hintTextColor="@color/azulEscuro"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_genre1">
+
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/input_genre2"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/edi_text_rounded5_blue_light"
-                android:fontFamily="@font/source_sans_pro"
-                android:paddingStart="10dp"
-                android:textColor="@color/azulEscuro"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_genre2" />
-
-            <TextView
-                android:id="@+id/text_genre3"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="10dp"
                 android:fontFamily="@font/source_sans_pro"
-                android:text="Gênero 3"
                 android:textColor="@color/azulEscuro"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/input_genre2" />
+                android:textCursorDrawable="@null" />
 
-            <EditText
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_genre3"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/source_sans_pro"
+            android:hint="Gênero 3"
+            android:textColorHint="@color/azulEscuro"
+            app:boxStrokeColor="@color/azulEscuro"
+            app:counterTextColor="@color/azulEscuro"
+            app:hintTextColor="@color/azulEscuro"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_genre2">
+
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/input_genre3"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/edi_text_rounded5_blue_light"
+                android:layout_height="wrap_content"
                 android:fontFamily="@font/source_sans_pro"
-                android:paddingStart="10dp"
                 android:textColor="@color/azulEscuro"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_genre3" />
+                android:textCursorDrawable="@null" />
 
-            <TextView
-                android:id="@+id/text_class"
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/text_class"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/source_sans_pro"
+            android:text="Classificação indicativa *"
+            android:textColor="@color/azulEscuro"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_genre3" />
+
+        <RadioGroup
+            android:id="@+id/class_radio_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_class">
+
+            <RadioButton
+                android:id="@+id/class_livre"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="10dp"
+                android:drawableStart="@drawable/class_indicativa_livre"
+                android:drawablePadding="2dp"
                 android:fontFamily="@font/source_sans_pro"
-                android:text="Classificação indicativa *"
-                android:textColor="@color/azulEscuro"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/input_genre3" />
 
-            <RadioGroup
-                android:id="@+id/class_radio_group"
+                android:textColor="@color/azulEscuro"
+                app:buttonTint="@color/azulEscuro" />
+
+            <RadioButton
+                android:id="@+id/class_10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_class">
+                android:drawableStart="@drawable/class_indicativa_10"
+                android:fontFamily="@font/source_sans_pro"
+                android:textColor="@color/azulEscuro"
+                app:buttonTint="@color/azulEscuro" />
 
-                <RadioButton
-                    android:id="@+id/class_livre"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/class_indicativa_livre"
-                    android:drawablePadding="2dp"
-                    android:fontFamily="@font/source_sans_pro"
-
-                    android:textColor="@color/azulEscuro"
-                    app:buttonTint="@color/azulEscuro" />
-
-                <RadioButton
-                    android:id="@+id/class_10"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/class_indicativa_10"
-                    android:fontFamily="@font/source_sans_pro"
-                    android:textColor="@color/azulEscuro"
-                    app:buttonTint="@color/azulEscuro" />
-
-                <RadioButton
-                    android:id="@+id/class_12"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/class_indicativa_12"
-                    android:fontFamily="@font/source_sans_pro"
-                    android:textColor="@color/azulEscuro"
-                    app:buttonTint="@color/azulEscuro" />
-
-                <RadioButton
-                    android:id="@+id/class_14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/class_indicativa_14"
-                    android:fontFamily="@font/source_sans_pro"
-                    android:textColor="@color/azulEscuro"
-                    app:buttonTint="@color/azulEscuro" />
-
-                <RadioButton
-                    android:id="@+id/class_16"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/class_indicativa_16"
-                    android:fontFamily="@font/source_sans_pro"
-                    android:textColor="@color/azulEscuro"
-                    app:buttonTint="@color/azulEscuro" />
-
-                <RadioButton
-                    android:id="@+id/class_18"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/class_indicativa_18"
-                    android:fontFamily="@font/source_sans_pro"
-                    android:textColor="@color/azulEscuro"
-                    app:buttonTint="@color/azulEscuro" />
-
-            </RadioGroup>
-
-            <TextView
-                android:id="@+id/text_sinopse"
+            <RadioButton
+                android:id="@+id/class_12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="10dp"
+                android:drawableStart="@drawable/class_indicativa_12"
                 android:fontFamily="@font/source_sans_pro"
-                android:text="Sinopse *"
                 android:textColor="@color/azulEscuro"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/class_radio_group" />
+                app:buttonTint="@color/azulEscuro" />
 
-            <EditText
+            <RadioButton
+                android:id="@+id/class_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/class_indicativa_14"
+                android:fontFamily="@font/source_sans_pro"
+                android:textColor="@color/azulEscuro"
+                app:buttonTint="@color/azulEscuro" />
+
+            <RadioButton
+                android:id="@+id/class_16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/class_indicativa_16"
+                android:fontFamily="@font/source_sans_pro"
+                android:textColor="@color/azulEscuro"
+                app:buttonTint="@color/azulEscuro" />
+
+            <RadioButton
+                android:id="@+id/class_18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/class_indicativa_18"
+                android:fontFamily="@font/source_sans_pro"
+                android:textColor="@color/azulEscuro"
+                app:buttonTint="@color/azulEscuro" />
+
+        </RadioGroup>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_sinopse"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/source_sans_pro"
+            android:hint="Sinopse *"
+            android:minHeight="100dp"
+            android:textColorHint="@color/azulEscuro"
+            app:boxStrokeColor="@color/azulEscuro"
+            app:counterTextColor="@color/azulEscuro"
+            app:hintTextColor="@color/azulEscuro"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/class_radio_group">
+
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/input_sinopse"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/edi_text_rounded5_blue_light"
                 android:fontFamily="@font/source_sans_pro"
                 android:minHeight="100dp"
-                android:paddingHorizontal="10dp"
-                android:textAlignment="inherit"
                 android:textColor="@color/azulEscuro"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_sinopse" />
+                android:textCursorDrawable="@null" />
 
-            <Button
-                android:id="@+id/send_book_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:backgroundTint="@color/azulEscuro"
-                android:fontFamily="@font/source_sans_pro"
-                android:hint="Selecionar capa do livro"
-                android:textColorHint="@color/azulClaro"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/input_sinopse" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-            <Button
-                android:id="@+id/publish_ebook"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:backgroundTint="@color/azulEscuro"
-                android:fontFamily="@font/source_sans_pro"
-                android:hint="Publicar"
-                android:paddingHorizontal="20dp"
-                android:paddingVertical="10dp"
-                android:textColorHint="@color/cinzaClaro"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/send_book_image" />
+        <Button
+            android:id="@+id/send_book_image"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/azulEscuro"
+            android:fontFamily="@font/source_sans_pro"
+            android:hint="Selecionar capa"
+            android:paddingVertical="10dp"
+            android:textColorHint="@color/cinzaClaro"
+            android:textSize="20sp"
+            app:iconPadding="10dp"
+            app:iconTint="@color/azulEscuro"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_sinopse"
+            app:rippleColor="@color/azulClaro" />
 
-            <TextView
-                android:id="@+id/info_box_cover"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginVertical="20dp"
-                android:fontFamily="@font/source_sans_pro"
-                android:text="Atenção! \n Você poderá inserir capa e capítulo depois de postar o Ebook"
-                android:textAlignment="center"
-                android:textColor="@color/azulEscuro"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@id/publish_ebook"
-                app:layout_constraintStart_toStartOf="@id/publish_ebook"
-                app:layout_constraintTop_toBottomOf="@id/publish_ebook" />
+        <Button
+            android:id="@+id/publish_ebook"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/azulEscuro"
+            android:fontFamily="@font/source_sans_pro"
+            android:hint="Publicar"
+            android:paddingVertical="10dp"
+            android:textColorHint="@color/cinzaClaro"
+            android:textSize="20sp"
+            app:iconPadding="10dp"
+            app:iconTint="@color/azulEscuro"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/send_book_image"
+            app:rippleColor="@color/azulClaro" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/info_box_cover"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="10dp"
+            android:fontFamily="@font/source_sans_pro"
+            android:text="Atenção! \n Você poderá inserir capa e capítulo depois de postar o Ebook"
+            android:textAlignment="center"
+            android:textColor="@color/azulEscuro"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/publish_ebook"
+            app:layout_constraintStart_toStartOf="@id/publish_ebook"
+            app:layout_constraintTop_toBottomOf="@id/publish_ebook" />
 
-    </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

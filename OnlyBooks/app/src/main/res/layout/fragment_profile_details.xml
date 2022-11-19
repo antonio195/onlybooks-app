@@ -140,7 +140,7 @@
             android:fontFamily="@font/source_sans_pro"
             android:hint="Atualizar perfil"
             android:paddingVertical="10dp"
-            android:textColorHint="@color/azulClaro"
+            android:textColorHint="@color/cinzaClaro"
             android:textSize="20sp"
             app:iconPadding="10dp"
             app:iconTint="@color/azulEscuro"

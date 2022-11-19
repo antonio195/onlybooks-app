@@ -91,18 +91,22 @@ class CreateEbookFragment(var ebookBase: EbookModel) : Fragment() {
     private fun checkFields() {
         when {
             binding.inputTitle.text.toString().isEmpty() -> {
-                binding.inputTitle.error = "Preencha esse campo"
+                binding.textTitle.error = "Preencha esse campo"
             }
             binding.inputGenre1.text.toString().isEmpty() -> {
-                binding.inputGenre1.error = "Preencha esse campo"
+                binding.textGenre1.error = "Preencha esse campo"
+            }
+
+            binding.inputSinopse.text.toString().isEmpty() -> {
+                binding.textSinopse.error = "Preencha esse campo"
             }
             binding.classRadioGroup.checkedRadioButtonId == -1 -> {
                 toast("Selecione uma classificação indicativa")
             }
-            binding.inputSinopse.text.toString().isEmpty() -> {
-                binding.inputSinopse.error = "Preencha esse campo"
-            }
             else -> {
+                binding.textTitle.error = null
+                binding.textGenre1.error = null
+                binding.textSinopse.error = null
                 postOrUpdate()
             }
         }

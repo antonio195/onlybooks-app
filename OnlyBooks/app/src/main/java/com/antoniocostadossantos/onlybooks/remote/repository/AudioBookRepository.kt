@@ -22,4 +22,7 @@ class AudioBookRepository : BaseRepository() {
 
     suspend fun deleteAudioBook(idAudioBook: Int) = api.deleteAudioBook(idAudioBook)
 
+    suspend fun getViews(idAudioBook: Int) = api.getViews(idAudioBook)
+
+    suspend fun getLikes(idAudioBook: Int) = api.getLikes(idAudioBook)
 }

@@ -40,6 +40,12 @@ class EbookViewModel(
     private val _deleteEbook = MutableLiveData<StateResource<String>>()
     val deleteEbook: LiveData<StateResource<String>> = _deleteEbook
 
+    private val _views = MutableLiveData<StateResource<Any>>()
+    val views: LiveData<StateResource<Any>> = _views
+
+    private val _likes = MutableLiveData<StateResource<Any>>()
+    val likes: LiveData<StateResource<Any>> = _likes
+
     fun getSuggestions() = viewModelScope.launch(Dispatchers.IO) {
         val response = ebookRepository.getSuggestions()
         _suggestions.postValue(handleResponse(response))
@@ -73,6 +79,16 @@ class EbookViewModel(
     fun deleteEbook(idEbook: Int) = viewModelScope.launch(Dispatchers.IO) {
         val response = ebookRepository.deleteEbook(idEbook)
         _deleteEbook.postValue(handleResponse(response))
+    }
+
+    fun getViews(idEbook: Int) = viewModelScope.launch(Dispatchers.IO) {
+        val response = ebookRepository.getViews(idEbook)
+        _views.postValue(handleResponse(response))
+    }
+
+    fun getLikes(idEbook: Int) = viewModelScope.launch(Dispatchers.IO) {
+        val response = ebookRepository.getLikes(idEbook)
+        _likes.postValue(handleResponse(response))
     }
 
     private fun <T> handleResponse(response: Response<T>): StateResource<T> {

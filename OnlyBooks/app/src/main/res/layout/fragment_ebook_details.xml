@@ -72,6 +72,35 @@
                 app:layout_constraintStart_toStartOf="@id/title_ebook"
                 app:layout_constraintTop_toBottomOf="@id/title_ebook" />
 
+            <TextView
+                android:id="@+id/total_view"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center_horizontal|center_vertical"
+                android:paddingHorizontal="16dp"
+                android:fontFamily="@font/source_sans_pro"
+                android:textColor="@color/azulEscuro"
+                android:textStyle="bold"
+                android:text="  0"
+                android:drawableLeft="@drawable/ic_outline_remove_red_eye"
+                app:layout_constraintRight_toLeftOf="@+id/genre_ebook"
+                app:layout_constraintTop_toBottomOf="@id/title_ebook" />
+            <TextView
+                android:id="@+id/total_liked"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center_horizontal|center_vertical"
+                android:paddingHorizontal="16dp"
+                android:fontFamily="@font/source_sans_pro"
+                android:textColor="@color/azulEscuro"
+                android:textStyle="bold"
+                android:text="  0"
+                android:drawableLeft="@drawable/ic_favorited"
+                app:layout_constraintLeft_toRightOf="@+id/genre_ebook"
+                app:layout_constraintTop_toBottomOf="@id/title_ebook" />
+
             <ScrollView
                 android:id="@+id/scrollview_synopsis"
                 android:layout_width="match_parent"

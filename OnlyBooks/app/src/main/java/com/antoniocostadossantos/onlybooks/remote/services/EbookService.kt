@@ -40,4 +40,14 @@ interface EbookService {
         @Path("idEbook") idEbook: Int
     ): Response<String>
 
+    @GET("/ebook/views/{idEbook}")
+    suspend fun getViews(
+        @Path("idEbook") idEbook: Int
+    ): Response<Long>
+
+    @GET("/ebook/likes/{idEbook}")
+    suspend fun getLikes(
+        @Path("idEbook") idEbook: Int
+    ): Response<Long>
+
 }

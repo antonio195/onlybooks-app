@@ -21,4 +21,8 @@ class EbookRepository : BaseRepository() {
     suspend fun getMyEbooksInLibrary(idUser: Int) = api.getMyEbooksInLibrary(idUser)
 
     suspend fun deleteEbook(idEbook: Int) = api.deleteEbook(idEbook)
+
+    suspend fun getViews(idEbook: Int) = api.getViews(idEbook)
+
+    suspend fun getLikes(idEbook: Int) = api.getLikes(idEbook)
 }

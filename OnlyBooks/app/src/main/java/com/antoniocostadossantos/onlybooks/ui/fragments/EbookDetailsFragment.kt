@@ -47,6 +47,8 @@ class EbookDetailsFragment(val ebook: EbookModel) : Fragment() {
         existsEbookInLibrary()
         checkUrlExists()
         checkProperty()
+        getViews()
+        getLikes()
 
         binding.editEbook.setOnClickListener {
             editEbook(ebook)
@@ -261,5 +263,47 @@ class EbookDetailsFragment(val ebook: EbookModel) : Fragment() {
             AppCompatActivity.MODE_PRIVATE
         )
         return preferences?.getString(key, "")
+    }
+
+    private fun getViews() {
+        val idEbook = ebook.idEbook
+        ebookViewModel.getViews(idEbook)
+        verifyViews()
+    }
+
+    private fun verifyViews() {
+        ebookViewModel.views.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is StateResource.Success -> {
+                    binding.totalView.text = "   ${response.data}"
+                }
+                is StateResource.Error -> {
+                    toast("Erro ao pegar as visualizações")
+                }
+                else -> {
+                }
+            }
+        }
+    }
+
+    private fun getLikes() {
+        val idEbook = ebook.idEbook
+        ebookViewModel.getLikes(idEbook)
+        verifyLikes()
+    }
+
+    private fun verifyLikes() {
+        ebookViewModel.likes.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is StateResource.Success -> {
+                    binding.totalLiked.text = "   ${response.data}"
+                }
+                is StateResource.Error -> {
+                    toast("Erro ao pegar as curtidas")
+                }
+                else -> {
+                }
+            }
+        }
     }
 }

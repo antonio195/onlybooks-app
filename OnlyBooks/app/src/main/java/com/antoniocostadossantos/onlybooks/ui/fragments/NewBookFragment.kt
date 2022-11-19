@@ -90,7 +90,6 @@ class NewBookFragment : Fragment() {
                 }
             }
         }
-
     }
 
     private fun goToCreateAudioBook(audioBook: AudioBookModel) {

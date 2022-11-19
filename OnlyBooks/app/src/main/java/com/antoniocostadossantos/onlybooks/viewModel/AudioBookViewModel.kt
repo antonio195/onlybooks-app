@@ -38,6 +38,12 @@ class AudioBookViewModel(
     private val _deleteAudioBook = MutableLiveData<StateResource<String>>()
     val deleteAudioBook: LiveData<StateResource<String>> = _deleteAudioBook
 
+    private val _views = MutableLiveData<StateResource<Any>>()
+    val views: LiveData<StateResource<Any>> = _views
+
+    private val _likes = MutableLiveData<StateResource<Any>>()
+    val likes: LiveData<StateResource<Any>> = _likes
+
     fun getSuggestions() = viewModelScope.launch(Dispatchers.IO) {
         val response = audioBookRepository.getSuggestions()
         _suggestions.postValue(handleResponse(response))
@@ -68,6 +74,16 @@ class AudioBookViewModel(
     fun deleteAudioBook(idAudioBook: Int) = viewModelScope.launch(Dispatchers.IO) {
         val response = audioBookRepository.deleteAudioBook(idAudioBook)
         _deleteAudioBook.postValue(handleResponse(response))
+    }
+
+    fun getViews(idAudioBook: Int) = viewModelScope.launch(Dispatchers.IO) {
+        val response = audioBookRepository.getViews(idAudioBook)
+        _views.postValue(handleResponse(response))
+    }
+
+    fun getLikes(idAudioBook: Int) = viewModelScope.launch(Dispatchers.IO) {
+        val response = audioBookRepository.getLikes(idAudioBook)
+        _likes.postValue(handleResponse(response))
     }
 
     private fun <T> handleResponse(response: Response<T>): StateResource<T> {

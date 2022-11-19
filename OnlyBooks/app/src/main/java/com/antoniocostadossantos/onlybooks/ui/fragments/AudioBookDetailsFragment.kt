@@ -45,6 +45,8 @@ class AudioBookDetailsFragment(val audioBook: AudioBookModel) : Fragment() {
         existsAudioBookInLibrary()
         checkUrlExists()
         checkProperty()
+        getViews()
+        getLikes()
 
         binding.editEbook.setOnClickListener {
             editAudioBook(audioBook)
@@ -263,5 +265,47 @@ class AudioBookDetailsFragment(val audioBook: AudioBookModel) : Fragment() {
             AppCompatActivity.MODE_PRIVATE
         )
         return preferences?.getString(key, "")
+    }
+
+    private fun getViews() {
+        val idEbook = audioBook.idAudioBook
+        audioBookViewModel.getViews(idEbook)
+        verifyViews()
+    }
+
+    private fun verifyViews() {
+        audioBookViewModel.views.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is StateResource.Success -> {
+                    binding.totalView.text = "   ${response.data}"
+                }
+                is StateResource.Error -> {
+                    toast("Erro ao pegar as visualizações")
+                }
+                else -> {
+                }
+            }
+        }
+    }
+
+    private fun getLikes() {
+        val idAudioBook = audioBook.idAudioBook
+        audioBookViewModel.getLikes(idAudioBook)
+        verifyLikes()
+    }
+
+    private fun verifyLikes() {
+        audioBookViewModel.likes.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is StateResource.Success -> {
+                    binding.totalLiked.text = "   ${response.data}"
+                }
+                is StateResource.Error -> {
+                    toast("Erro ao pegar as curtidas")
+                }
+                else -> {
+                }
+            }
+        }
     }
 }

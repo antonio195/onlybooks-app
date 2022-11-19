@@ -37,4 +37,14 @@ interface AudioBookService {
         @Path("idAudioBook") idAudioBook: Int
     ): Response<String>
 
+    @GET("/audiobook/views/{idAudioBook}")
+    suspend fun getViews(
+        @Path("idAudioBook") idAudioBook: Int
+    ): Response<Long>
+
+    @GET("/audiobook/likes/{idAudioBook}")
+    suspend fun getLikes(
+        @Path("idAudioBook") idAudioBook: Int
+    ): Response<Long>
+
 }

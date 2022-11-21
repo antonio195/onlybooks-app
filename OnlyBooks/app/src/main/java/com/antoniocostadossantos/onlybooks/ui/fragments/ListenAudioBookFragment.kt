@@ -3,79 +3,155 @@ package com.antoniocostadossantos.onlybooks.ui.fragments
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.antoniocostadossantos.onlybooks.R
 import com.antoniocostadossantos.onlybooks.databinding.FragmentListenAudioBookBinding
-import com.antoniocostadossantos.onlybooks.util.toast
+import com.antoniocostadossantos.onlybooks.model.AudioBookModel
+import com.antoniocostadossantos.onlybooks.util.StateResource
+import com.antoniocostadossantos.onlybooks.viewModel.ChapterViewModel
+import com.bumptech.glide.Glide
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.concurrent.TimeUnit
 
 
-class ListenAudioBookFragment(val URLAudioBook: String) : Fragment() {
+class ListenAudioBookFragment(val audiobook: AudioBookModel) : Fragment() {
 
     private lateinit var binding: FragmentListenAudioBookBinding
-
     private lateinit var mediaPlayer: MediaPlayer
+    private val chapterViewModel: ChapterViewModel by viewModel()
+    private var URLAudioBook: String = ""
+    private var playing: Boolean = false
+    private var paused: Boolean = false
+    private var currentPosition = 0F
+    private var duration = 0
+
+    var handler: Handler = Handler()
+    var runnable: Runnable? = null
+    var delay = 1000
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentListenAudioBookBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        displayData()
+        getUrl()
 
-        println(URLAudioBook)
-
-        binding.idBtnPlay.setOnClickListener {
-            playAudio()
+        binding.btnPlayPause.setOnClickListener {
+            if (playing) {
+                playing = false
+                paused = false
+                binding.btnPlayPause.setBackgroundResource(R.drawable.ic_baseline_play_circle_filled_24)
+                pauseAudio()
+            } else {
+                playing = true
+                paused = true
+                binding.btnPlayPause.setBackgroundResource(R.drawable.ic_baseline_pause_circle_filled_24)
+                playAudio()
+            }
         }
-        binding.idBtnPause.setOnClickListener {
-            pauseAudio()
+
+        binding.btnBack10.setOnClickListener {
+            mediaPlayer.pause()
+            var seconds = TimeUnit.MILLISECONDS.toSeconds(currentPosition.toLong())
+            seconds -= 10
+            var miliseconds = TimeUnit.SECONDS.toMillis(seconds)
+            mediaPlayer.seekTo(miliseconds.toInt())
+            currentPosition = miliseconds.toFloat()
+            mediaPlayer.start()
         }
+    }
 
-
+    private fun prepareAudio() {
+        mediaPlayer = MediaPlayer()
+        val audioUrl = URLAudioBook
+        duration = mediaPlayer.duration
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC)
+        mediaPlayer.setDataSource(audioUrl)
+        mediaPlayer.prepare()
+        currentPosition = mediaPlayer.currentPosition.toFloat()
+        binding.finalTime.text = SimpleDateFormat("mm:ss").format(mediaPlayer.duration)
     }
 
     private fun pauseAudio() {
-        if (mediaPlayer.isPlaying()) {
-            // pausing the media player if media player
-            // is playing we are calling below line to
-            // stop our media player.
-            mediaPlayer.stop();
-            mediaPlayer.reset();
-            mediaPlayer.release();
-
-            // below line is to display a message
-            // when media player is paused.
-            toast("Audio has been paused")
-        } else {
-            // this method is called when media
-            // player is not playing.
-            toast("Audio has not played")
-        }
+        mediaPlayer.pause()
     }
 
-
     private fun playAudio() {
-        val audioUrl = URLAudioBook
-
-        mediaPlayer = MediaPlayer()
-
-        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC)
-
         try {
-            mediaPlayer.setDataSource(audioUrl)
-            mediaPlayer.prepare()
+            binding.progressBar.value = currentPosition
             mediaPlayer.start()
+            Thread.sleep(500)
+            binding.progressBar.valueFrom = currentPosition
+            binding.progressBar.value = currentPosition
+            binding.progressBar.valueTo = mediaPlayer.duration.toFloat()
+
+            checkPosition()
         } catch (e: IOException) {
             e.printStackTrace()
         }
-        toast("Audio started playing..")
+    }
+
+    private fun checkPosition() {
+        if (playing) {
+            if (paused) {
+                handler.postDelayed(Runnable {
+                    handler.postDelayed(runnable!!, delay.toLong())
+                    currentPosition = mediaPlayer.currentPosition.toFloat()
+                    binding.progressBar.value = currentPosition
+                    binding.currentTime.text = SimpleDateFormat("mm:ss").format(currentPosition)
+                }.also { runnable = it }, delay.toLong())
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        handler.removeCallbacks(runnable!!)
+    }
+
+    private fun displayData() {
+        binding.audiobookTitle.text = audiobook.nameAudioBook
+        binding.audiobookAuthor.text = audiobook.authorAudioBook
+        val cover = binding.audiobookCover
+        Glide.with(cover)
+            .load(audiobook.urlAudioBook)
+            .into(cover)
+    }
+
+    private fun getUrl() {
+        chapterViewModel.getChapterAudioBook(audiobook.idAudioBook)
+        checkUrlResponse()
+    }
+
+    private fun checkUrlResponse() {
+        chapterViewModel.getChapterAudioBook.observe(viewLifecycleOwner) { response ->
+            when (response) {
+
+                is StateResource.Success -> {
+                    println(response.data?.get(0)!!.urlAudio)
+                    URLAudioBook = response.data?.get(0)!!.urlAudio
+                    prepareAudio()
+                }
+                is StateResource.Error -> {
+                }
+                else -> {
+                    println("AudioBookDetailsFragment linha 131")
+                }
+            }
+
+        }
     }
 }

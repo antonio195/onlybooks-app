@@ -57,7 +57,7 @@ class AudioBookDetailsFragment(val audioBook: AudioBookModel) : Fragment() {
         }
 
         binding.ouvirAudiobook.setOnClickListener {
-            listenEbook(URLAudioBook)
+            listenEbook(audioBook)
         }
 
         binding.saveAudiobook.setOnClickListener {
@@ -82,7 +82,7 @@ class AudioBookDetailsFragment(val audioBook: AudioBookModel) : Fragment() {
         transaction.commit()
     }
 
-    private fun listenEbook(URLAudioBook: String) {
+    private fun listenEbook(audioBook: AudioBookModel) {
         if (URLAudioBook.isEmpty()) {
             toast("AudioBook não possui capitulo")
         } else {
@@ -91,7 +91,7 @@ class AudioBookDetailsFragment(val audioBook: AudioBookModel) : Fragment() {
 
             transaction.replace(
                 R.id.nav_host_fragment,
-                ListenAudioBookFragment(URLAudioBook)
+                ListenAudioBookFragment(audioBook)
             )
             transaction.addToBackStack(null)
             transaction.commit()
@@ -280,7 +280,6 @@ class AudioBookDetailsFragment(val audioBook: AudioBookModel) : Fragment() {
                     binding.totalView.text = "   ${response.data}"
                 }
                 is StateResource.Error -> {
-                    toast("Erro ao pegar as visualizações")
                 }
                 else -> {
                 }
@@ -301,7 +300,6 @@ class AudioBookDetailsFragment(val audioBook: AudioBookModel) : Fragment() {
                     binding.totalLiked.text = "   ${response.data}"
                 }
                 is StateResource.Error -> {
-                    toast("Erro ao pegar as curtidas")
                 }
                 else -> {
                 }

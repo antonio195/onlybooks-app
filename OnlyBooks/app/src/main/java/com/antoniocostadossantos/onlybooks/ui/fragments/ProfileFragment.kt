@@ -99,6 +99,7 @@ class ProfileFragment : Fragment() {
         val chancePhoto = view.findViewById<Button>(R.id.btn_change_photo)
         seePhoto.setOnClickListener {
             showDialogPhoto(getDataInCache("photo")!!)
+            dialogOptions.dismiss()
         }
         chancePhoto.setOnClickListener {
             toast("Saindo...")
@@ -343,9 +344,9 @@ class ProfileFragment : Fragment() {
                 }
                 is StateResource.Error -> {
                 }
-                else -> {
-                    println(response)
+                is StateResource.Loading -> {
                 }
+
             }
         }
     }

@@ -30,6 +30,7 @@ class ListenAudioBookFragment(val audiobook: AudioBookModel) : Fragment() {
     private var paused: Boolean = false
     private var currentPosition = 0F
     private var duration = 0
+    private val currentPositionValue = 0
 
     var handler: Handler = Handler()
     var runnable: Runnable? = null
@@ -64,14 +65,36 @@ class ListenAudioBookFragment(val audiobook: AudioBookModel) : Fragment() {
         }
 
         binding.btnBack10.setOnClickListener {
-            mediaPlayer.pause()
-            var seconds = TimeUnit.MILLISECONDS.toSeconds(currentPosition.toLong())
-            seconds -= 10
-            var miliseconds = TimeUnit.SECONDS.toMillis(seconds)
-            mediaPlayer.seekTo(miliseconds.toInt())
-            currentPosition = miliseconds.toFloat()
-            mediaPlayer.start()
+            backTeenSeconds()
         }
+
+        binding.btnForward10.setOnClickListener {
+            forwardTeenSeconds()
+        }
+    }
+
+    private fun click(){
+        val seekBar = binding
+    }
+
+    private fun backTeenSeconds() {
+        mediaPlayer.pause()
+        var seconds = TimeUnit.MILLISECONDS.toSeconds(currentPosition.toLong())
+        seconds -= 10
+        var miliseconds = TimeUnit.SECONDS.toMillis(seconds)
+        mediaPlayer.seekTo(miliseconds.toInt())
+        currentPosition = miliseconds.toFloat()
+        mediaPlayer.start()
+    }
+
+    private fun forwardTeenSeconds() {
+        mediaPlayer.pause()
+        var seconds = TimeUnit.MILLISECONDS.toSeconds(currentPosition.toLong())
+        seconds += 10
+        var miliseconds = TimeUnit.SECONDS.toMillis(seconds)
+        mediaPlayer.seekTo(miliseconds.toInt())
+        currentPosition = miliseconds.toFloat()
+        mediaPlayer.start()
     }
 
     private fun prepareAudio() {
@@ -87,6 +110,7 @@ class ListenAudioBookFragment(val audiobook: AudioBookModel) : Fragment() {
 
     private fun pauseAudio() {
         mediaPlayer.pause()
+        checkPosition()
     }
 
     private fun playAudio() {
@@ -106,14 +130,12 @@ class ListenAudioBookFragment(val audiobook: AudioBookModel) : Fragment() {
 
     private fun checkPosition() {
         if (playing) {
-            if (paused) {
-                handler.postDelayed(Runnable {
-                    handler.postDelayed(runnable!!, delay.toLong())
-                    currentPosition = mediaPlayer.currentPosition.toFloat()
-                    binding.progressBar.value = currentPosition
-                    binding.currentTime.text = SimpleDateFormat("mm:ss").format(currentPosition)
-                }.also { runnable = it }, delay.toLong())
-            }
+            handler.postDelayed(Runnable {
+                handler.postDelayed(runnable!!, delay.toLong())
+                currentPosition = mediaPlayer.currentPosition.toFloat()
+                binding.progressBar.value = currentPosition
+                binding.currentTime.text = SimpleDateFormat("mm:ss").format(currentPosition)
+            }.also { runnable = it }, delay.toLong())
         }
     }
 

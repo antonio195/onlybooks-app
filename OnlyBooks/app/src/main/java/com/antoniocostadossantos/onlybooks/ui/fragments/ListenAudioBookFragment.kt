@@ -14,6 +14,7 @@ import com.antoniocostadossantos.onlybooks.model.AudioBookModel
 import com.antoniocostadossantos.onlybooks.util.StateResource
 import com.antoniocostadossantos.onlybooks.viewModel.ChapterViewModel
 import com.bumptech.glide.Glide
+import com.google.android.material.slider.Slider
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -31,6 +32,8 @@ class ListenAudioBookFragment(val audiobook: AudioBookModel) : Fragment() {
     private var currentPosition = 0F
     private var duration = 0
     private val currentPositionValue = 0
+    private var newPosition: Int = 0
+    private var changedPosition: Boolean = false
 
     var handler: Handler = Handler()
     var runnable: Runnable? = null
@@ -49,6 +52,17 @@ class ListenAudioBookFragment(val audiobook: AudioBookModel) : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         displayData()
         getUrl()
+
+        binding.progressBar.addOnChangeListener(object : Slider.OnChangeListener {
+            override fun onValueChange(slider: Slider, value: Float, fromUser: Boolean) {
+                mediaPlayer.pause()
+                mediaPlayer.seekTo(value.toInt())
+                newPosition = slider.value.toInt()
+                changedPosition = true
+                mediaPlayer.start()
+            }
+
+        })
 
         binding.btnPlayPause.setOnClickListener {
             if (playing) {
@@ -73,7 +87,13 @@ class ListenAudioBookFragment(val audiobook: AudioBookModel) : Fragment() {
         }
     }
 
-    private fun click(){
+    override fun onDestroyView() {
+        super.onDestroyView()
+        handler.removeCallbacks(runnable!!)
+        mediaPlayer.stop()
+    }
+
+    private fun click() {
         val seekBar = binding
     }
 
@@ -110,38 +130,18 @@ class ListenAudioBookFragment(val audiobook: AudioBookModel) : Fragment() {
 
     private fun pauseAudio() {
         mediaPlayer.pause()
-        checkPosition()
     }
 
     private fun playAudio() {
         try {
-            binding.progressBar.value = currentPosition
             mediaPlayer.start()
             Thread.sleep(500)
             binding.progressBar.valueFrom = currentPosition
             binding.progressBar.value = currentPosition
             binding.progressBar.valueTo = mediaPlayer.duration.toFloat()
-
-            checkPosition()
         } catch (e: IOException) {
             e.printStackTrace()
         }
-    }
-
-    private fun checkPosition() {
-        if (playing) {
-            handler.postDelayed(Runnable {
-                handler.postDelayed(runnable!!, delay.toLong())
-                currentPosition = mediaPlayer.currentPosition.toFloat()
-                binding.progressBar.value = currentPosition
-                binding.currentTime.text = SimpleDateFormat("mm:ss").format(currentPosition)
-            }.also { runnable = it }, delay.toLong())
-        }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        handler.removeCallbacks(runnable!!)
     }
 
     private fun displayData() {

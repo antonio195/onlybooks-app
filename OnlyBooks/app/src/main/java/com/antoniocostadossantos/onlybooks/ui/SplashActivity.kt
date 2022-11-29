@@ -6,6 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.antoniocostadossantos.onlybooks.R
+import com.antoniocostadossantos.onlybooks.util.checkForInternetConnection
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,11 +18,17 @@ class SplashActivity : AppCompatActivity() {
     private fun verifyUserCache() {
         val email = getDataInCache("email")
 
-        if (email.isNullOrEmpty()) {
-            goToLogin()
+        if (!checkForInternetConnection(application)) {
+            startActivity(Intent(this@SplashActivity, InternetErrorActivity::class.java))
+            finish()
         } else {
-            goToBaseFragment()
+            if (email.isNullOrEmpty()) {
+                goToLogin()
+            } else {
+                goToBaseFragment()
+            }
         }
+
     }
 
     private fun goToLogin() {

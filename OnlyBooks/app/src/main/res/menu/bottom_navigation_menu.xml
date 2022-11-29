@@ -13,15 +13,15 @@
     <item
         android:id="@+id/menu_new_book"
         android:icon="@drawable/new_book_vector"
-        android:title="New Book" />
+        android:title="Novo post" />
 
     <item
         android:id="@+id/menu_audiobook"
         android:icon="@drawable/audio_book_vector"
-        android:title="AudioBook" />
+        android:title="AudioBooks" />
 
     <item
         android:id="@+id/menu_profile"
         android:icon="@drawable/person_vector"
-        android:title="Profile" />
+        android:title="Perfil" />
 </menu>

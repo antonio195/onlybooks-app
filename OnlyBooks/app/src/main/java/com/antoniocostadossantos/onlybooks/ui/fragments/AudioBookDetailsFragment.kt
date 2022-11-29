@@ -84,7 +84,7 @@ class AudioBookDetailsFragment(val audioBook: AudioBookModel) : Fragment() {
 
     private fun listenEbook(audioBook: AudioBookModel) {
         if (URLAudioBook.isEmpty()) {
-            toast("AudioBook não possui capitulo")
+            toast("AudioBook sem capitulo...")
         } else {
             val transaction =
                 (context as FragmentActivity).supportFragmentManager.beginTransaction()
@@ -194,7 +194,7 @@ class AudioBookDetailsFragment(val audioBook: AudioBookModel) : Fragment() {
                     if (response.data == true) {
                         audioBookExistsInLibrary = false
                         binding.saveAudiobook.setImageResource(R.drawable.ic_not_favorited)
-                        toast("AudioBook removido da biblioteca")
+                        toast("Removeu da biblioteca")
                     }
                 }
                 is StateResource.Error -> {
@@ -218,7 +218,7 @@ class AudioBookDetailsFragment(val audioBook: AudioBookModel) : Fragment() {
                 is StateResource.Success -> {
                     audioBookExistsInLibrary = true
                     binding.saveAudiobook.setImageResource(R.drawable.ic_favorited)
-                    toast("AudioBook adicionado da biblioteca")
+                    toast("Adicionou na biblioteca")
                 }
                 is StateResource.Error -> {
                 }

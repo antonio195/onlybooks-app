@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -17,7 +16,10 @@ import com.antoniocostadossantos.onlybooks.model.AudioBookModel
 import com.antoniocostadossantos.onlybooks.model.EbookModel
 import com.antoniocostadossantos.onlybooks.ui.adapter.AudiobookItemVerticalAdapter
 import com.antoniocostadossantos.onlybooks.ui.adapter.EbookItemVerticalAdapter
-import com.antoniocostadossantos.onlybooks.util.*
+import com.antoniocostadossantos.onlybooks.util.StateResource
+import com.antoniocostadossantos.onlybooks.util.gone
+import com.antoniocostadossantos.onlybooks.util.hide
+import com.antoniocostadossantos.onlybooks.util.show
 import com.antoniocostadossantos.onlybooks.viewModel.AudioBookViewModel
 import com.antoniocostadossantos.onlybooks.viewModel.EbookViewModel
 import com.antoniocostadossantos.onlybooks.viewModel.LibraryViewModel
@@ -77,7 +79,7 @@ class ProfileFragment : Fragment() {
         }
 
         binding.profileImage.setOnClickListener {
-            showDialogOptions()
+            showDialogPhoto(getDataInCache("photo")!!)
         }
     }
 
@@ -89,23 +91,6 @@ class ProfileFragment : Fragment() {
         getMyAudioBookssInLibrary()
         countEbookForId()
         countAudioBookForId()
-    }
-
-    private fun showDialogOptions() {
-        val build = AlertDialog.Builder(context as FragmentActivity)
-        val view = layoutInflater.inflate(R.layout.custom_dialog_options, null)
-        build.setView(view)
-        val seePhoto = view.findViewById<Button>(R.id.btn_see_photo)
-        val chancePhoto = view.findViewById<Button>(R.id.btn_change_photo)
-        seePhoto.setOnClickListener {
-            showDialogPhoto(getDataInCache("photo")!!)
-            dialogOptions.dismiss()
-        }
-        chancePhoto.setOnClickListener {
-            toast("Saindo...")
-        }
-        dialogOptions = build.create()
-        dialogOptions.show()
     }
 
     private fun showDialogPhoto(photoURL: String) {

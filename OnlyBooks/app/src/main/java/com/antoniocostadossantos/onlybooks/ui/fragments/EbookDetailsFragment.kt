@@ -86,7 +86,7 @@ class EbookDetailsFragment(val ebook: EbookModel) : Fragment() {
 
     private fun readEbook() {
         if (URLEbook.isEmpty()) {
-            toast("Ebook não possui capitulo")
+            toast("Ebook sem capitulo...")
         } else {
             val intent = Intent((context as FragmentActivity), ReadPDFURLActivity::class.java)
             intent.putExtra(
@@ -193,7 +193,7 @@ class EbookDetailsFragment(val ebook: EbookModel) : Fragment() {
                     if (response.data == true) {
                         ebookExistsInLibrary = false
                         binding.saveEbook.setImageResource(R.drawable.ic_not_favorited)
-                        toast("Ebook removido da biblioteca")
+                        toast("Removeu da biblioteca")
                     }
                 }
                 is StateResource.Error -> {
@@ -216,7 +216,7 @@ class EbookDetailsFragment(val ebook: EbookModel) : Fragment() {
                 is StateResource.Success -> {
                     ebookExistsInLibrary = true
                     binding.saveEbook.setImageResource(R.drawable.ic_favorited)
-                    toast("Ebook adicionado da biblioteca")
+                    toast("Adicionou a biblioteca")
                 }
                 is StateResource.Error -> {
                 }
@@ -278,7 +278,6 @@ class EbookDetailsFragment(val ebook: EbookModel) : Fragment() {
                     binding.totalView.text = "   ${response.data}"
                 }
                 is StateResource.Error -> {
-                    toast("Erro ao pegar as visualizações")
                 }
                 else -> {
                 }
@@ -299,7 +298,6 @@ class EbookDetailsFragment(val ebook: EbookModel) : Fragment() {
                     binding.totalLiked.text = "   ${response.data}"
                 }
                 is StateResource.Error -> {
-                    toast("Erro ao pegar as curtidas")
                 }
                 else -> {
                 }

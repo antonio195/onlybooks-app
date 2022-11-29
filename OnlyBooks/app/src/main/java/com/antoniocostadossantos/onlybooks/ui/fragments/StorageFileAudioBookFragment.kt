@@ -65,7 +65,6 @@ class StorageFileAudioBookFragment(val audioBookBase: AudioBookModel) : Fragment
             .getReference("audios/$name").downloadUrl.addOnSuccessListener {
                 postChapter(it.toString())
             }.addOnFailureListener {
-                toast("Erro ao pegar URL")
             }
     }
 

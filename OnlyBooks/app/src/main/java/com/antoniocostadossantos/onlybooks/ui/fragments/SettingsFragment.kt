@@ -37,6 +37,10 @@ class SettingsFragment : Fragment() {
             goToProfileDetails()
         }
 
+        binding.changePhotoProfile.setOnClickListener {
+            goToChangeProfilePhoto()
+        }
+
         binding.logof.setOnClickListener {
             showDialogLogof()
         }
@@ -49,6 +53,17 @@ class SettingsFragment : Fragment() {
             (context as FragmentActivity).supportFragmentManager.beginTransaction()
 
         transaction.replace(R.id.nav_host_fragment, ProfileDetailsFragment(id))
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
+
+    private fun goToChangeProfilePhoto() {
+
+        val id = getDataInCache("id")!!.toInt()
+        val transaction =
+            (context as FragmentActivity).supportFragmentManager.beginTransaction()
+
+        transaction.replace(R.id.nav_host_fragment, ChangeProfilePhotoFragment(id))
         transaction.addToBackStack(null)
         transaction.commit()
     }

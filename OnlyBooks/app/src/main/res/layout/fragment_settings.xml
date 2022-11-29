@@ -49,6 +49,28 @@
             android:background="@color/azulEscuro" />
 
         <Button
+            android:id="@+id/change_photo_profile"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/cinzaClaro"
+            android:fontFamily="@font/source_sans_pro"
+            android:hint="Trocar foto do perfil"
+            android:textAlignment="textStart"
+            android:textColorHint="@color/azulEscuro"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:icon="@drawable/ic_baseline_photo_camera_24"
+            app:iconPadding="10dp"
+            app:iconTint="@color/azulEscuro"
+            app:rippleColor="@color/azulClaro" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/azulEscuro" />
+
+        <Button
             android:id="@+id/logof"
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="match_parent"

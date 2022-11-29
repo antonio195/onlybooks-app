@@ -65,7 +65,6 @@ class StorageFileEbookFragment(val ebookBase: EbookModel) : Fragment() {
             .getReference("documents/$name").downloadUrl.addOnSuccessListener {
                 postChapter(it.toString())
             }.addOnFailureListener {
-                toast("Erro ao pegar URL")
             }
     }
 

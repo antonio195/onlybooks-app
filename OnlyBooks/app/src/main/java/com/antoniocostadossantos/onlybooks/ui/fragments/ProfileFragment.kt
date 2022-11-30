@@ -123,7 +123,7 @@ class ProfileFragment : Fragment() {
             .placeholder(R.drawable.person_vector)
             .error(R.drawable.ic_baseline_error_24)
 
-        Glide.with(binding.profileImage)
+        Glide.with(photo)
             .applyDefaultRequestOptions(requestOptions)
             .load(photoURL)
             .into(photo)

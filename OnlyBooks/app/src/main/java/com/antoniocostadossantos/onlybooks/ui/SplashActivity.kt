@@ -28,7 +28,6 @@ class SplashActivity : AppCompatActivity() {
                 goToBaseFragment()
             }
         }
-
     }
 
     private fun goToLogin() {

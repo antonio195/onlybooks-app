@@ -28,4 +28,28 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="read_ebook">Ler ebook</string>
+    <string name="text_input_title">Título *</string>
+    <string name="text_input_co_author">Co Autor</string>
+    <string name="text_input_primary_storyteller">Narrador primário *</string>
+    <string name="text_input_secondary_storyteller">Narrador secundário</string>
+    <string name="text_input_genre1">Gênero 1 *</string>
+    <string name="text_input_genre2">Gênero 2</string>
+    <string name="text_input_genre3">Gênero 3</string>
+    <string name="text_input_parental_rating">Classificação indicativa *</string>
+    <string name="text_input_synopsis">Sinopse *</string>
+    <string name="text_button_select_cover">Selecionar capa</string>
+    <string name="text_button_publish">Publicar</string>
+    <string name="text_info_box_publish">Atenção! \n Você poderá inserir capa e capítulo depois de postar o Ebook</string>
+    <string name="text_question_forgot_password">Esqueceu a senha?</string>
+    <string name="text_question_no_problem">Sem problemas!</string>
+    <string name="text_input_email">Email</string>
+    <string name="text_info_box_error">Não existe usuário cadastrado com esse email!</string>
+    <string name="text_decription_logo">Logo OnlyBooks</string>
+    <string name="text_info_box_no_connection">Poxa, você está sem conexão com a internet :(</string>
+    <string name="text_button_try_again">Tentar reconexão</string>
+    <string name="text_input_password">Senha</string>
+    <string name="text_info_box_error_wrong_user_or_password">Usuário ou senha incorretos</string>
+    <string name="text_input_nickname">Apelido</string>
+    <string name="text_info_box_error3">Usuário ou email já cadastrado.</string>
+    <string name="text_input_title_book">Nome do Audiobook/Ebook</string>
 </resources>

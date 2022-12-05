@@ -47,4 +47,9 @@ interface AudioBookService {
         @Path("idAudioBook") idAudioBook: Int
     ): Response<Long>
 
+    @GET("/audiobook/search/{text}")
+    suspend fun searchAudioBook(
+        @Path("text") text: String
+    ): Response<List<AudioBookModel>>
+
 }

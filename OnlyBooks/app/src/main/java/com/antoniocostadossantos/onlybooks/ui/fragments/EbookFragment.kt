@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.GridLayoutManager
+import com.antoniocostadossantos.onlybooks.R
 import com.antoniocostadossantos.onlybooks.databinding.FragmentEbookBinding
 import com.antoniocostadossantos.onlybooks.ui.adapter.EbookItemVerticalAdapter
 import com.antoniocostadossantos.onlybooks.viewModel.EbookViewModel
@@ -28,6 +30,10 @@ class EbookFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
+
+        binding.iconSearch.setOnClickListener {
+            goToSearch()
+        }
     }
 
     private fun setupRecyclerView() {
@@ -42,5 +48,17 @@ class EbookFragment : Fragment() {
         ebookViewModel.suggestions.observe(viewLifecycleOwner) { response ->
             this.ebookAdapter.setList(response.data!!)
         }
+    }
+
+    private fun goToSearch() {
+        val transaction =
+            (context as FragmentActivity).supportFragmentManager.beginTransaction()
+
+        transaction.replace(
+            R.id.nav_host_fragment,
+            SearchFragment()
+        )
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 }

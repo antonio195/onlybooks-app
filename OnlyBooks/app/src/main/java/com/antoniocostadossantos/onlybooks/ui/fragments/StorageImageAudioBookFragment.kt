@@ -40,7 +40,6 @@ class StorageImageAudioBookFragment(val audioBookBase: AudioBookModel) : Fragmen
         super.onViewCreated(view, savedInstanceState)
 
         setupImageEbook(audioBookBase)
-        displayData()
 
         binding.selectImage.setOnClickListener {
             selectImage()
@@ -62,11 +61,6 @@ class StorageImageAudioBookFragment(val audioBookBase: AudioBookModel) : Fragmen
             .into(binding.ivBannerEbook)
     }
 
-    private fun displayData() {
-        binding.etUrl.setText(audioBookBase.nameAudioBook)
-
-    }
-
     fun getURL(name: String) {
         FirebaseStorage.getInstance()
             .getReference("images/$name").downloadUrl.addOnSuccessListener {
@@ -74,7 +68,6 @@ class StorageImageAudioBookFragment(val audioBookBase: AudioBookModel) : Fragmen
                 audioBookBase.urlAudioBook = it.toString()
 //                updateEbook(audioBookBase)
             }.addOnFailureListener {
-                binding.etUrl.setText(it.toString())
             }
     }
 

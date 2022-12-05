@@ -46,6 +46,9 @@ class EbookViewModel(
     private val _likes = MutableLiveData<StateResource<Any>>()
     val likes: LiveData<StateResource<Any>> = _likes
 
+    private val _searchEbook = MutableLiveData<StateResource<List<EbookModel>>>()
+    val searchEbook: LiveData<StateResource<List<EbookModel>>> = _searchEbook
+
     fun getSuggestions() = viewModelScope.launch(Dispatchers.IO) {
         val response = ebookRepository.getSuggestions()
         _suggestions.postValue(handleResponse(response))
@@ -89,6 +92,11 @@ class EbookViewModel(
     fun getLikes(idEbook: Int) = viewModelScope.launch(Dispatchers.IO) {
         val response = ebookRepository.getLikes(idEbook)
         _likes.postValue(handleResponse(response))
+    }
+
+    fun searchEbook(text: String) = viewModelScope.launch(Dispatchers.IO) {
+        val response = ebookRepository.searchEbook(text)
+        _searchEbook.postValue(handleResponse(response))
     }
 
     private fun <T> handleResponse(response: Response<T>): StateResource<T> {

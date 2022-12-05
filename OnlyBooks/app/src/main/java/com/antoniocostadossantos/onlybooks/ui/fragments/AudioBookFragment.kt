@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.GridLayoutManager
+import com.antoniocostadossantos.onlybooks.R
 import com.antoniocostadossantos.onlybooks.databinding.FragmentAudioBookBinding
 import com.antoniocostadossantos.onlybooks.ui.adapter.AudiobookItemVerticalAdapter
 import com.antoniocostadossantos.onlybooks.viewModel.AudioBookViewModel
@@ -29,6 +31,9 @@ class AudioBookFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
 
+        binding.iconSearch.setOnClickListener {
+            goToSearch()
+        }
     }
 
     private fun setupRecyclerView() {
@@ -43,6 +48,18 @@ class AudioBookFragment : Fragment() {
         audioBookViewModel.suggestions.observe(viewLifecycleOwner) { response ->
             this.audioBookItemAdapter.setList(response.data!!)
         }
+    }
+
+    private fun goToSearch() {
+        val transaction =
+            (context as FragmentActivity).supportFragmentManager.beginTransaction()
+
+        transaction.replace(
+            R.id.nav_host_fragment,
+            SearchFragment()
+        )
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 
 }

@@ -25,4 +25,6 @@ class EbookRepository : BaseRepository() {
     suspend fun getViews(idEbook: Int) = api.getViews(idEbook)
 
     suspend fun getLikes(idEbook: Int) = api.getLikes(idEbook)
+
+    suspend fun searchEbook(text: String) = api.searchEbook(text)
 }

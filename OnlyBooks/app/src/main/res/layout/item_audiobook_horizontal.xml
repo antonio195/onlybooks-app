@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="wrap_content">
 
     <com.google.android.material.imageview.ShapeableImageView
@@ -36,7 +37,7 @@
         android:gravity="center"
         android:layout_marginTop="3dp"
         android:fontFamily="@font/source_sans_pro"
-        android:text="O menino do dedo verde"
+        tools:text="O menino do dedo verde"
         android:textAlignment="center"
         android:textColor="@color/azulEscuro"
         app:layout_constraintEnd_toEndOf="@id/image_ebook"
@@ -51,7 +52,7 @@
         android:background="@drawable/edi_text_rounded5_blue_dark_stroke"
         android:gravity="center_horizontal|center_vertical"
         android:paddingHorizontal="16dp"
-        android:text="Drama"
+        tools:text="Drama"
         android:textColor="@color/azulEscuro"
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="@id/image_ebook"
@@ -60,6 +61,7 @@
 
     <ImageView
         android:id="@+id/parental_rating"
+        android:importantForAccessibility="no"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:src="@drawable/class_indicativa_livre"

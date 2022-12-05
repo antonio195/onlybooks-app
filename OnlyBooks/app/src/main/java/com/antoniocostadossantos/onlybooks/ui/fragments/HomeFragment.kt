@@ -48,6 +48,10 @@ class HomeFragment : Fragment() {
         binding.btnConhecer.setOnClickListener {
             goToEbookDetails()
         }
+
+        binding.iconSearch.setOnClickListener {
+            goToSearch()
+        }
     }
 
     private fun setupEbookRecyclerView() {
@@ -128,6 +132,18 @@ class HomeFragment : Fragment() {
         transaction.replace(
             R.id.nav_host_fragment,
             EbookDetailsFragment(ebookSpotlight)
+        )
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
+
+    private fun goToSearch() {
+        val transaction =
+            (context as FragmentActivity).supportFragmentManager.beginTransaction()
+
+        transaction.replace(
+            R.id.nav_host_fragment,
+            SearchFragment()
         )
         transaction.addToBackStack(null)
         transaction.commit()

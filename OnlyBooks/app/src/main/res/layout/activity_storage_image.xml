@@ -21,36 +21,17 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fontFamily="@font/source_sans_pro"
-                android:text="Título"
-                android:textColor="@color/azulEscuro"
-                android:textSize="16sp" />
-
-            <EditText
-                android:id="@+id/et_url"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:adjustViewBounds="true"
-                android:background="@drawable/edi_text_rounded5_blue_light"
-                android:fontFamily="@font/source_sans_pro"
-                android:paddingHorizontal="14dp"
-                android:textColor="@color/azulEscuro"
-                tools:text="título" />
-
             <ImageView
                 android:id="@+id/iv_banner_ebook"
                 android:layout_width="190dp"
                 android:layout_height="266dp"
+                android:layout_marginTop="50dp"
                 android:layout_marginStart="96dp"
-                android:layout_marginTop="96dp"
+                android:importantForAccessibility="no"
                 android:scaleType="fitXY"
                 android:background="@drawable/ic_launcher_background" />
 
         </LinearLayout>
-
 
         <LinearLayout
             android:layout_width="match_parent"

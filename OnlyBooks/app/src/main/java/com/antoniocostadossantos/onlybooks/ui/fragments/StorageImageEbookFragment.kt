@@ -40,7 +40,6 @@ class StorageImageEbookFragment(val ebook: EbookModel) : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupImageEbook(ebook)
-        displayData()
 
         binding.selectImage.setOnClickListener {
             selectImage()
@@ -62,11 +61,6 @@ class StorageImageEbookFragment(val ebook: EbookModel) : Fragment() {
             .into(binding.ivBannerEbook)
     }
 
-    private fun displayData() {
-        binding.etUrl.setText(ebook.nameEbook)
-
-    }
-
     fun getURL(name: String) {
         FirebaseStorage.getInstance()
             .getReference("images/$name").downloadUrl.addOnSuccessListener {
@@ -74,7 +68,6 @@ class StorageImageEbookFragment(val ebook: EbookModel) : Fragment() {
                 ebook.url = it.toString()
                 updateEbook(ebook)
             }.addOnFailureListener {
-                binding.etUrl.setText(it.toString())
             }
     }
 

@@ -22,8 +22,8 @@
     <string name="tv_name_chapter">Nome do Capítulo</string>
     <string name="btn_selected_upload_pdf">Selecionar PDF</string>
     <string name="btn_upload_pdf">Enviar PDF</string>
-    <string name="btn_selected_upload_audio">Selecionar Audio</string>
-    <string name="btn_upload_audio">Enviar Audio</string>
+    <string name="btn_selected_upload_audio">Selecionar áudio</string>
+    <string name="btn_upload_audio">Enviar áudio</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
@@ -51,5 +51,39 @@
     <string name="text_info_box_error_wrong_user_or_password">Usuário ou senha incorretos</string>
     <string name="text_input_nickname">Apelido</string>
     <string name="text_info_box_error3">Usuário ou email já cadastrado.</string>
-    <string name="text_input_title_book">Nome do Audiobook/Ebook</string>
+    <string name="text_input_title_book">Audiobook/Ebook</string>
+    <string name="text_info_progress">Enviando o áudio, aguarde.</string>
+    <string name="text_progress_info_pdf">Enviando PDF, aguarde.</string>
+    <string name="text_progress_info_pdf_loading">Carregando Ebook...</string>
+    <string name="text_info_logoff">Tem certeza que deseja sair?</string>
+    <string name="text_option_logoff">Sair</string>
+    <string name="text_option_cancel">Cancelar</string>
+    <string name="text_button_listen_audiobook">Ouvir AudioBook</string>
+    <string name="text_button_select_photo">Selecionar foto</string>
+    <string name="text_button_send_photo">Enviar foto</string>
+    <string name="text_title_genre1">Drama</string>
+    <string name="text_input_synopsis_base">Sinopse do livro</string>
+    <string name="text_suggestion_audiobook">Nossa sugestão de AudioBooks para você!</string>
+    <string name="text_suggestion_ebook">Nossa sugestão de Ebooks para você!</string>
+    <string name="text_weekly_suggestion">Destaque da semana!</string>
+    <string name="text_info_weekly_suggetions">De uma chance pro novo, quem \nsabe ele não te conquista né?</string>
+    <string name="text_button_weekly_suggetions">Conhecer</string>
+    <string name="text_author_audiobook">Autor</string>
+    <string name="text_button_make_ebook">Criar Ebook</string>
+    <string name="text_button_make_audiobook">Criar Audiobook</string>
+    <string name="text_title_readings">Leituras</string>
+    <string name="text_title_tapping">Escutas</string>
+    <string name="text_switch_button_my_works">Mostrar Minhas Obras?</string>
+    <string name="text_title_my_works">Minhas Obras</string>
+    <string name="text_button_ebooks">Ebooks</string>
+    <string name="text_button_audiobooks">AudioBooks</string>
+    <string name="text_my_library">Minha biblioteca</string>
+    <string name="text_title_profile_details">Detalhes do perfil</string>
+    <string name="text_input_description">Descrição</string>
+    <string name="text_button_update_profile">Atualizar perfil</string>
+    <string name="text_title_configurations">Configurações</string>
+    <string name="text_button_edit_profile">Editar perfil</string>
+    <string name="text_button_change_profile_photo">Trocar foto do perfil</string>
+    <string name="text_button_logoff">Sair</string>
+    <string name="text_name_author">Autor: %s</string>
 </resources>

@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.antoniocostadossantos.onlybooks.R
-import com.antoniocostadossantos.onlybooks.databinding.ActivityStorageAudio2Binding
+import com.antoniocostadossantos.onlybooks.databinding.ActivityStorageAudioBinding
 import com.antoniocostadossantos.onlybooks.model.AudioBookModel
 import com.antoniocostadossantos.onlybooks.model.ChapterAudioBookMobile
 import com.antoniocostadossantos.onlybooks.util.StateResource
@@ -27,7 +27,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class StorageFileAudioBookFragment(val audioBookBase: AudioBookModel) : Fragment() {
-    lateinit var binding: ActivityStorageAudio2Binding
+    lateinit var binding: ActivityStorageAudioBinding
     lateinit var fileUri: Uri
     private val chapterViewModel: ChapterViewModel by viewModel()
 
@@ -36,7 +36,7 @@ class StorageFileAudioBookFragment(val audioBookBase: AudioBookModel) : Fragment
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = ActivityStorageAudio2Binding.inflate(inflater, container, false)
+        binding = ActivityStorageAudioBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -58,7 +58,6 @@ class StorageFileAudioBookFragment(val audioBookBase: AudioBookModel) : Fragment
 
         }
     }
-
 
     fun getURL(name: String) {
         FirebaseStorage.getInstance()

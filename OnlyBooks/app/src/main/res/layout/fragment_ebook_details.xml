@@ -8,208 +8,207 @@
     android:fitsSystemWindows="true"
     tools:context=".ui.fragments.EbookDetailsFragment">
 
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <View
+            android:id="@+id/view_balow_ebook"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="200dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/rounded_edges_ebook_details"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <View
-                android:id="@+id/view_balow_ebook"
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/image_ebook"
+            android:layout_width="220dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="8dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_launcher_background"
+            app:layout_constraintEnd_toEndOf="@id/view_balow_ebook"
+            app:layout_constraintStart_toStartOf="@id/view_balow_ebook"
+            app:layout_constraintTop_toTopOf="@id/view_balow_ebook"
+            app:shapeAppearanceOverlay="@style/rounded_edges_imageView_5" />
+
+        <TextView
+            android:id="@+id/title_ebook"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/source_sans_pro"
+            android:text="@string/text_input_title_book"
+            android:textAlignment="center"
+            android:textColor="@color/azulEscuro"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent    "
+            app:layout_constraintTop_toBottomOf="@id/image_ebook" />
+
+        <TextView
+            android:id="@+id/genre_ebook"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/edi_text_rounded5_blue_dark_stroke"
+            android:fontFamily="@font/source_sans_pro"
+            android:gravity="center_horizontal|center_vertical"
+            android:paddingHorizontal="16dp"
+            android:text="@string/text_title_genre1"
+            android:textColor="@color/azulEscuro"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/title_ebook"
+            app:layout_constraintStart_toStartOf="@id/title_ebook"
+            app:layout_constraintTop_toBottomOf="@id/title_ebook" />
+
+        <TextView
+            android:id="@+id/total_view"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_marginTop="20dp"
+            android:drawablePadding="10dp"
+            android:fontFamily="@font/source_sans_pro"
+            android:gravity="center_horizontal|center_vertical"
+            android:paddingHorizontal="16dp"
+            android:textColor="@color/azulEscuro"
+            android:textStyle="bold"
+            app:drawableLeftCompat="@drawable/ic_outline_remove_red_eye"
+            app:layout_constraintRight_toLeftOf="@+id/genre_ebook"
+            app:layout_constraintTop_toBottomOf="@id/title_ebook"
+            tools:text="0" />
+
+        <TextView
+            android:id="@+id/total_liked"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_marginTop="20dp"
+            android:drawablePadding="10dp"
+            android:fontFamily="@font/source_sans_pro"
+            android:gravity="center_horizontal|center_vertical"
+            android:paddingHorizontal="16dp"
+            android:textColor="@color/azulEscuro"
+            android:textStyle="bold"
+            app:drawableStartCompat="@drawable/ic_favorited"
+            app:layout_constraintLeft_toRightOf="@+id/genre_ebook"
+            app:layout_constraintTop_toBottomOf="@id/title_ebook"
+            tools:text="0" />
+
+        <ScrollView
+            android:id="@+id/scrollview_synopsis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/genre_ebook">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/rounded_edges_ebook_details"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_height="wrap_content">
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/image_ebook"
-                android:layout_width="220dp"
-                android:layout_height="300dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginEnd="8dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/ic_launcher_background"
-                app:layout_constraintEnd_toEndOf="@id/view_balow_ebook"
-                app:layout_constraintStart_toStartOf="@id/view_balow_ebook"
-                app:layout_constraintTop_toTopOf="@id/view_balow_ebook"
-                app:shapeAppearanceOverlay="@style/rounded_edges_imageView_5" />
-
-            <TextView
-                android:id="@+id/title_ebook"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:fontFamily="@font/source_sans_pro"
-                android:layout_marginTop="30dp"
-                android:text="O menino do dedo verde"
-                android:textAlignment="center"
-                android:textColor="@color/azulEscuro"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent    "
-                app:layout_constraintTop_toBottomOf="@id/image_ebook" />
-
-            <TextView
-                android:id="@+id/genre_ebook"
-                android:layout_width="wrap_content"
-                android:layout_height="25dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/edi_text_rounded5_blue_dark_stroke"
-                android:gravity="center_horizontal|center_vertical"
-                android:paddingHorizontal="16dp"
-                android:fontFamily="@font/source_sans_pro"
-                android:text="Drama"
-                android:textColor="@color/azulEscuro"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@id/title_ebook"
-                app:layout_constraintStart_toStartOf="@id/title_ebook"
-                app:layout_constraintTop_toBottomOf="@id/title_ebook" />
-
-            <TextView
-                android:id="@+id/total_view"
-                android:layout_width="wrap_content"
-                android:layout_height="25dp"
-                android:layout_marginTop="20dp"
-                android:gravity="center_horizontal|center_vertical"
-                android:paddingHorizontal="16dp"
-                android:fontFamily="@font/source_sans_pro"
-                android:textColor="@color/azulEscuro"
-                android:textStyle="bold"
-                android:text="  0"
-                android:drawableLeft="@drawable/ic_outline_remove_red_eye"
-                app:layout_constraintRight_toLeftOf="@+id/genre_ebook"
-                app:layout_constraintTop_toBottomOf="@id/title_ebook" />
-            <TextView
-                android:id="@+id/total_liked"
-                android:layout_width="wrap_content"
-                android:layout_height="25dp"
-                android:layout_marginTop="20dp"
-                android:gravity="center_horizontal|center_vertical"
-                android:paddingHorizontal="16dp"
-                android:fontFamily="@font/source_sans_pro"
-                android:textColor="@color/azulEscuro"
-                android:textStyle="bold"
-                android:text="  0"
-                android:drawableLeft="@drawable/ic_favorited"
-                app:layout_constraintLeft_toRightOf="@+id/genre_ebook"
-                app:layout_constraintTop_toBottomOf="@id/title_ebook" />
-
-            <ScrollView
-                android:id="@+id/scrollview_synopsis"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="15dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/genre_ebook">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <TextView
+                    android:id="@+id/ebook_synopsis"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:fontFamily="@font/source_sans_pro"
+                    android:text="@string/text_input_synopsis_base"
+                    android:textAlignment="center"
+                    android:textColor="@color/azulEscuro"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                    <TextView
-                        android:id="@+id/ebook_synopsis"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="16dp"
-                        android:text="“Essa é a sinopse do livro”"
-                        android:fontFamily="@font/source_sans_pro"
-                        android:textAlignment="center"
-                        android:textColor="@color/azulEscuro"
-                        android:textSize="18sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
 
-            </ScrollView>
+        <Button
+            android:id="@+id/ler_ebook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/azulEscuro"
+            android:fontFamily="@font/source_sans_pro"
+            android:hint="@string/read_ebook"
+            android:paddingHorizontal="18dp"
+            android:paddingVertical="10dp"
+            android:textColorHint="@color/cinzaClaro"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/scrollview_synopsis"
+            app:layout_constraintStart_toStartOf="@id/scrollview_synopsis"
+            app:layout_constraintTop_toBottomOf="@id/scrollview_synopsis" />
 
-            <Button
-                android:id="@+id/ler_ebook"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:backgroundTint="@color/azulEscuro"
-                android:fontFamily="@font/source_sans_pro"
-                android:hint="@string/read_ebook"
-                android:paddingHorizontal="18dp"
-                android:paddingVertical="10dp"
-                android:textColorHint="@color/cinzaClaro"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@id/scrollview_synopsis"
-                app:layout_constraintStart_toStartOf="@id/scrollview_synopsis"
-                app:layout_constraintTop_toBottomOf="@id/scrollview_synopsis" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/save_ebook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/azulEscuro"
+            android:focusable="true"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_not_favorited"
+            android:visibility="visible"
+            app:fabSize="mini"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/edit_ebook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/azulEscuro"
+            android:focusable="true"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_baseline_edit_24"
+            android:visibility="gone"
+            app:fabSize="mini"
+            app:layout_constraintBottom_toTopOf="@id/save_ebook"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/new_chapter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/azulEscuro"
+            android:focusable="true"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_baseline_add_24"
+            android:visibility="gone"
+            app:fabSize="mini"
+            app:layout_constraintBottom_toTopOf="@id/edit_ebook"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    </ScrollView>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/delete_ebook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/azulEscuro"
+            android:focusable="true"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_baseline_delete_24"
+            android:visibility="gone"
+            app:fabSize="mini"
+            app:layout_constraintBottom_toTopOf="@id/new_chapter"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/save_ebook"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/azulEscuro"
-        android:focusable="true"
-        android:src="@drawable/ic_not_favorited"
-        android:visibility="visible"
-        app:fabSize="mini"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/edit_ebook"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="10dp"
-        android:backgroundTint="@color/azulEscuro"
-        android:focusable="true"
-        android:src="@drawable/ic_baseline_edit_24"
-        android:visibility="gone"
-        app:fabSize="mini"
-        app:layout_constraintBottom_toTopOf="@id/save_ebook"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/new_chapter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="10dp"
-        android:backgroundTint="@color/azulEscuro"
-        android:focusable="true"
-        android:src="@drawable/ic_baseline_add_24"
-        android:visibility="gone"
-        app:fabSize="mini"
-        app:layout_constraintBottom_toTopOf="@id/edit_ebook"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/delete_ebook"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="10dp"
-        android:backgroundTint="@color/azulEscuro"
-        android:focusable="true"
-        android:src="@drawable/ic_baseline_delete_24"
-        android:visibility="gone"
-        app:fabSize="mini"
-        app:layout_constraintBottom_toTopOf="@id/new_chapter"
-        app:layout_constraintEnd_toEndOf="parent" />
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

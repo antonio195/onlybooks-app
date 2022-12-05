@@ -133,22 +133,22 @@ class ListenAudioBookFragment(val audiobook: AudioBookModel) : Fragment() {
             binding.progressBar.valueFrom = currentPosition
             binding.progressBar.value = currentPosition
             binding.progressBar.valueTo = mediaPlayer.duration.toFloat()
-            checkPosition()
+//            checkPosition()
         } catch (e: IOException) {
             e.printStackTrace()
         }
     }
 
-    private fun checkPosition() {
-        if (playing) {
-            handler.postDelayed(Runnable {
-                handler.postDelayed(runnable!!, delay.toLong())
-                currentPosition = mediaPlayer.currentPosition.toFloat()
-                binding.progressBar.value = currentPosition
-                binding.currentTime.text = SimpleDateFormat("mm:ss").format(currentPosition)
-            }.also { runnable = it }, delay.toLong())
-        }
-    }
+//    private fun checkPosition() {
+//        if (playing) {
+//            handler.postDelayed(Runnable {
+//                handler.postDelayed(runnable!!, delay.toLong())
+//                currentPosition = mediaPlayer.currentPosition.toFloat()
+//                binding.progressBar.value = currentPosition
+//                binding.currentTime.text = SimpleDateFormat("mm:ss").format(currentPosition)
+//            }.also { runnable = it }, delay.toLong())
+//        }
+//    }
 
     private fun displayData() {
         binding.audiobookTitle.text = audiobook.nameAudioBook

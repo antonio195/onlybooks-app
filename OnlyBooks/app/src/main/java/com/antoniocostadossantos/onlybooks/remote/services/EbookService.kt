@@ -50,4 +50,9 @@ interface EbookService {
         @Path("idEbook") idEbook: Int
     ): Response<Long>
 
+    @GET("/ebook/search/{text}")
+    suspend fun searchEbook(
+        @Path("text") text: String
+    ): Response<List<EbookModel>>
+
 }

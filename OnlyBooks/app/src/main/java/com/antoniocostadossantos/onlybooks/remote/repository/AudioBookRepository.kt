@@ -25,4 +25,7 @@ class AudioBookRepository : BaseRepository() {
     suspend fun getViews(idAudioBook: Int) = api.getViews(idAudioBook)
 
     suspend fun getLikes(idAudioBook: Int) = api.getLikes(idAudioBook)
+
+    suspend fun searchAudioBook(text: String) = api.searchAudioBook(text)
+
 }

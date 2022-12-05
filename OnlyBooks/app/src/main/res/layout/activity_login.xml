@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/source_sans_pro"
             android:inputType="textEmailAddress"
-            android:text="antonio195br@gmail.com"
+            android:text=""
             android:textColor="@color/azulEscuro"
             android:textCursorDrawable="@null" />
 
@@ -86,7 +86,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/source_sans_pro"
             android:inputType="textPassword"
-            android:text="sptech"
+            android:text=""
             android:textColor="@color/azulEscuro"
             android:textCursorDrawable="@null" />
 

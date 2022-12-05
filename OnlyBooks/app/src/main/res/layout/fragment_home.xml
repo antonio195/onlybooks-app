@@ -10,16 +10,16 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:contentDescription="teste">
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/icon_search"
                 android:layout_width="40dp"
+                android:importantForAccessibility="no"
                 android:layout_height="40dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
@@ -34,6 +34,7 @@
                 android:layout_height="40dp"
                 android:layout_marginTop="16dp"
                 android:src="@drawable/logo"
+                android:importantForAccessibility="no"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -45,7 +46,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="30dp"
                 android:fontFamily="@font/source_sans_pro"
-                android:text="Nossa sugestão de AudioBooks para você!"
+                android:text="@string/text_suggestion_audiobook"
                 android:textColor="@color/azulEscuro"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -68,7 +69,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="30dp"
                 android:fontFamily="@font/source_sans_pro"
-                android:text="Nossa sugestão de Ebooks para você!"
+                android:text="@string/text_suggestion_ebook"
                 android:textColor="@color/azulEscuro"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -118,7 +119,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/source_sans_pro"
-                    android:text="Destaque da semana!"
+                    android:text="@string/text_weekly_suggestion"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@id/image_destaque"
@@ -131,7 +132,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/source_sans_pro"
-                    android:text="De uma chance pro novo, quem \nsabe ele não te conquista né?"
+                    android:text="@string/text_info_weekly_suggetions"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@id/image_destaque"
@@ -142,7 +143,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/source_sans_pro"
-                    android:text="Conhecer"
+                    android:text="@string/text_button_weekly_suggetions"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@id/view_base"

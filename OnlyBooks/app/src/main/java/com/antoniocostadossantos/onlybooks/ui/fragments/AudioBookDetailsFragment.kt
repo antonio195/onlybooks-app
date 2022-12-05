@@ -110,6 +110,8 @@ class AudioBookDetailsFragment(val audioBook: AudioBookModel) : Fragment() {
         binding.titleEbook.text = audioBook.nameAudioBook
         binding.genreEbook.text = audioBook.genreAudioBook
         binding.ebookSynopsis.text = audioBook.descricao
+        binding.authorName.text =
+            getString(R.string.text_name_author).format(audioBook.authorAudioBook)
         val image = binding.imageEbook
 
         val requestOptions = RequestOptions()

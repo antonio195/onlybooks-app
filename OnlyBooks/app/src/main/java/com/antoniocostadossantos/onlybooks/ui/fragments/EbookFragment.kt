@@ -46,7 +46,7 @@ class EbookFragment : Fragment() {
         recyclerView.adapter = this.ebookAdapter
 
         ebookViewModel.suggestions.observe(viewLifecycleOwner) { response ->
-            this.ebookAdapter.setList(response.data!!)
+            this.ebookAdapter.setList(response.data!!.shuffled())
         }
     }
 

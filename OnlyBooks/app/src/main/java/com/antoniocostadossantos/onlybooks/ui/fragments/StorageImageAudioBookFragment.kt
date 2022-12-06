@@ -14,7 +14,7 @@ import com.antoniocostadossantos.onlybooks.databinding.ActivityStorageImageBindi
 import com.antoniocostadossantos.onlybooks.model.AudioBookModel
 import com.antoniocostadossantos.onlybooks.util.StateResource
 import com.antoniocostadossantos.onlybooks.util.toast
-import com.antoniocostadossantos.onlybooks.viewModel.EbookViewModel
+import com.antoniocostadossantos.onlybooks.viewModel.AudioBookViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.storage.FirebaseStorage
@@ -25,7 +25,10 @@ import java.util.*
 class StorageImageAudioBookFragment(val audioBookBase: AudioBookModel) : Fragment() {
     lateinit var binding: ActivityStorageImageBinding
     lateinit var imageUri: Uri
-    private val ebookViewModel: EbookViewModel by viewModel()
+
+    //    private val ebookViewModel: EbookViewModel by viewModel()
+    private val audioBookViewModel: AudioBookViewModel by viewModel()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -66,18 +69,18 @@ class StorageImageAudioBookFragment(val audioBookBase: AudioBookModel) : Fragmen
             .getReference("images/$name").downloadUrl.addOnSuccessListener {
                 Glide.with(this).load(it.toString()).into(binding.ivBannerEbook)
                 audioBookBase.urlAudioBook = it.toString()
-//                updateEbook(audioBookBase)
+                updateEbook(audioBookBase)
             }.addOnFailureListener {
             }
     }
 
-//    private fun updateEbook(audioBookBase: AudioBookModel) {
-//        ebookViewModel.updateEbook(audioBookBase, audioBookBase.idAudioBook)
-//        verifyUpdateEbook()
-//    }
+    private fun updateEbook(audioBookBase: AudioBookModel) {
+        audioBookViewModel.updateAudioBook(audioBookBase, audioBookBase.idAudioBook)
+        verifyUpdateAudioBook()
+    }
 
-    private fun verifyUpdateEbook() {
-        ebookViewModel.updateEbook.observe(viewLifecycleOwner) { response ->
+    private fun verifyUpdateAudioBook() {
+        audioBookViewModel.updateAudioBook.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is StateResource.Success -> {
                     toast("Sucesso ao atualizar a capa")

@@ -46,7 +46,7 @@ class AudioBookFragment : Fragment() {
         recyclerView.adapter = this.audioBookItemAdapter
 
         audioBookViewModel.suggestions.observe(viewLifecycleOwner) { response ->
-            this.audioBookItemAdapter.setList(response.data!!)
+            this.audioBookItemAdapter.setList(response.data!!.shuffled())
         }
     }
 

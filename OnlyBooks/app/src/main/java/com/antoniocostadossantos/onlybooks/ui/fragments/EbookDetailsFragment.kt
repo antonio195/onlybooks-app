@@ -109,6 +109,7 @@ class EbookDetailsFragment(val ebook: EbookModel) : Fragment() {
         binding.titleEbook.text = ebook.nameEbook
         binding.genreEbook.text = ebook.genreEbook
         binding.ebookSynopsis.text = ebook.descricao
+        binding.authorName.text = getString(R.string.text_name_author).format(ebook.authorEbook)
         val image = binding.imageEbook
 
         val requestOptions = RequestOptions()

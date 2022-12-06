@@ -30,9 +30,8 @@ class ListenAudioBookFragment(val audiobook: AudioBookModel) : Fragment() {
     private var playing: Boolean = false
     private var paused: Boolean = false
     private var currentPosition = 0F
-    private var duration = 0
+    private var totalDuration = 0
     private var newPosition: Int = 0
-    private var changedPosition: Boolean = false
 
     var handler: Handler = Handler()
     var runnable: Runnable? = null
@@ -57,8 +56,9 @@ class ListenAudioBookFragment(val audiobook: AudioBookModel) : Fragment() {
                 mediaPlayer.pause()
                 mediaPlayer.seekTo(value.toInt())
                 newPosition = slider.value.toInt()
-                changedPosition = true
                 mediaPlayer.start()
+                currentPosition = slider.value
+                handler.removeCallbacksAndMessages(null)
             }
 
         })
@@ -66,12 +66,12 @@ class ListenAudioBookFragment(val audiobook: AudioBookModel) : Fragment() {
         binding.btnPlayPause.setOnClickListener {
             if (playing) {
                 playing = false
-                paused = false
+                paused = true
                 binding.btnPlayPause.setBackgroundResource(R.drawable.ic_baseline_play_circle_filled_24)
                 pauseAudio()
             } else {
                 playing = true
-                paused = true
+                paused = false
                 binding.btnPlayPause.setBackgroundResource(R.drawable.ic_baseline_pause_circle_filled_24)
                 playAudio()
             }
@@ -89,6 +89,7 @@ class ListenAudioBookFragment(val audiobook: AudioBookModel) : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         mediaPlayer.stop()
+        handler.removeCallbacksAndMessages(null)
     }
 
     private fun backTeenSeconds() {
@@ -114,7 +115,7 @@ class ListenAudioBookFragment(val audiobook: AudioBookModel) : Fragment() {
     private fun prepareAudio() {
         mediaPlayer = MediaPlayer()
         val audioUrl = URLAudioBook
-        duration = mediaPlayer.duration
+        totalDuration = mediaPlayer.duration
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC)
         mediaPlayer.setDataSource(audioUrl)
         mediaPlayer.prepare()
@@ -124,6 +125,9 @@ class ListenAudioBookFragment(val audiobook: AudioBookModel) : Fragment() {
 
     private fun pauseAudio() {
         mediaPlayer.pause()
+        currentPosition = mediaPlayer.currentPosition.toFloat()
+        handler.removeCallbacksAndMessages(null)
+        checkPosition()
     }
 
     private fun playAudio() {
@@ -132,22 +136,24 @@ class ListenAudioBookFragment(val audiobook: AudioBookModel) : Fragment() {
             binding.progressBar.valueFrom = currentPosition
             binding.progressBar.value = currentPosition
             binding.progressBar.valueTo = mediaPlayer.duration.toFloat()
-//            checkPosition()
+            handler.removeCallbacksAndMessages(null)
+            checkPosition()
         } catch (e: IOException) {
             e.printStackTrace()
         }
     }
 
-//    private fun checkPosition() {
-//        if (playing) {
-//            handler.postDelayed(Runnable {
-//                handler.postDelayed(runnable!!, delay.toLong())
-//                currentPosition = mediaPlayer.currentPosition.toFloat()
-//                binding.progressBar.value = currentPosition
-//                binding.currentTime.text = SimpleDateFormat("mm:ss").format(currentPosition)
-//            }.also { runnable = it }, delay.toLong())
-//        }
-//    }
+    private fun checkPosition() {
+        if (playing) {
+            handler.removeCallbacksAndMessages(null)
+            handler.postDelayed(Runnable {
+                currentPosition = mediaPlayer.currentPosition.toFloat()
+                binding.progressBar.value = currentPosition
+                binding.currentTime.text = SimpleDateFormat("mm:ss").format(currentPosition)
+                handler.postDelayed(runnable!!, delay.toLong())
+            }.also { runnable = it }, delay.toLong())
+        }
+    }
 
     private fun displayData() {
         binding.audiobookTitle.text = audiobook.nameAudioBook

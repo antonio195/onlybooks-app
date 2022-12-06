@@ -88,7 +88,6 @@ class ListenAudioBookFragment(val audiobook: AudioBookModel) : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        handler.removeCallbacks(runnable!!)
         mediaPlayer.stop()
     }
 

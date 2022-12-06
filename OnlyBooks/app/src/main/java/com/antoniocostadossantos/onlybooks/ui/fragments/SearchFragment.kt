@@ -42,11 +42,15 @@ class SearchFragment : Fragment() {
         binding.seeEbooks.setOnClickListener {
             binding.recyclerViewEbook.show()
             binding.recyclerViewAudiobook.hide()
+            binding.seeAudiobooks.alpha = 0.7F
+            binding.seeEbooks.alpha = 1F
         }
 
         binding.seeAudiobooks.setOnClickListener {
             binding.recyclerViewEbook.hide()
             binding.recyclerViewAudiobook.show()
+            binding.seeAudiobooks.alpha = 1F
+            binding.seeEbooks.alpha = 0.7F
         }
 
         binding.inputSearch.addTextChangedListener(object : TextWatcher {
